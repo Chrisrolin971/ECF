@@ -10,6 +10,8 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const indexHtml = join(serverDistFolder, 'index.server.html');
 
 const app = express();
+//supprime le Header de Express pour éviter les attaques ciblées
+app.disable('x-powered-by'); // NOTE : security hotspot 'This framework implicitly discloses version information by default. Make sure it is safe here.'
 const commonEngine = new CommonEngine();
 
 /**
