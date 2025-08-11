@@ -66,3 +66,11 @@ connection.query(queryRead, function (err, results) {
 });
 
 connectWithRetry();
+
+
+function maFonction() {
+  return 'résultat attendu';
+}
+
+module.exports = maFonction;
+
