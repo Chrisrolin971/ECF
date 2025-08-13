@@ -1,1 +1,36 @@
-<p>header works!</p>
+<nav class="navbar">
+
+  <div>
+    <img src="assets/logo1.jpg" alt="Logo Cinephoria" class="logo">
+  </div>
+
+  <!-- Liens sur grand écran -->
+  <ul class="nav-links desktop">
+    <li><a href="https://www.ugc.fr/">Accueil</a></li>
+    <p class ="separateur">|</p>
+    <li><a routerLink="/films">Films</a></li>
+    <p class ="separateur">|</p>
+    <li><a routerLink="/reservation">Réservation</a></li>
+    <p class ="separateur">|</p>
+    <li><a routerLink="/contacts">Contacts</a></li>
+    <p class ="separateur">|</p>
+    <li><a routerLink="/admin">Administration</a></li>
+  </ul>
+
+  <!-- Liens sur mobiles -->
+  <ul class="nav-links mobile" [class.active]="menuOpen">
+    <li><a href="https://www.ugc.fr/" (click)="toggleMenu()">Accueil</a></li>
+    <li><a href="#" (click)="toggleMenu()">Films</a></li>
+    <li><a href="#" (click)="toggleMenu()">Réservation</a></li>
+    <li><a href="#" (click)="toggleMenu()">Contacts</a></li>
+    <li><a href="#" (click)="toggleMenu()">Administration</a></li>
+  </ul>
+  <button class="hamburger" (click)="toggleMenu()"
+          aria-label="Menu" [attr.aria-expanded]="menuOpen">☰
+  </button>
+
+  <div class="navbar-right">
+    <a href="#"></a>
+    <button class="person-btn">👤</button>
+  </div>
+</nav>

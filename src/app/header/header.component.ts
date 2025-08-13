@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  standalone: true,
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
 
+//Gestion d'ouverture du BurgerMenu
+export class HeaderComponent {
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  //Referme le BurgerMenu si changement de taille de fenêtre
+  @HostListener('window:resize', ['$event'])
+  onResize(event: UIEvent) {
+    const width = (event.target as Window).innerWidth;
+    if (width >= 768 && this.menuOpen) {
+      this.menuOpen = false;
+    }
+  }
 }
