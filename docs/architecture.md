@@ -19,13 +19,20 @@ ecf/
 │   └── config/
 │
 ├── database/                → Scripts SQL, exports
+│   └── init_db.sql          → création de la Base de données et des tables
+│   └── seed.sql             → import des données
+│   └── transaction.sql      → Mise à jour des données
 │
 ├── docs/
-│   ├── architecture.md      → Documentation technique
-│   └── README.md            → Présentation du projet
+│   └── architecture.md      → Documentation technique
+│
+├── node_modules/
+│
+├── test/
+│   └── index.test.js        → Test unitaire du fichier index
 │
 ├── .gitignore
 ├── package.json             → Dépendances frontend
 ├── composer.json            → Dépendances PHP (si tu utilises Composer)
-└── README.md
+└── README.md                → Présentation du projet
 
