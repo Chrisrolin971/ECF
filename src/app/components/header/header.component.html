@@ -6,7 +6,7 @@
 
   <!-- Liens sur grand écran -->
   <ul class="nav-links desktop">
-    <li><a href="https://www.ugc.fr/">Accueil</a></li>
+    <li><a routerLink="/home" routerLinkActive="active">Accueil</a></li>
     <p class ="separateur">|</p>
     <li><a routerLink="/films">Films</a></li>
     <p class ="separateur">|</p>
@@ -19,7 +19,7 @@
 
   <!-- Liens sur mobiles -->
   <ul class="nav-links mobile" [class.active]="menuOpen">
-    <li><a href="https://www.ugc.fr/" (click)="toggleMenu()">Accueil</a></li>
+    <li><a routerLink="/home" routerLinkActive="active" (click)="toggleMenu()">Accueil</a></li>
     <li><a routerLink="/films" (click)="toggleMenu()">Films</a></li>
     <li><a routerLink="/reservation" (click)="toggleMenu()">Réservation</a></li>
     <li><a routerLink="/contacts" (click)="toggleMenu()">Contacts</a></li>
