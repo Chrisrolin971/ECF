@@ -1,0 +1,30 @@
+.pub-image {
+  width: 120%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // optionnel, pour le relief
+}
+
+.pub-carousel {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.pub-slide img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.pub-slide img:hover {
+  transform: scale(1.05);
+}
+

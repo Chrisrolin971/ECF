@@ -1,0 +1,14 @@
+.layout {
+  display: flex;
+  min-height: calc(100vh - 120px); /* Ajuste selon la hauteur du header/footer */
+}
+
+app-sidebar {
+  width: 350px;
+  position: relative;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
