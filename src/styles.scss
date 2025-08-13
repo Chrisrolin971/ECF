@@ -2,9 +2,9 @@
 
 :root {
   --dark-marron: oklch(0.566 0.083 49.081);
-  --beige: oklch(0.895 0.042 75.404);
+  --beige: oklch(0.915 0.027 85.666);
   --vert-pastel: oklch(0.849 0.029 148.546);
-  --vert-feuille: oklch(0.596 0.075 149.768);
+  --vert-logo: oklch(0.596 0.075 149.768);
   --dark-vert: oklch(0.408 0.025 155.936);
   --turquoise: oklch(0.709 0.119 212.713);
   --light-turquoise: oklch(0.796 0.089 216.186);
@@ -84,15 +84,6 @@ main {
   font-style: italic;
 }
 
-.angular-logo img {
-  width: 60%;
-  height: 60%;
-  object-position: 60px; //Gauche-droite
-  object-fit: contain;
-  margin-bottom: 1px;
-  margin-top: 15px;
-}
-
 .btn-menu {
   max-width: 15rem;
   max-height: 4rem;
@@ -145,38 +136,9 @@ main {
   display: flex;
   flex-direction: column;
 }
-li.nav-item {
-  font-size: 0.9rem;
-}
-
-li {
-  display: list-item;
-  text-align: -webkit-match-parent;
-  unicode-bidi: isolate;
-}
 
 .mr-auto {
   margin-right: auto !important;
-}
-
-.navbar {
-  padding: 0.8rem 1rem;
-}
-
-.navbar-brand {
-  font-family: 'Quattrocento Sans', sans-serif;
-  display: inline-block;
-  padding-top: .25rem;
-  padding-bottom: .25rem;
-  margin-right: 1rem;
-  font-size: 1.25rem;
-  line-height: inherit;
-  white-space: nowrap;
-}
-
-.navbar-toggler-right {
-  position: absolute;
-  right: 1rem;
 }
 
 .pill-group {
@@ -258,33 +220,6 @@ li {
     width: 100%;
     background: var(--blue-to-turquoise-vertical-gradient);
     margin-block: 1.5rem;
-  }
-
-  .navbar-brand {
-    font-size: 1rem;
-    display: none;
-  }
-
-  .navbar-toggleable-md {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
-  .navbar-toggleable-md .navbar-nav {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
   }
 }
 
