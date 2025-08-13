@@ -20,17 +20,17 @@
   <!-- Liens sur mobiles -->
   <ul class="nav-links mobile" [class.active]="menuOpen">
     <li><a href="https://www.ugc.fr/" (click)="toggleMenu()">Accueil</a></li>
-    <li><a href="#" (click)="toggleMenu()">Films</a></li>
-    <li><a href="#" (click)="toggleMenu()">Réservation</a></li>
-    <li><a href="#" (click)="toggleMenu()">Contacts</a></li>
-    <li><a href="#" (click)="toggleMenu()">Administration</a></li>
+    <li><a routerLink="/films" (click)="toggleMenu()">Films</a></li>
+    <li><a routerLink="/reservation" (click)="toggleMenu()">Réservation</a></li>
+    <li><a routerLink="/contacts" (click)="toggleMenu()">Contacts</a></li>
+    <li><a routerLink="/admin" (click)="toggleMenu()">Administration</a></li>
   </ul>
   <button class="hamburger" (click)="toggleMenu()"
           aria-label="Menu" [attr.aria-expanded]="menuOpen">☰
   </button>
 
   <div class="navbar-right">
-    <a href="#"></a>
+    <a routerLink="/connexion"></a>
     <button class="person-btn">👤</button>
   </div>
 </nav>
