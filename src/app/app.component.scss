@@ -1,6 +1,17 @@
 .layout {
   display: flex;
   min-height: calc(100vh - 120px); /* Ajuste selon la hauteur du header/footer */
+  height: 100vh; /* pleine hauteur */
+  overflow: hidden;
+}
+
+.pub-carousel {
+  width: 300px; /* ou 25% si tu veux une largeur relative */
+  padding: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  flex-shrink: 0; /* ne rétrécit pas */
+  align-self: center;
 }
 
 app-sidebar {
@@ -10,5 +21,18 @@ app-sidebar {
 
 .main-content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 40px;
+  overflow-y: auto;
 }
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .pub-carousel {
+    width: 50%;
+    box-shadow: none;
+  }
+}
+
