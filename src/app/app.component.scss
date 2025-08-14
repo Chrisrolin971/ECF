@@ -1,28 +1,31 @@
 .layout {
   display: flex;
+  grid-template-columns: auto 1fr;
+  align-items: flex-start;
   min-height: calc(100vh - 120px); /* Ajuste selon la hauteur du header/footer */
-  height: 100vh; /* pleine hauteur */
   overflow: hidden;
 }
 
 .pub-carousel {
-  width: 300px; /* ou 25% si tu veux une largeur relative */
-  padding: 20px;
+  width: 400px;
+  height: auto;
+  display: flex;
+  padding: 10px;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  flex-shrink: 0; /* ne rétrécit pas */
-  align-self: center;
+  background: var(--dark-marron);
+  align-self: start;
 }
 
 app-sidebar {
-  width: 350px;
+  //width: 350px;
+  height: 100%;
   position: relative;
 }
 
 .main-content {
-  flex-grow: 1;
+  flex: 1;
   padding: 40px;
-  overflow-y: auto;
+  height: 100hv;
 }
 
 @media (max-width: 768px) {

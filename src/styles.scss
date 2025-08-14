@@ -24,8 +24,15 @@
   --light-to-dark-green-horizontal-gradient: linear-gradient(
       90deg,
       var(--vert-pastel) 0%,
-      var(--vert-feuille) 50%,
+      var(--vert-logo) 50%,
       var(--dark-vert) 100%
+  );
+
+  --marron-to-beige-to-white-horizontal-gradient: linear-gradient(
+      90deg,
+      var(--dark-marron) 5%,
+      var(--beige) 70%,
+      var(--bs-white) 100%
   );
 
   --pill-accent: var(--vert-feuille);

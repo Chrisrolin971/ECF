@@ -1,9 +1,11 @@
 .pub-image {
-  width: 120%;
+  width: 100%;
   height: auto;
   display: block;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // optionnel, pour le relief
+  overflow-y: auto;
+  padding-top: 5px;
 }
 
 .pub-carousel {
