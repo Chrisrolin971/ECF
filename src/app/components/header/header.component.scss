@@ -51,6 +51,7 @@
     background-color: var(--beige);
     font-size: 25px;
     position: absolute;
+    z-index: 1000; //mettre la navbar au prmier plan
 
     li {
       padding: 10px 20px;
