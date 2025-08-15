@@ -1,1 +1,28 @@
-<p>inscription works!</p>
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <input
+    type="text"
+    name="nom"
+    [(ngModel)]="nom"
+    placeholder="Nom"
+    required
+  />
+
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="email"
+    placeholder="Email"
+    required
+  />
+
+  <input
+    type="password"
+    name="motDePasse"
+    [(ngModel)]="motDePasse"
+    placeholder="Mot de passe"
+    required
+  />
+
+  <button type="submit">S'inscrire</button>
+</form>
+
