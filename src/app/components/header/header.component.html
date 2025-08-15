@@ -1,12 +1,12 @@
 <nav class="navbar">
 
   <div>
-    <img src="assets/logo1.jpg" alt="Logo Cinephoria" class="logo">
+    <img src="assets/logo1.jpg" alt="Logo Cinephoria" class="logo" routerLink="/home">
   </div>
 
   <!-- Liens sur grand écran -->
   <ul class="nav-links desktop">
-    <li><a href="https://www.ugc.fr/">Accueil</a></li>
+    <li><a routerLink="/home" routerLinkActive="active">Accueil</a></li>
     <p class ="separateur">|</p>
     <li><a routerLink="/films">Films</a></li>
     <p class ="separateur">|</p>
@@ -15,22 +15,23 @@
     <li><a routerLink="/contacts">Contacts</a></li>
     <p class ="separateur">|</p>
     <li><a routerLink="/admin">Administration</a></li>
+<!--    <li><a routerLink="/employe">Intranet</a></li>-->
   </ul>
 
   <!-- Liens sur mobiles -->
   <ul class="nav-links mobile" [class.active]="menuOpen">
-    <li><a href="https://www.ugc.fr/" (click)="toggleMenu()">Accueil</a></li>
+    <li><a routerLink="/home" (click)="toggleMenu()">Accueil</a></li>
     <li><a routerLink="/films" (click)="toggleMenu()">Films</a></li>
     <li><a routerLink="/reservation" (click)="toggleMenu()">Réservation</a></li>
     <li><a routerLink="/contacts" (click)="toggleMenu()">Contacts</a></li>
     <li><a routerLink="/admin" (click)="toggleMenu()">Administration</a></li>
+<!--    <li><a routerLink="/employe" (click)="toggleMenu()">Intranet</a></li>-->
   </ul>
   <button class="hamburger" (click)="toggleMenu()"
           aria-label="Menu" [attr.aria-expanded]="menuOpen">☰
   </button>
 
   <div class="navbar-right">
-    <a routerLink="/connexion"></a>
-    <button class="person-btn">👤</button>
+      <button class="person-btn" routerLink="/connexion">👤</button>
   </div>
 </nav>

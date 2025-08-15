@@ -1,0 +1,83 @@
+.footer {
+  background-color: var(--beige);
+  color: var(--vert-logo);
+  padding: 10px 10px;
+  font-family: Arial, sans-serif;
+  font-size: 0.6rem;
+
+  .city-name {
+    font-size: 0.7rem; /* plus petit que le titre mais plus grand que le texte */
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+  }
+
+  .footer-box{
+    min-width: 150px;
+    flex: 0 0 auto;
+  }
+
+  .footer-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-col h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .footer-col h3 {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+  .footer-col p {
+    font-size: 13px;
+    margin: 0 0 10px 0;
+  }
+
+  .footer-title {
+    font-size: 1.2rem;
+    text-align: left;
+    color: var(--vert-logo);
+    margin-bottom: 0.2rem;
+    margin-left: 5rem;
+  }
+
+  .footer-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* permet le scroll si trop large */
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.footer-subgrid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-left: 2rem;
+}
+
+.footer-subcol { //changer les espaces entre les villes
+  flex: 0 0 auto;
+  min-width: 120px;
+  padding: 8px;
+  margin-left: 3rem;
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}

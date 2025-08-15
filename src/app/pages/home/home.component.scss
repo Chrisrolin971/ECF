@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  padding-top: 0; // ou la hauteur exacte de ta navbar
+}
+
+.section {
+  margin: 40px 20px;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--vert-logo);
+}
+
+.film-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: flex-start; //aligner les Films à gauche
+  margin: 20px;
+  padding-top: 20px;
+}
+
+.film-card {
+  width: 180px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.film-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.film-card:hover {
+  transform: scale(1.05);
+}
+
+.film-card p {
+  margin-top: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .film-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .film-card {
+    width: 100%;
+  }
+}
