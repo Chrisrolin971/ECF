@@ -1,8 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --dark-marron: oklch(0.566 0.083 49.081);
+  --light-beige: oklch(0.918 0.025 75.264);
   --beige: oklch(0.915 0.027 85.666);
+  --dark-beige: oklch(0.868 0.036 63.17);
+  --light-marron: oklch(0.725 0.066 61.016);
+  --marron: oklch(0.528 0.084 59.939);
+  --dark-marron: oklch(0.33 0.06 48.209);
+
+  --light-vert-pastel: oklch(0.849 0.029 148.546 / 0.5);
   --vert-pastel: oklch(0.849 0.029 148.546);
   --vert-logo: oklch(0.596 0.075 149.768);
   --dark-vert: oklch(0.408 0.025 155.936);
