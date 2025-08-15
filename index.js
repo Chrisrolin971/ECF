@@ -1,4 +1,5 @@
 ﻿const mysql = require('mysql2');
+const fs = require('fs');
 
 require('dotenv').config(); //Charger les variables d'env à partir du fichier .env
 
@@ -8,65 +9,36 @@ const connection = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+  multipleStatements: true //permet d'executer plusieurs requettes à la fois
 });
-// const connection = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-//   database: process.env.DB_DATABASE,
-// });
 
 // Connexion à la base de données
 function connectWithRetry() {
   connection.connect(err => {
     if (err) {
-      return console.error('Echec de connexion: ' + err.message);
+      console.error('Echec de connexion: ' + err.message);
       setTimeout(connectWithRetry, 5000);
-    } else console.log('Connecté à la base de données MySQL.');
+    } else {
+      console.log('Connecté à la base de données MySQL.');
+
+      // Lecture du fichier SQL
+      let sql = fs.readFileSync('./database/init_db.sql', 'utf8');
+      if (sql.charCodeAt(0) === 0xFEFF) sql = sql.slice(1); // Supprimer BOM si présent
+
+      // Exécuter les requêtes
+      connection.query(sql, (err, result) => {
+        if (err) {
+          console.error('Echec : ' + err.message);
+        } else {
+          console.log('Base de données et table créées avec succès.');
+        }
+        connection.end();
+      });
+    }
   });
 }
 
-// Insérer de nouvelles données
-// const queryInsert = `INSERT INTO users (name, email) VALUES ('Alice', 'alice@example.com')`;
-// connection.query(queryInsert, function(err, results) {
-//     if (err)
-//         console.error('Erreur lors de l\'insertion : ' + err.message);
-//     else console.log('Données insérées avec succès, ID de l\'entrée : ' + results.insertId);
-//     connection.end();
-// });
-
-// Mettre à jour les données
-// const queryUpdate = `UPDATE users SET email = 'alice@example.com' WHERE name = 'Alice'`;
-// connection.query(queryUpdate, function(err, results) {
-//     if (err)
-//         console.error('Erreur lors de la mise à jour : ' + err.message);
-//     else console.log('Données mises à jour avec succès, lignes affectées : ' + results.affectedRows);
-//     connection.end();
-// });
-
-// Supprimer des données
-// const queryDel = `DELETE
-//                   FROM users
-//                   WHERE name = 'Alice'`;
-// connection.query(queryDel, function (err, results) {
-//   if (err)
-//     console.error('Erreur lors de la suppression : ' + err.message);
-//   else console.log('Données supprimées avec succès, lignes affectées : ' + results.affectedRows);
-//   connection.end();
-// });
-
-// Lire les données
-const queryRead = `SELECT *
-                   FROM users`;
-connection.query(queryRead, function (err, results) {
-  if (err)
-    console.error('Erreur lors de la lecture : ' + err.message);
-  else console.log('Données récupérées :', results);
-  connection.end();
-});
-
 connectWithRetry();
-
 
 function maFonction() {
   return 'résultat attendu';
