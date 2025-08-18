@@ -1,21 +1,65 @@
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 400px;
-  margin: auto;
-}
-
-input {
-  padding: 10px;
-  font-size: 16px;
-}
-
 button {
-  padding: 10px;
-  background-color: #007bff;
+  padding: 12px;
+  margin-top: 2rem;
+  background-color: var(--vert-logo);
   color: white;
   border: none;
   border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 20rem;
 }
+
+button:hover {
+  background-color: #2e7d32;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 60rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-row{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+
+.form-row label {
+  width: 10rem;
+  font-weight: 450;
+  flex-grow: 1;
+  text-align: right;
+  align-self: center;
+  padding-right: 1rem;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+.login-container {
+  max-width: 35rem;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: var(--light-vert-pastel);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--vert-logo);
+}
+
