@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {EMPTY_SUBSCRIPTION} from 'rxjs/internal/Subscription';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-inscription',
@@ -10,6 +10,7 @@ import {EMPTY_SUBSCRIPTION} from 'rxjs/internal/Subscription';
   templateUrl: './inscription.component.html',
   styleUrls: ['./inscription.component.scss']
 })
+
 export class InscriptionComponent {
   nom = '';
   prenom = '';
@@ -18,8 +19,7 @@ export class InscriptionComponent {
   motDePasse = '';
   confMotdePasse = '';
   messageErreur = '';
-
-
+  constructor(private http: HttpClient) {}
   onSubmit(): void {
 
     if (this.motDePasse !== this.confMotdePasse) {
@@ -50,6 +50,34 @@ export class InscriptionComponent {
     console.log('Email:', this.email);
     console.log('Mot de passe:', this.motDePasse);
     console.log('Confirm Mot de passe:', this.confMotdePasse);
+
+    const utilisateur = {
+      nom: this.nom,
+      prenom: this.prenom,
+      pseudo: this.pseudo,
+      email: this.email,
+      motDePasse: this.motDePasse
+    };
+
     // Tu peux ajouter ici l’appel à ton service d’inscription
+    this.http.post('http://ecf.local/backend/api/inscription.php', utilisateur)
+      .subscribe({
+        next: (res: any) => alert(res.message),
+        error: err => alert('Erreur lors de l\'inscription')
+      });
+
+    this.http.post('http://ecf.local/backend/api/inscription.php', utilisateur).subscribe({
+      next: (res: any) => {
+        console.log('Succès:', res.message);
+        // alert(res.message);
+      },
+      error: (err: any) => {
+        console.error('Erreur complète:', err);
+        const msg = err.error?.message || 'Erreur inconnue';
+        console.error('Message:', msg);
+        // alert(msg)
+      }
+    });
+
   }
 }
