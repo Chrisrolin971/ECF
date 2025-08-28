@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InscriptionService, Utilisateur, ApiResponse } from '../inscription/inscription.service';
+import { InscriptionService, Utilisateur, ApiResponse } from './inscription.service';
 
 @Component({
   selector: 'app-inscription',
@@ -20,7 +20,7 @@ export class InscriptionComponent {
   confMotdePasse = '';
   messageErreur = '';
 
-  private inscriptionService = inject(InscriptionService);
+  private readonly inscriptionService = inject(InscriptionService);
   onSubmit(): void {
 
     //Vérification de la correspondance des mots de passe

@@ -19,11 +19,10 @@ export interface ApiResponse {
 })
 
 export class InscriptionService {
-  private apiUrl = 'http://ecf.local/backend/api/inscription.php'; // Chemin vers le script PHP
-
+  private readonly apiUrl = 'http://ecf.local/backend/api/inscription.php'; // Chemin vers le script PHP
+  private readonly http = inject(HttpClient);
   //Appel HTTP
   inscrireUtilisateur(utilisateur: Utilisateur): Observable<ApiResponse> {
-    const http = inject(HttpClient);
-    return http.post<ApiResponse>(this.apiUrl, utilisateur);
+    return this.http.post<ApiResponse>(this.apiUrl, utilisateur);
   }
 }
