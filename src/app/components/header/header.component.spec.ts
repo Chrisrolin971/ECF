@@ -17,7 +17,6 @@ describe('HeaderComponent', () => {
             params: of({}), // si tu utilises route.params
             snapshot: {
               paramMap: {
-                get: (key: string) => null // adapte selon ce que ton composant attend
               }
             }
           }
