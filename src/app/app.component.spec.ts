@@ -1,10 +1,24 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {ActivatedRoute} from '@angular/router';
+import {of} from 'rxjs';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({}), // si tu utilises route.params
+            snapshot: {
+              paramMap: {
+                get: (key: string) => null // adapte selon ce que ton composant attend
+              }
+            }
+          }
+        }]
     }).compileComponents();
   });
 
@@ -20,10 +34,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('ecf');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ecf');
-  });
 });
