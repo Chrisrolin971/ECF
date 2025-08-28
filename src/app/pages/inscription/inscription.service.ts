@@ -11,6 +11,7 @@ export interface Utilisateur {
 }
 
 export interface ApiResponse {
+  success: boolean;
   message: string;
 }
 

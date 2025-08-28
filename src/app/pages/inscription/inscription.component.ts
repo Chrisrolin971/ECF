@@ -19,6 +19,7 @@ export class InscriptionComponent {
   motDePasse = '';
   confMotdePasse = '';
   messageErreur = '';
+  messageValid = '';
 
   resetForm(): void {
     this.nom = '';
@@ -35,6 +36,7 @@ export class InscriptionComponent {
 
     //Vérification de la correspondance des mots de passe
     if (this.motDePasse !== this.confMotdePasse) {
+      this.messageValid = '';
       this.messageErreur = 'Les mots de passe ne correspondent pas.';
       return;
     }
@@ -43,6 +45,7 @@ export class InscriptionComponent {
     if (this.nom == '' || this.prenom == '' ||
     this.pseudo == '' || this.email == '' ||
     this.motDePasse == '' || this.confMotdePasse == '') {
+      this.messageValid = '';
       this.messageErreur = 'Tous les champs sont obligatoires.';
       return;
     }
@@ -50,6 +53,7 @@ export class InscriptionComponent {
     //Vérification du format de l'adresse mail
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.email.trim())) {
+      this.messageValid = '';
       this.messageErreur = 'Le format de l’adresse email est invalide.<br> ' +
         'Elle doit être sous forme : exemple@domaine.com';
       return;
@@ -70,15 +74,20 @@ export class InscriptionComponent {
     this.inscriptionService.inscrireUtilisateur(utilisateur)
       .subscribe({
         next: (res: ApiResponse) => {
-          alert(res.message);
+          if (!res.success) {
+            this.messageErreur = res.message;
+            return;
+          } else {
+            this.messageValid = "Inscription réussie !";
+          }
           console.log('Succès:', res.message);
           this.resetForm();
         },
         error: (err: unknown) => {
-          const msg = (err as { error?: { message?: string } })?.error?.message || 'Erreur inconnue';
+          const msg = (err as { error?: { message?: string } })?.error?.message || 'Inscription impossible';
           console.error('Erreur complète:', err);
           console.error('Message:', msg);
-          alert(err);
+          this.messageErreur = msg;
         }
     });
   }

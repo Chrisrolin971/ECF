@@ -73,6 +73,11 @@
     {{ messageErreur }}
   </div>
 
+  <div *ngIf="messageValid" [innerHTML]="messageValid"
+       style="color: #63b528; margin: 0.5rem; text-align: center;">
+    {{ messageValid }}
+  </div>
+
   <button type="submit">S'inscrire</button>
 </form>
 

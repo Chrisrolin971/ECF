@@ -19,6 +19,29 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (!empty($data['nom']) && !empty($data['prenom']) &&
     !empty($data['pseudo']) && !empty($data['email']) && !empty($data['motDePasse']))
   {
+      // Vérification si le pseudo existe déjà
+              $sqlCheck = "SELECT * FROM Utilisateurs WHERE pseudo = :pseudo";
+              $stmtCheck = $pdo->prepare($sqlCheck);
+              $stmtCheck->execute([':pseudo' => $data['pseudo']]);
+              $pseudoExiste = $stmtCheck->fetchColumn() > 0;
+
+              if ($pseudoExiste) {
+                echo json_encode([
+                "success" => false,
+                "message" => "Ce pseudo est déjà utilisé"]);
+                exit;
+              }
+
+              // Vérification de l'email
+              $sqlEmail = "SELECT * FROM Utilisateurs WHERE email = :email";
+              $stmtEmail = $pdo->prepare($sqlEmail);
+              $stmtEmail->execute([':email' => $data['email']]);
+              $emailExiste = $stmtEmail->fetchColumn() > 0;
+
+              if ($emailExiste) {
+                echo json_encode(["message" => "Un compte existe déjà avec cette adresse mail"]);
+              exit;
+              }
 
     $mdpHash = password_hash($data['motDePasse'], PASSWORD_DEFAULT);
 
@@ -36,7 +59,9 @@ if (!empty($data['nom']) && !empty($data['prenom']) &&
     ]);
 
     if ($stmt->execute()) {
-    echo json_encode(["message" => "Inscription réussie"]);
+    echo json_encode([
+      "success" => true,
+      "message" => "Inscription réussie"]);
     } else {
     echo json_encode(["message" => "Erreur lors de l'inscription"]);
     }
