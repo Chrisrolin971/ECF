@@ -10,22 +10,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './connexion.component.scss'
 })
 export class ConnexionComponent {
-  isEmailValid = true;
-
-  validateEmail(value: string): void {
-    // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // this.isEmailValid = regex.test(value);
-    this.isEmailValid = value == null ;
-  }
-
-  isPasswordValid = true;
-
-  validatePassword(value: string): void {
-    this.isPasswordValid = value == null;
-  }
-
-  isValid() {
-    this.isEmailValid == true && this.isPasswordValid == true
-  }
-
+  // TODO : Mettre validateur avant connexion
 }

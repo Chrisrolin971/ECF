@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { InscriptionService, Utilisateur, ApiResponse } from '../inscription/inscription.service';
 
 @Component({
   selector: 'app-inscription',
@@ -19,14 +19,17 @@ export class InscriptionComponent {
   motDePasse = '';
   confMotdePasse = '';
   messageErreur = '';
-  constructor(private http: HttpClient) {}
+
+  private inscriptionService = inject(InscriptionService);
   onSubmit(): void {
 
+    //Vérification de la correspondance des mots de passe
     if (this.motDePasse !== this.confMotdePasse) {
       this.messageErreur = 'Les mots de passe ne correspondent pas.';
       return;
     }
 
+    //Vérification des champs requis
     if (this.nom == '' || this.prenom == '' ||
     this.pseudo == '' || this.email == '' ||
     this.motDePasse == '' || this.confMotdePasse == '') {
@@ -34,6 +37,7 @@ export class InscriptionComponent {
       return;
     }
 
+    //Vérification du format de l'adresse mail
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.email.trim())) {
       this.messageErreur = 'Le format de l’adresse email est invalide.<br> ' +
@@ -44,14 +48,7 @@ export class InscriptionComponent {
     // Si tout va bien, on vide le message d’erreur
     this.messageErreur = '';
 
-    console.log('Nom:', this.nom);
-    console.log('Prénom:', this.prenom);
-    console.log('Pseudo:', this.pseudo);
-    console.log('Email:', this.email);
-    console.log('Mot de passe:', this.motDePasse);
-    console.log('Confirm Mot de passe:', this.confMotdePasse);
-
-    const utilisateur = {
+    const utilisateur: Utilisateur = {
       nom: this.nom,
       prenom: this.prenom,
       pseudo: this.pseudo,
@@ -59,25 +56,19 @@ export class InscriptionComponent {
       motDePasse: this.motDePasse
     };
 
-    // Tu peux ajouter ici l’appel à ton service d’inscription
-    this.http.post('http://ecf.local/backend/api/inscription.php', utilisateur)
+    //Appel requette POST
+    this.inscriptionService.inscrireUtilisateur(utilisateur)
       .subscribe({
-        next: (res: any) => alert(res.message),
-        error: err => alert('Erreur lors de l\'inscription')
-      });
-
-    this.http.post('http://ecf.local/backend/api/inscription.php', utilisateur).subscribe({
-      next: (res: any) => {
-        console.log('Succès:', res.message);
-        // alert(res.message);
-      },
-      error: (err: any) => {
-        console.error('Erreur complète:', err);
-        const msg = err.error?.message || 'Erreur inconnue';
-        console.error('Message:', msg);
-        // alert(msg)
-      }
+        next: (res: ApiResponse) => {
+          alert(res.message);
+          console.log('Succès:', res.message);
+        },
+        error: (err: unknown) => {
+          const msg = (err as { error?: { message?: string } })?.error?.message || 'Erreur inconnue';
+          console.error('Erreur complète:', err);
+          console.error('Message:', msg);
+          alert(msg);
+        }
     });
-
   }
 }
