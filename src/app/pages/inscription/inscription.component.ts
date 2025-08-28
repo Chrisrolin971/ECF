@@ -20,6 +20,16 @@ export class InscriptionComponent {
   confMotdePasse = '';
   messageErreur = '';
 
+  resetForm(): void {
+    this.nom = '';
+    this.prenom = '';
+    this.pseudo = '';
+    this.email = '';
+    this.motDePasse = '';
+    this.confMotdePasse = '';
+    this.messageErreur = '';
+  }
+
   private readonly inscriptionService = inject(InscriptionService);
   onSubmit(): void {
 
@@ -62,12 +72,13 @@ export class InscriptionComponent {
         next: (res: ApiResponse) => {
           alert(res.message);
           console.log('Succès:', res.message);
+          this.resetForm();
         },
         error: (err: unknown) => {
           const msg = (err as { error?: { message?: string } })?.error?.message || 'Erreur inconnue';
           console.error('Erreur complète:', err);
           console.error('Message:', msg);
-          alert(msg);
+          alert(err);
         }
     });
   }
