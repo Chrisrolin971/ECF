@@ -48,3 +48,5 @@ Thumbs.db
 !.env.project
 !.env.vault
 .env.keys
+
+vendor/vlucas/phpdotenv
