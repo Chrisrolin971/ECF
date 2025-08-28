@@ -1,15 +1,16 @@
 <div class="login-container">
   <h2>Connexion</h2>
 
-  <form>
+  <form (ngSubmit)="onSubmit()">
     <label for="email">Adresse mail</label>
-    <input type="email" id="email" name="email" placeholder="exemple@domaine.com" required />
+    <input type="email" id="email" name="email" placeholder="exemple@domaine.com"  [(ngModel)]="email" required />
 
     <label for="password">Mot de passe</label>
-    <input type="password" id="password" name="password" placeholder="••••••••"  required />
-    <!-- TODO : ajouter fonctionnalité pour révéler mot de passe ou non -->
+    <input type="password" id="password" name="password" placeholder="••••••••" [(ngModel)]="motDePasse" required />
 
-    <label for="email">Adresse mail invalide</label>
+    <p *ngIf="messageErreur" style="color: red; text-align: center;">
+      {{ messageErreur }}
+    </p>
 
     <button type="submit">Se connecter</button>
 
