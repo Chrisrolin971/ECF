@@ -1,0 +1,115 @@
+h1 {
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--vert-logo);
+}
+
+button {
+  padding: 12px;
+  margin-top: 0.5rem;
+  background-color: var(--vert-logo);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2e7d32;
+}
+
+.contact-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+.contact-container {
+  width: 25rem;
+  flex-shrink: 0;
+}
+
+.image-container {
+  max-width: 400px;
+  margin-left: 2rem;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  margin-top:  2rem;
+}
+.form-row {
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-bottom: 5px;
+  margin-top: 0.5rem;
+  font-weight: 450;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  border: 1px solid #ccc; //couleur du champ de saisie
+}
+
+.pseudo{
+  margin-bottom: 30px;
+}
+
+.object{
+  width: 75%;
+}
+
+input.invalid {
+  border-color: #ff0000;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  border: 1px solid #ccc; //couleur du champ de saisie
+}
+
+.erreur {
+  color: var(--invalid);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.succes {
+  color: var(--valid);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .contact-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-container {
+    margin-top: 1rem;
+  }
+}

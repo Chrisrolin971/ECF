@@ -69,12 +69,12 @@
   </div>
 
   <div *ngIf="messageErreur" [innerHTML]="messageErreur"
-       style="color: #dc0c0c; margin: 0.5rem; text-align: center;">
+       style="color: var(--invalid); margin: 0.5rem; text-align: center;">
     {{ messageErreur }}
   </div>
 
   <div *ngIf="messageValid" [innerHTML]="messageValid"
-       style="color: #63b528; margin: 0.5rem; text-align: center;">
+       style="color: var(--valid); margin: 0.5rem; text-align: center;">
     {{ messageValid }}
   </div>
 
