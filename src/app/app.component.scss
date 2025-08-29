@@ -1,0 +1,41 @@
+.layout {
+  display: flex;
+  grid-template-columns: auto 1fr;
+  align-items: flex-start;
+  min-height: calc(100vh - 120px); /* Ajuste selon la hauteur du header/footer */
+  overflow: hidden;
+}
+
+.pub-carousel {
+  width: 400px;
+  height: auto;
+  display: flex;
+  padding: 10px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  background: var(--dark-marron);
+  align-self: start;
+}
+
+app-sidebar {
+  //width: 350px;
+  height: 100%;
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  height: 100hv;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .pub-carousel {
+    width: 50%;
+    box-shadow: none;
+  }
+}
+

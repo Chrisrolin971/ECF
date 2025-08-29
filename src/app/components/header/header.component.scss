@@ -1,0 +1,117 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--beige);
+  padding: 15px 20px;
+  color: var(--vert-feuille);
+  position: relative;
+
+  .hamburger {
+    font-size: 24px;
+    background: var(--beige);
+    border: none;
+    color: var(--vert-logo);
+    cursor: pointer;
+    display: none;
+  }
+
+  .logo {
+    width: 140px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 0;
+  }
+
+  .nav-links {
+    list-style: none;
+    gap: 50px;
+    font-size: 20px;
+    margin-top: 45px;
+    margin-bottom: 0;
+
+    li a {
+      color: var(--vert-logo);
+      text-decoration: none;
+      font-weight: 500;
+    }
+  }
+
+  .desktop {
+    display: flex;
+  }
+
+  .mobile {
+    display: none;
+    flex-direction: column;
+    top: 100px;
+    left: 23rem;
+    width: 35%;
+    background-color: var(--beige);
+    font-size: 25px;
+    position: absolute;
+    z-index: 1000; //mettre la navbar au prmier plan
+
+    li {
+      padding: 10px 20px;
+    }
+
+    &.active {
+      display: flex;
+    }
+  }
+}
+
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+
+  .a {
+    background: #000ae0;
+  }
+}
+
+.navbar-center {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.person-btn {
+  background: none;
+  border: none;
+  color: var(--vert-logo);
+  font-size: 35px;
+  cursor: pointer;
+  margin-top: 40px;
+  margin-left: 50px;
+}
+
+@media (max-width: 1200px) {
+
+  .navbar .hamburger {
+    display: block;
+    font-size: 50px;
+    margin-right: 2rem;
+    justify-self: right;
+  }
+
+  .navbar .nav-links {
+    display: none;
+  }
+
+  .nav-links .desktop {
+    display: none;
+  }
+
+  .navbar .logo {
+    width: 150px;
+    height: auto;
+  }
+
+  .person-btn {
+    font-size: 40px;
+  }
+}

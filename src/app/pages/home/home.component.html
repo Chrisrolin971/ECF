@@ -1,0 +1,23 @@
+<div class="section">
+  <h2>Nouveauté</h2>
+  <div class="film-grid">
+    <div class="film-card" *ngFor="let film of nouveautes">
+      <a [routerLink]="['/films']">
+        <img [src]="film.image" [alt]="film.titre" />
+      </a>
+      <p>{{ film.titre }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Films à l'affiche</h2>
+  <div class="film-grid">
+    <div class="film-card" *ngFor="let film of affiches">
+      <a [routerLink]="['/films']">
+        <img [src]="film.image" [alt]="film.titre" />
+      </a>
+      <p>{{ film.titre }}</p>
+    </div>
+  </div>
+</div>
