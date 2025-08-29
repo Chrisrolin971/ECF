@@ -34,13 +34,6 @@ export class InscriptionComponent {
   private readonly inscriptionService = inject(InscriptionService);
   onSubmit(): void {
 
-    //Vérification de la correspondance des mots de passe
-    if (this.motDePasse !== this.confMotdePasse) {
-      this.messageValid = '';
-      this.messageErreur = 'Les mots de passe ne correspondent pas.';
-      return;
-    }
-
     //Vérification des champs requis
     if (this.nom == '' || this.prenom == '' ||
     this.pseudo == '' || this.email == '' ||
@@ -56,6 +49,23 @@ export class InscriptionComponent {
       this.messageValid = '';
       this.messageErreur = 'Le format de l’adresse email est invalide.<br> ' +
         'Elle doit être sous forme : exemple@domaine.com';
+      return;
+    }
+
+    //Vérification de la correspondance des mots de passe
+    if (this.motDePasse !== this.confMotdePasse) {
+      this.messageValid = '';
+      this.messageErreur = 'Les mots de passe ne correspondent pas.';
+      return;
+    }
+
+    //Vérification du format du mot de passe
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    if (!passwordRegex.test(this.motDePasse)) {
+      this.messageValid = '';
+      this.messageErreur = 'Le mot de passe doit contenir :<br>' +
+        'Au moins 8 caractères, une majuscule et une minuscule,<br>' +
+        'un chiffre et un caractère spécial';
       return;
     }
 
@@ -79,6 +89,7 @@ export class InscriptionComponent {
             return;
           } else {
             this.messageValid = "Inscription réussie !";
+            setTimeout(() => this.messageValid = '', 1500);
           }
           console.log('Succès:', res.message);
           this.resetForm();
@@ -87,6 +98,7 @@ export class InscriptionComponent {
           const msg = (err as { error?: { message?: string } })?.error?.message || 'Inscription impossible';
           console.error('Erreur complète:', err);
           console.error('Message:', msg);
+          this.messageValid = '';
           this.messageErreur = msg;
         }
     });

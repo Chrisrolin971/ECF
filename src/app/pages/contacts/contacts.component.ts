@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-contacts',
   imports: [
     FormsModule,
-    NgIf,
-    RouterLink
+    NgIf
   ],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss'

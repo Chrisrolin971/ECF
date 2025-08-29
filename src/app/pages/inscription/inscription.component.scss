@@ -47,6 +47,11 @@ form {
   border: 1px solid #ccc;
 }
 
+.listMdp {
+  text-align: left;
+  display: flex;
+}
+
 .login-container {
   max-width: 35rem;
   margin: 50px auto;
@@ -61,5 +66,17 @@ h2 {
   text-align: center;
   margin-bottom: 40px;
   color: var(--vert-logo);
+}
+
+.erreur {
+  color: var(--invalid);
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.valid {
+  color: var(--valid);
+  margin: 0.5rem;
+  text-align: center;
 }
 

@@ -3,17 +3,6 @@
   <h2>Inscription</h2>
 
   <div class="form-row">
-    <label for="nom">Nom</label>
-    <input
-      type="text"
-      name="nom"
-      [(ngModel)]="nom"
-      placeholder="Dupont"
-      required
-    />
-  </div>
-
-  <div class="form-row">
     <label for="prenom">Prénom</label>
     <input
       type="text"
@@ -23,7 +12,16 @@
       required
     />
   </div>
-
+  <div class="form-row">
+    <label for="nom">Nom</label>
+    <input
+      type="text"
+      name="nom"
+      [(ngModel)]="nom"
+      placeholder="Dupont"
+      required
+    />
+  </div>
   <div class="form-row">
     <label for="pseudo">Nom d'utilisateur</label>
     <input
@@ -34,7 +32,6 @@
       required
     />
   </div>
-
   <div class="form-row">
     <label for="email">Adresse mail (Loggin)</label>
     <input
@@ -45,7 +42,6 @@
       required
     />
   </div>
-
   <div class="form-row">
     <label for="password">Mot de passe</label>
     <input
@@ -56,7 +52,6 @@
       required
     />
   </div>
-
   <div class="form-row">
     <label for="password">Confirmez votre mot de passe</label>
     <input
@@ -68,13 +63,11 @@
     />
   </div>
 
-  <div *ngIf="messageErreur" [innerHTML]="messageErreur"
-       style="color: var(--invalid); margin: 0.5rem; text-align: center;">
+  <div *ngIf="messageErreur" [innerHTML]="messageErreur" class="erreur">
     {{ messageErreur }}
   </div>
 
-  <div *ngIf="messageValid" [innerHTML]="messageValid"
-       style="color: var(--valid); margin: 0.5rem; text-align: center;">
+  <div *ngIf="messageValid" [innerHTML]="messageValid" class="valid">
     {{ messageValid }}
   </div>
 

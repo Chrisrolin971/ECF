@@ -45,11 +45,11 @@ if (!empty($data['nom']) && !empty($data['prenom']) &&
 
     $mdpHash = password_hash($data['motDePasse'], PASSWORD_DEFAULT);
 
-    $sql = "INSERT IGNORE INTO Utilisateurs (nom, prenom, pseudo, role, email, mdp)
+try {
+    $sql = "INSERT INTO Utilisateurs (nom, prenom, pseudo, role, email, mdp)
             VALUES (:nom, :prenom, :pseudo, :role, :email, :mdp)";
     $stmt = $pdo->prepare($sql);
-
-    $success = $stmt->execute([
+    $stmt->execute([
         ':nom' => $data['nom'],
         ':prenom' => $data['prenom'],
         ':pseudo' => $data['pseudo'],
@@ -58,13 +58,26 @@ if (!empty($data['nom']) && !empty($data['prenom']) &&
         ':mdp' => $mdpHash
     ]);
 
-    if ($stmt->execute()) {
     echo json_encode([
-      "success" => true,
-      "message" => "Inscription réussie"]);
-    } else {
-    echo json_encode(["message" => "Erreur lors de l'inscription"]);
-    }
-  }
+          "success" => true,
+          "message" => "Inscription réussie"
+    ]);
+} catch (PDOException $e) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Erreur lors de l'inscription : " . $e->getMessage()
+    ]);
+}
+//     if ($success) {
+//     echo json_encode([
+//       "success" => true,
+//       "message" => "Inscription réussie"]);
+//     } else {
+//     echo json_encode([
+//       "success" => true,
+//       "message" => "Erreur lors de l'inscription"]);
+//     }
+//   }
+}
 ?>
 

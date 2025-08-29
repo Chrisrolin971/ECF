@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from './pages/home/home.component';
-import {ConnexionComponent} from './pages/connexion/connexion.component';
-import {FilmsComponent} from './pages/films/films.component';
+import { HomeComponent} from './pages/home/home.component';
+import { ConnexionComponent} from './pages/connexion/connexion.component';
+import { FilmsComponent} from './pages/films/films.component';
 import { ReservationComponent} from './pages/reservation/reservation.component';
 import { ContactsComponent} from './pages/contacts/contacts.component';
 import { AdminComponent} from './pages/admin/admin.component';
@@ -20,5 +20,4 @@ export const routes: Routes = [
   { path: 'employe', component: EmployeComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'compte', component: CompteComponent },
-  //rajouter ici les autres pages
 ];
