@@ -1,1 +1,49 @@
-<p>contacts works!</p>
+<div class="contact-wrapper">
+  <form (ngSubmit)="onSubmit()" #form="ngForm" class="contact-container">
+    <h1>Contactez-nous</h1>
+
+    <div class="form-row">
+      <label for="nom">Nom d'utilisateur (facultatif)</label>
+      <input class="pseudo"
+        type="text"
+        name="nom"
+        [(ngModel)]="nom"
+        placeholder="Pseudo"
+      />
+    </div>
+
+    <div class="form-row">
+      <input class="object"
+        type="text"
+        name="objet"
+        [(ngModel)]="objet"
+        placeholder="Sujet de votre demande"
+        required
+      />
+    </div>
+
+    <div class="form-row">
+      <textarea
+        name="message"
+        [(ngModel)]="message"
+        placeholder="Décrivez votre demande ici..."
+        rows="6"
+        required
+      ></textarea>
+    </div>
+
+    <div *ngIf="messageErreur" class="erreur">
+      {{ messageErreur }}
+    </div>
+
+    <div *ngIf="messageValid" class="succes">
+      {{ messageValid }}
+    </div>
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <div class="image-container">
+    <img src="assets/cineIllustration2.png" alt="Illustration contact" />
+  </div>
+</div>

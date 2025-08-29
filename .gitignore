@@ -47,3 +47,6 @@ Thumbs.db
 .flaskenv*
 !.env.project
 !.env.vault
+.env.keys
+
+vendor/vlucas/phpdotenv

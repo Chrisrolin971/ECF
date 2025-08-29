@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
+  --valid : oklch(0.56 0.169 143.82);
+  --invalid : oklch(0.561 0.226 28.815);
+
   --light-beige: oklch(0.918 0.025 75.264);
   --beige: oklch(0.915 0.027 85.666);
   --dark-beige: oklch(0.868 0.036 63.17);
