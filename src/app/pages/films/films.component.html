@@ -1,1 +1,17 @@
-<p>films works!</p>
+<h2>Films à l'affiche</h2>
+
+<section id="films-container"></section>
+<div class="films-container">
+  <div class="film-card" *ngFor="let film of films">
+    <img ngSrc="film.image_url" [alt]="film.titre" fill/>
+    <div class="info">
+      <h3>{{ film.titre }}</h3>
+      <p>{{ film.description }}</p>
+      <p>Durée : {{ film.duree }} min</p>
+      <p>Genre : {{ film.genre }}</p>
+      <p *ngIf="film.note">Note : {{ film.note }}/10</p>
+      <p *ngIf="film.date_sortie">Sortie :
+        {{ film.date_sortie | date:'dd/MM/yyyy' }}</p>
+    </div>
+  </div>
+</div>

@@ -15,13 +15,15 @@ CREATE TABLE IF NOT EXISTS Utilisateurs(
 );
 
 -- Table Films
-CREATE TABLE IF NOT EXISTS Films (
-                                   idFilms INT AUTO_INCREMENT PRIMARY KEY,
-                                   titre VARCHAR(255) NOT NULL,
-  duree INT,
-  genre VARCHAR(100),
-  description TEXT
-  );
+CREATE TABLE IF NOT EXISTS films (
+                     id INT AUTO_INCREMENT PRIMARY KEY,
+                     titre VARCHAR(255),
+                     description TEXT,
+                     duree INT, -- en minutes
+                     note FLOAT, -- sur 5
+                     image_url VARCHAR(255), -- lien vers l'affiche
+                     date_sortie DATE
+);
 
 -- Table Salles
 CREATE TABLE IF NOT EXISTS Salles (

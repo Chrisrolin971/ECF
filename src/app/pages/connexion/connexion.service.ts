@@ -8,13 +8,17 @@ export interface ConnexionPayload {
 }
 
 export interface ConnexionResponse {
+  success: boolean;
   message: string;
   pseudo?: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
+
 export class ConnexionService {
-  private apiUrl = 'http://ecf.local/backend/api/connexion.php';
+  private readonly apiUrl = 'http://ecf.local/backend/api/connexion.php';
   private readonly http = inject(HttpClient);
 
   connecterUtilisateur(payload: ConnexionPayload): Observable<ConnexionResponse> {
