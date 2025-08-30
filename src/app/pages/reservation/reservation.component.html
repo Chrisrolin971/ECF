@@ -1,1 +1,31 @@
-<p>reservation works!</p>
+<h2>Réserver un film </h2>
+
+<div class="filter">
+  <label for="tri-select" class="choice">Choisissez votre cinéma :</label>
+  <select id="tri-select" [(ngModel)]="selectedCinema">
+    <option value="">-- Sélectionnez --</option>
+    <option value="Nantes">Nantes</option>
+    <option value="Bordeaux">Bordeaux</option>
+    <option value="Paris">Paris</option>
+    <option value="Toulouse">Toulouse</option>
+    <option value="Lille">Lille</option>
+    <option value="Charleroi">Charleroi</option>
+    <option value="Lieges">Lièges</option>
+  </select>
+</div>
+
+<div *ngFor="let film of films" class="film-row">
+  <img [src]="film.image" alt="Affiche du film" class="film-poster" fill>
+  <div class="film-info">
+    <div class="film-header">
+      <h3 class="film-title">{{ film.titre }}</h3>
+      <div class="coeur">❤️ Coup de cœur</div>
+    </div>
+    <p class="film-description">{{ film.description }}</p>
+    <div class="film-meta">
+      <div class="film-rating">Note : {{ film.note }} / 10</div>
+      <div class="categorie">{{ film.categorie }}</div>
+      <button class="reserver-btn" [routerLink]="['/reserve']">Réserver</button>
+    </div>
+  </div>
+</div>

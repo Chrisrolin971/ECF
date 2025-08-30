@@ -41,7 +41,7 @@
       <div class="film-rating">Note : 8.5 / 10</div>
 <!--      <div class="pegi">PEGI 12</div>-->
       <div class="categorie">Science-Fiction</div>
-      <button class="reserver-btn">Réserver</button>
+      <button class="reserver-btn" [routerLink]="['/reserve']">Réserver</button>
     </div>
   </div>
 </div>
@@ -63,7 +63,7 @@
       <div class="film-rating">Note : 8.5 / 10</div>
 <!--      <div class="pegi">PEGI 12</div>-->
       <div class="categorie">Familial</div>
-      <button class="reserver-btn">Réserver</button>
+      <button class="reserver-btn" [routerLink]="['/reserve']">Réserver</button>
     </div>
   </div>
 </div>
@@ -85,7 +85,7 @@
       <div class="film-rating">Note : 8.5 / 10</div>
       <div class="pegi">PEGI 12</div>
       <div class="categorie">Science-Fiction</div>
-      <button class="reserver-btn">Réserver</button>
+      <button class="reserver-btn" [routerLink]="['/reserve']">Réserver</button>
     </div>
   </div>
 </div>
@@ -106,9 +106,7 @@
       <div class="film-rating">Note : 8.5 / 10</div>
       <div class="pegi">PEGI 18</div>
       <div class="categorie">Horreur</div>
-      <button class="reserver-btn" onclick="window.location.href='reservation.html'">
-        Réserver
-      </button>
+      <button class="reserver-btn" [routerLink]="['/reserve']">Réserver</button>
     </div>
   </div>
 </div>
