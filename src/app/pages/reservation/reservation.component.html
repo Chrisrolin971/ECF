@@ -25,7 +25,7 @@
     <div class="film-meta">
       <div class="film-rating">Note : {{ film.note }} / 10</div>
       <div class="categorie">{{ film.categorie }}</div>
-      <button class="reserver-btn" [routerLink]="['/reserve']">Réserver</button>
+      <button class="reserver-btn" [routerLink]="['/reserve', film.titre]">Réserver</button>
     </div>
   </div>
 </div>

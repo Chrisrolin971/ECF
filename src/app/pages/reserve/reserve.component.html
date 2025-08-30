@@ -1,1 +1,119 @@
-<p>reserve works!</p>
+<h2>Réserver un film </h2>
+<h3>{{ filmTitre }}</h3>
+<p>Rajouter fiches descriptive du film ici</p>
+<div *ngIf="seances.length > 0; else noSeances">
+  <h3>Séances disponibles</h3>
+
+  <table class="datagrid">
+    <thead>
+    <tr>
+      <th>Séance</th>
+      <th>Date</th>
+      <th>Heure</th>
+      <th>Qualité</th>
+      <th>Langue</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let seance of seances" (click)="selectSeance(seance)" class="clickable-row">
+      <td>{{ seance.nom }}</td>
+      <td>{{ seance.date }}</td>
+      <td>{{ seance.heure }}</td>
+      <td>{{ seance.qualite }}</td>
+      <td>{{ seance.langue }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<ng-template #noSeances>
+  <p>Aucune séance disponible pour ce film.</p>
+</ng-template>
+
+
+<!--Popup pour sélectionner sièges : -->
+<div class="popup-overlay" *ngIf="showPopup"></div>
+
+<div class="popup" *ngIf="showPopup">
+  <h3>Choisissez votre siège</h3>
+  <div class="seance-details">
+    <p>Date : {{ selectedSeance?.date }}</p>
+    <p>Heure : {{ selectedSeance?.heure }}</p>
+    <p>Qualité : {{ selectedSeance?.qualite }}</p>
+    <p>Langue : {{ selectedSeance?.langue }}</p>
+  </div>
+
+  <div class="selected-seats">
+    <label class="seat-label">Sièges :</label>
+    <span *ngFor="let seat of selectedSeats" class="seat-tag">{{ seat }}</span>
+  </div>
+
+
+  <div class="seat-layout">
+
+    <!--  Schéma de la salle -->
+    <div class="seat-container">
+      <div class="screen-wrapper">
+        <div class="screen-bar">
+          <div class="screen-label">Écran</div>
+        </div>
+      </div>
+
+
+      <div class="seat-grid">
+        <!-- Ligne des numéros de colonnes -->
+        <div class="seat-line col-header">
+        <span *ngFor="let col of columns"
+              class="col-number"
+              [class.col-gap-left]="col == 5 || col == 17">
+          {{ col }}</span>
+        </div>
+
+        <!-- Rangées de sièges -->
+        <div *ngFor="let row of rows" class="seat-row">
+          <span class="row-label">{{ row }}</span>
+
+          <div class="seat-line">
+            <button
+              *ngFor="let col of columns"
+              class="seat-btn"
+              [class.selected]="selectedSeats.includes(row + col)"
+              [class.col-gap-left]="col == 5 || col == 17"
+              (click)="toggleSeat(row + col)"
+            ></button>
+          </div>
+          <span class="row-label">{{ row }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Légende à droite -->
+    <div class="seat-legend">
+      <div class="legend-item">
+        <div class="legend-box disponible"></div>
+        <span>Disponible</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box reserve"></div>
+        <span>Réservé</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box pmr-dispo"></div>
+        <span>PMR Disponible</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box pmr-reserve"></div>
+        <span>PMR Réservé</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="popup-actions">
+    <button class="close-btn" (click)="closePopup()">Annuler</button>
+    <button class="validate-btn" (click)="validateSelection()">Valider</button>
+  </div>
+
+</div>
+

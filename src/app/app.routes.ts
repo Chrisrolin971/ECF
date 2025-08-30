@@ -21,5 +21,5 @@ export const routes: Routes = [
   { path: 'employe', component: EmployeComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'compte', component: CompteComponent },
-  { path: 'reserve', component: ReserveComponent },
+  { path: 'reserve/:titre', component: ReserveComponent },
 ];

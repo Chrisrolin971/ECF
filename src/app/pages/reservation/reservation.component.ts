@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
-import {NgForOf, NgOptimizedImage} from '@angular/common';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-reservation',
