@@ -1,17 +1,115 @@
-<h2>Films à l'affiche</h2>
+<!--<section id="films-container"></section>-->
+<!--<div class="films-container">-->
+<!--  <div class="film-card" *ngFor="let film of films">-->
+<!--    <img ngSrc="film.image_url" [alt]="film.titre" fill/>-->
+<!--    <div class="info">-->
+<!--      <h3>{{ film.titre }}</h3>-->
+<!--      <p>{{ film.description }}</p>-->
+<!--      <p>Durée : {{ film.duree }} min</p>-->
+<!--      <p>Genre : {{ film.genre }}</p>-->
+<!--      <p *ngIf="film.note">Note : {{ film.note }}/10</p>-->
+<!--      <p *ngIf="film.date_sortie">Sortie :-->
+<!--        {{ film.date_sortie | date:'dd/MM/yyyy' }}</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<h2>Films à l'affiche </h2>
 
-<section id="films-container"></section>
-<div class="films-container">
-  <div class="film-card" *ngFor="let film of films">
-    <img ngSrc="film.image_url" [alt]="film.titre" fill/>
-    <div class="info">
-      <h3>{{ film.titre }}</h3>
-      <p>{{ film.description }}</p>
-      <p>Durée : {{ film.duree }} min</p>
-      <p>Genre : {{ film.genre }}</p>
-      <p *ngIf="film.note">Note : {{ film.note }}/10</p>
-      <p *ngIf="film.date_sortie">Sortie :
-        {{ film.date_sortie | date:'dd/MM/yyyy' }}</p>
+<div class="film-filter">
+  <label for="tri-select">Trier par :</label>
+  <select id="tri-select" name="tri">
+    <option value="genre">Genre</option>
+    <option value="cinema">Cinéma</option>
+    <option value="date">Date de parution</option>
+  </select>
+</div>
+
+<div class="film-row">
+  <img src="assets/films/4fantastiques.jpg" alt="Affiche du film" class="film-poster">
+  <div class="film-info">
+    <div class="film-header">
+      <h3 class="film-title">Les 4 Fantastiques</h3>
+      <div class="coeur">❤️ Coup de cœur</div>
+    </div>
+    <p class="film-description">
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.</p>
+    <div class="film-meta">
+      <div class="film-rating">Note : 8.5 / 10</div>
+<!--      <div class="pegi">PEGI 12</div>-->
+      <div class="categorie">Science-Fiction</div>
+      <button class="reserver-btn">Réserver</button>
     </div>
   </div>
 </div>
+
+<div class="film-row">
+  <img src="assets/films/dora.jpg" alt="Affiche du film" class="film-poster">
+  <div class="film-info">
+    <div class="film-header">
+      <h3 class="film-title">Dora l'exploratrice</h3>
+<!--      <div class="coeur">❤️ Coup de cœur</div>-->
+    </div>
+    <p class="film-description">
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.</p>
+    <div class="film-meta">
+      <div class="film-rating">Note : 8.5 / 10</div>
+<!--      <div class="pegi">PEGI 12</div>-->
+      <div class="categorie">Familial</div>
+      <button class="reserver-btn">Réserver</button>
+    </div>
+  </div>
+</div>
+
+<div class="film-row">
+  <img src="assets/films/dragons.jpg" alt="Affiche du film" class="film-poster">
+  <div class="film-info">
+    <div class="film-header">
+      <h3 class="film-title">Dragons</h3>
+      <div class="coeur">❤️ Coup de cœur</div>
+    </div>
+    <p class="film-description">
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.</p>
+    <div class="film-meta">
+      <div class="film-rating">Note : 8.5 / 10</div>
+      <div class="pegi">PEGI 12</div>
+      <div class="categorie">Science-Fiction</div>
+      <button class="reserver-btn">Réserver</button>
+    </div>
+  </div>
+</div>
+<div class="film-row">
+  <img src="assets/films/evanouis.jpg" alt="Affiche du film" class="film-poster">
+  <div class="film-info">
+    <div class="film-header">
+      <h3 class="film-title">Evanouis</h3>
+<!--      <div class="coeur">❤️ Coup de cœur</div>-->
+    </div>
+    <p class="film-description">
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.
+      Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.</p>
+    <div class="film-meta">
+      <div class="film-rating">Note : 8.5 / 10</div>
+      <div class="pegi">PEGI 18</div>
+      <div class="categorie">Horreur</div>
+      <button class="reserver-btn" onclick="window.location.href='reservation.html'">
+        Réserver
+      </button>
+    </div>
+  </div>
+</div>
+
