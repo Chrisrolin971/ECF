@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 
@@ -17,9 +17,9 @@ interface Seance {
   templateUrl: './reserve.component.html',
   styleUrl: './reserve.component.scss'
 })
-export class ReserveComponent {
+export class ReserveComponent implements OnInit {
 
-  filmTitre: string = '';
+  filmTitre = '';
   seances: Seance[] = [];
 
   private readonly route = inject (ActivatedRoute);
@@ -27,7 +27,7 @@ export class ReserveComponent {
   ngOnInit() {
     this.filmTitre = this.route.snapshot.paramMap.get('titre') || '';
 
-    const seancesParFilm: { [titre: string]: Seance[] } = {
+    const seancesParFilm: Record<string, Seance[]> = {
       'Les 4 Fantastiques': [
         {
           nom: 'Séance 1',
@@ -66,7 +66,7 @@ export class ReserveComponent {
   }
 
   selectedSeance: Seance | null = null;
-  showPopup: boolean = false;
+  showPopup = false;
 
   selectSeance(seance: Seance) {
     this.selectedSeance = seance;

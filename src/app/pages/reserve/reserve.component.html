@@ -45,7 +45,9 @@
   </div>
 
   <div class="selected-seats">
-    <label class="seat-label">Sièges :</label>
+    <label class="seat-label" for="selectedSeats">Sièges :</label>
+    <input type="hidden" id="selectedSeats" [value]="selectedSeats.join(', ')" />
+
     <span *ngFor="let seat of selectedSeats" class="seat-tag">{{ seat }}</span>
   </div>
 
@@ -66,7 +68,7 @@
         <div class="seat-line col-header">
         <span *ngFor="let col of columns"
               class="col-number"
-              [class.col-gap-left]="col == 5 || col == 17">
+              [class.col-gap-left]="col === 5 || col === 17">
           {{ col }}</span>
         </div>
 
@@ -79,9 +81,11 @@
               *ngFor="let col of columns"
               class="seat-btn"
               [class.selected]="selectedSeats.includes(row + col)"
-              [class.col-gap-left]="col == 5 || col == 17"
+              [class.col-gap-left]="col === 5 || col === 17"
               (click)="toggleSeat(row + col)"
-            ></button>
+            >
+              <span class="visually-hidden">{{ row + col }}</span>
+            </button>
           </div>
           <span class="row-label">{{ row }}</span>
         </div>

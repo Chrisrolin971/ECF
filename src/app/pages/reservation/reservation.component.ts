@@ -10,9 +10,9 @@ import {NgForOf} from '@angular/common';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent {
-  selectedCinema: string = '';
+  selectedCinema = '';
 
-  filmsParCinema: { [ville: string]: Film[] } = {
+  filmsParCinema: Record<string, Film[]> = {
     Nantes: [{
       titre: 'Cannes',
       description: 'Une brève description du film, son intrigue, ses acteurs ou tout autre détail captivant.\n' +

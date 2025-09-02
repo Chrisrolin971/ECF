@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FilmsComponent } from './films.component';
+import {ActivatedRoute} from '@angular/router';
 
 describe('FilmsComponent', () => {
   let component: FilmsComponent;
@@ -8,7 +8,17 @@ describe('FilmsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilmsComponent]
+      imports: [FilmsComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+              }
+            }
+          }
+        }]
     })
     .compileComponents();
 

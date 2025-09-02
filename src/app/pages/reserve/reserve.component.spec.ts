@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ReserveComponent } from './reserve.component';
+import {ActivatedRoute} from '@angular/router';
 
 describe('ReserveComponent', () => {
   let component: ReserveComponent;
@@ -8,7 +8,21 @@ describe('ReserveComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReserveComponent]
+      imports: [ReserveComponent],
+      providers: [
+      {
+        provide: ActivatedRoute,
+        useValue: {
+          snapshot: {
+            paramMap: {
+              get: (key: string) => {
+                if (key === 'titre') return 'Les 4 Fantastiques';
+                return null;
+              }
+            }
+          }
+        }
+      }]
     })
     .compileComponents();
 
