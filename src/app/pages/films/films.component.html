@@ -1,1 +1,38 @@
-<p>films works!</p>
+
+<h2>Films à l'affiche </h2>
+
+<div class="film-filter">
+  <label for="tri-select">Trier par :</label>
+  <select id="tri-select" name="tri" [(ngModel)]="triSelection" (ngModelChange)="trierFilms()">
+    <option value="">-- Sélectionnez --</option>
+    <option value="titre">Ordre Alphabétique</option>
+    <option value="genre">Genre</option>
+    <option value="date">Date de parution</option>
+  </select>
+</div>
+
+<div>
+  <div *ngIf="films.length === 0">
+    <p>Aucun film disponible.</p>
+  </div>
+
+  <div *ngFor="let film of films" class="film-row">
+    <img [src]="film.image" alt="Affiche du film" class="film-poster">
+    <div class="film-info">
+      <div class="film-header">
+        <h3 class="film-title">{{ film.titre }}</h3>
+        <div class="coeur" *ngIf="film.coeur">❤️ Coup de cœur</div>
+      </div>
+      <p class="film-description">
+        {{ film.description }}
+      </p>
+      <div class="film-meta">
+        <div class="film-rating">Note : {{ film.note }} / 10</div>
+        <!-- <div class="pegi">PEGI 12</div> -->
+        <div class="categorie">{{ film.categorie }}</div>
+        <button class="reserver-btn" [routerLink]="['/reserve', film.titre]">Réserver</button>
+      </div>
+    </div>
+  </div>
+</div>
+
