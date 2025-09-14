@@ -1,0 +1,132 @@
+h2 {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  color: var(--vert-logo);
+}
+
+.coeur {
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: center; // ✅ Centrage horizontal
+  gap: 10px;
+  margin: 3rem 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+
+.film-description {
+  margin-top: 8px;
+  font-size: 0.95em;
+  color: #555;
+  width: 100%;
+}
+
+.film-info {
+  flex: 1;
+}
+
+.film-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.film-meta {
+  display: flex;
+  align-items: center;
+}
+
+.film-poster {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.film-row {
+  display: flex;
+  align-items: flex-start;
+  margin : 5rem 0;
+}
+
+.film-title {
+   margin-bottom: 1rem;
+   font-size: 1.2em;
+   font-weight: bold;
+ }
+
+.film-rating {
+  margin-top: 1rem;
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+}
+
+.choice{
+  font-size: 1.1rem;
+  margin-right: 20px;
+}
+
+.pegi {
+  margin-top: 1rem;
+  margin-left:  2rem;
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+}
+
+.categorie {
+  margin-top: 1rem;
+  margin-left:  2rem;
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+}
+
+.reserver-btn {
+  margin-left: auto;
+  margin-top: 1rem;
+  padding: 8px;
+  background-color: var(--vert-logo);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reserver-btn:hover {
+  background-color: #2e7d32;
+}
+

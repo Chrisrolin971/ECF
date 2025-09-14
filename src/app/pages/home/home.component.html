@@ -1,5 +1,8 @@
 <div class="section">
   <h2>Nouveauté</h2>
+  <div *ngIf="nouveautes.length === 0">
+    <p>Aucune nouveauté cette semaine !</p>
+  </div>
   <div class="film-grid">
     <div class="film-card" *ngFor="let film of nouveautes">
       <a [routerLink]="['/films']">
