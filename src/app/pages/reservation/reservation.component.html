@@ -2,7 +2,7 @@
 
 <div class="filter">
   <label for="tri-select" class="choice">Choisissez votre cinéma :</label>
-  <select id="tri-select" [(ngModel)]="selectedCinema">
+  <select id="tri-select" [(ngModel)]="selectedCinema" (ngModelChange)="onCinemaChange($event)">
     <option value="">-- Sélectionnez --</option>
     <option value="Nantes">Nantes</option>
     <option value="Bordeaux">Bordeaux</option>
@@ -15,11 +15,15 @@
 </div>
 
 <div *ngFor="let film of films" class="film-row">
+  <div *ngIf="films.length === 0">
+    <p>Aucun film disponible pour ce cinéma.</p>
+  </div>
+
   <img [src]="film.image" alt="Affiche du film" class="film-poster" fill>
   <div class="film-info">
     <div class="film-header">
       <h3 class="film-title">{{ film.titre }}</h3>
-      <div class="coeur">❤️ Coup de cœur</div>
+      <div class="coeur" *ngIf="film.coeur">❤️ Coup de cœur</div>
     </div>
     <p class="film-description">{{ film.description }}</p>
     <div class="film-meta">
@@ -29,3 +33,4 @@
     </div>
   </div>
 </div>
+

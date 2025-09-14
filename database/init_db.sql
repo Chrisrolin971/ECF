@@ -18,12 +18,27 @@ CREATE TABLE IF NOT EXISTS Utilisateurs(
 CREATE TABLE IF NOT EXISTS films (
                      id INT AUTO_INCREMENT PRIMARY KEY,
                      titre VARCHAR(255),
-                     description TEXT,
                      duree INT, -- en minutes
+                     genre VARCHAR(255),
+                     description TEXT,
                      note FLOAT, -- sur 5
                      image_url VARCHAR(255), -- lien vers l'affiche
-                     date_sortie DATE
+                     date_sortie DATE,
+                     coeur BOOLEAN DEFAULT FALSE
 );
+
+-- Table des séances
+CREATE TABLE IF NOT EXISTS seances (
+                                     id INT AUTO_INCREMENT PRIMARY KEY,
+                                     film_id INT NOT NULL,
+                                     cinema VARCHAR(100) NOT NULL,
+  date DATE NOT NULL,
+  heure TIME NOT NULL,
+  langue VARCHAR(50),
+  qualite VARCHAR(50),
+  FOREIGN KEY (film_id) REFERENCES films(id) ON DELETE CASCADE
+  );
+
 
 -- Table Salles
 CREATE TABLE IF NOT EXISTS Salles (
@@ -34,9 +49,8 @@ CREATE TABLE IF NOT EXISTS Salles (
 
 -- Table Cinema
 CREATE TABLE IF NOT EXISTS Cinema (
-                                    idCinema INT AUTO_INCREMENT PRIMARY KEY,
-                                    nomCinema VARCHAR(255) NOT NULL,
-  adresse VARCHAR(255)
+  idCinema INT AUTO_INCREMENT PRIMARY KEY,
+  villeCinema VARCHAR(255) NOT NULL,
   );
 
 -- Table Reservations
@@ -61,9 +75,7 @@ CREATE TABLE IF NOT EXISTS Reservations (
 CREATE TABLE IF NOT EXISTS Qualité(
                       idQualites INT AUTO_INCREMENT PRIMARY KEY,
                       Type VARCHAR(255) NOT NULL,
-                      prix DECIMAL(15,2) NOT NULL,
-                      idSalles INT NOT NULL,
-                      FOREIGN KEY(idSalles) REFERENCES Salles(idSalles)
+                      prix DECIMAL(15,2) NOT NULL
 );
 
 -- Table Defaillances
