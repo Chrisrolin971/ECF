@@ -1,33 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FilmsComponent } from './films.component';
-import {ActivatedRoute} from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FilmsService } from './films.service';
 
 describe('FilmsComponent', () => {
-  let component: FilmsComponent;
-  let fixture: ComponentFixture<FilmsComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilmsComponent],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              paramMap: {
-              }
-            }
-          }
-        }]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(FilmsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      imports: [
+        FilmsComponent,
+        HttpClientTestingModule,
+        RouterTestingModule
+      ],
+      providers: [FilmsService]
+    }).compileComponents();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(FilmsComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
