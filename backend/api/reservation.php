@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $ville = $_GET['ville'] ?? '';
 
 if ($ville) {
-    $sql = "SELECT f.idFilms, f.titre, f.description, f.note, f.genre AS categorie, f.image_url AS image, f.coeur, f.date_sortie
+    $sql = "SELECT f.idFilms AS id, f.titre, f.description, f.note, f.genre AS categorie, f.image_url AS image, f.coeur, f.date_sortie, f.pegi AS pegi
             FROM films f
             JOIN FilmCinema fc ON f.idFilms = fc.idFilm
             JOIN Cinema c ON fc.idCinema = c.idCinema

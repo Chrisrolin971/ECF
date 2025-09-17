@@ -12,6 +12,7 @@ export interface Films {
   date_sortie: string;
   image: string;
   coeur: boolean;
+  pegi?: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -21,5 +22,9 @@ export class FilmsService {
 
   getFilms(): Observable<Films[]> {
     return this.http.get<Films[]>(this.apiUrl);
+  }
+
+  getFilmById(id: number): Observable<Films> {
+    return this.http.get<Films>(`http://ecf.local/backend/api/getFilmById.php?id=${id}`);
   }
 }

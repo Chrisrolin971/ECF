@@ -1,36 +1,88 @@
 <h2>Réserver un film </h2>
-<h3>{{ filmTitre }}</h3>
-<p>Rajouter fiches descriptive du film ici</p>
-<div *ngIf="seances.length > 0; else noSeances">
+<div *ngIf="selectedCinema" class="cinema-selection">
+  <p><strong>Cinéma sélectionné :</strong> {{ selectedCinema }}</p>
+</div>
+
+<div *ngIf="film" class="film-row">
+  <img [src]="film.image" alt="Affiche du film" class="film-poster">
+  <div class="film-info">
+    <div class="film-header">
+      <h3 class="film-title">{{ film.titre }}</h3>
+      <div class="coeur" *ngIf="film.coeur">❤️ Coup de cœur</div>
+    </div>
+    <p class="film-description">{{ film.description }}</p>
+    <div class="film-meta">
+      <div class="film-rating">Note : {{ film.note }} / 10</div>
+      <div class="categorie">{{ film.categorie }}</div>
+      <div *ngIf="film.pegi !== null" class="pegi">PEGI {{ film.pegi }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="place-info">
+  <label for="nbPlaces">Nombre de places :</label>
+  <input id="nbPlaces"
+         type="number"
+         [(ngModel)]="nbPlaces"
+         [min]="0"
+         [max]="100"
+         class="input-field"/>
+
+  <label for="nbPMR">dont PMR :</label>
+  <input id="nbPMR"
+         type="number"
+         [(ngModel)]="nbPMR"
+         [min]="0"
+         [max]="10"
+         class="input-field"
+         (input)="verifierPMR()" />
+
+  <div *ngIf="pmrErreur" class="error-message">
+    Le nombre maximum de sièges PMR a été atteint
+  </div>
+</div>
+
+
+<div *ngIf="seances.length > 0">
   <h3>Séances disponibles</h3>
 
-  <table class="datagrid">
+  <div *ngIf="seancesFiltered().length === 0">
+    <p class="no-seance">Aucune séance disponible dans ce cinéma.</p>
+  </div>
+
+  <table *ngIf="seancesFiltered().length > 0" class="seance-table">
     <thead>
     <tr>
-      <th>Séance</th>
       <th>Date</th>
       <th>Heure</th>
-      <th>Qualité</th>
       <th>Langue</th>
+      <th>Qualité</th>
+      <th>Salle</th>
+      <th>Cinéma</th>
+      <th>Prix</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let seance of seances" (click)="selectSeance(seance)" class="clickable-row">
-      <td>{{ seance.nom }}</td>
-      <td>{{ seance.date }}</td>
-      <td>{{ seance.heure }}</td>
-      <td>{{ seance.qualite }}</td>
+    <tr *ngFor="let seance of seancesFiltered()"
+        [class.selected]="seance === selectedSeance"
+        (dblclick)="selectSeance(seance)">
+      <td>{{ formatDate(seance.date) }}</td>
+      <td>{{ formatHeure(seance.heure) }}</td>
       <td>{{ seance.langue }}</td>
+      <td>{{ seance.qualite }}</td>
+      <td>{{ seance.salle }}</td>
+      <td>{{ seance.cinema }}</td>
+      <td>{{ seance.prix }} €</td>
     </tr>
     </tbody>
   </table>
 
+
 </div>
 
-<ng-template #noSeances>
+<ng-template [ngIf]="seances.length === 0">
   <p>Aucune séance disponible pour ce film.</p>
 </ng-template>
-
 
 <!--Popup pour sélectionner sièges : -->
 <div class="popup-overlay" *ngIf="showPopup"></div>
@@ -42,11 +94,12 @@
     <p>Heure : {{ selectedSeance?.heure }}</p>
     <p>Qualité : {{ selectedSeance?.qualite }}</p>
     <p>Langue : {{ selectedSeance?.langue }}</p>
+    <p>Salle : {{ selectedSeance?.salle }}</p>
   </div>
 
   <div class="selected-seats">
     <label class="seat-label" for="selectedSeats">Sièges :</label>
-    <input type="hidden" id="selectedSeats" [value]="selectedSeats.join(', ')" />
+    <input type="hidden" id="selectedSeats" [value]="selectedSeats.join(', ')"/>
 
     <span *ngFor="let seat of selectedSeats" class="seat-tag">{{ seat }}</span>
   </div>
@@ -82,6 +135,10 @@
               class="seat-btn"
               [class.selected]="selectedSeats.includes(row + col)"
               [class.col-gap-left]="col === 5 || col === 17"
+              [ngClass]="{'pmr-dispo': isPMR(row, col) && !isReserved(row, col),
+                          'pmr-reserve': isPMR(row, col) && isReserved(row, col),
+                          'reserve': !isPMR(row, col) && isReserved(row, col),
+                          'disponible': !isPMR(row, col) && !isReserved(row, col)}"
               (click)="toggleSeat(row + col)"
             >
               <span class="visually-hidden">{{ row + col }}</span>
@@ -114,9 +171,15 @@
 
   </div>
 
+  <div *ngIf="validationErreur" class="error-message">
+    {{ validationErreur }}
+  </div>
+
   <div class="popup-actions">
     <button class="close-btn" (click)="closePopup()">Annuler</button>
-    <button class="validate-btn" (click)="validateSelection()">Valider</button>
+    <button class="validate-btn"
+            [disabled]="nbPlaces <= 0 || nbPlaces > 100 || nbPMR > nbPlaces || pmrErreur"
+            (click)="validateSelection()">Valider</button>
   </div>
 
 </div>

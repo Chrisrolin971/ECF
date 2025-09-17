@@ -28,9 +28,10 @@
       </p>
       <div class="film-meta">
         <div class="film-rating">Note : {{ film.note }} / 10</div>
-        <!-- <div class="pegi">PEGI 12</div> -->
         <div class="categorie">{{ film.categorie }}</div>
-        <button class="reserver-btn" [routerLink]="['/reserve', film.titre]">Réserver</button>
+        <div *ngIf="film.pegi !== null" class="pegi">PEGI {{ film.pegi }}</div>
+        <button class="reserver-btn" [routerLink]="['/home']">Accueil</button>
+
       </div>
     </div>
   </div>

@@ -27,49 +27,67 @@ CREATE TABLE IF NOT EXISTS films (
                      coeur BOOLEAN DEFAULT FALSE
 );
 
--- Table des séances
-CREATE TABLE IF NOT EXISTS seances (
-                                     id INT AUTO_INCREMENT PRIMARY KEY,
-                                     film_id INT NOT NULL,
-                                     cinema VARCHAR(100) NOT NULL,
-  date DATE NOT NULL,
-  heure TIME NOT NULL,
-  langue VARCHAR(50),
-  qualite VARCHAR(50),
-  FOREIGN KEY (film_id) REFERENCES films(id) ON DELETE CASCADE
-  );
-
-
--- Table Salles
-CREATE TABLE IF NOT EXISTS Salles (
-                                    idSalles INT AUTO_INCREMENT PRIMARY KEY,
-                                    nomSalle VARCHAR(255) NOT NULL,
-  capacite INT NOT NULL
-  );
-
 -- Table Cinema
 CREATE TABLE IF NOT EXISTS Cinema (
-  idCinema INT AUTO_INCREMENT PRIMARY KEY,
-  villeCinema VARCHAR(255) NOT NULL,
+                                    idCinema INT AUTO_INCREMENT PRIMARY KEY,
+                                    villeCinema VARCHAR(255) NOT NULL,
   );
 
--- Table Reservations
-CREATE TABLE IF NOT EXISTS Reservations (
-                                          idReservations INT AUTO_INCREMENT PRIMARY KEY,
-                                          idUtilisateurs INT NOT NULL,
-                                          idFilms INT NOT NULL,
-                                          idSalles INT NOT NULL,
-                                          NbPlaces INT NOT NULL,
-                                          idCinema INT NOT NULL,
-                                          Sieges VARCHAR(255) NOT NULL,
-  jour DATE NOT NULL,
-  heureDeb DATETIME NOT NULL,
-  heureFin DATETIME,
-  FOREIGN KEY (idUtilisateurs) REFERENCES Utilisateurs(idUtilisateurs),
-  FOREIGN KEY (idFilms) REFERENCES Films(idFilms),
-  FOREIGN KEY (idSalles) REFERENCES Salles(idSalles),
+-- Table qui relie les films aux cinémas
+CREATE TABLE IF NOT EXISTS FilmCinema (
+                                        idFilm INT,
+                                        idCinema INT,
+                                        PRIMARY KEY (idFilm, idCinema),
+  FOREIGN KEY (idFilm) REFERENCES films(id),
   FOREIGN KEY (idCinema) REFERENCES Cinema(idCinema)
   );
+
+-- Table des séances
+CREATE TABLE IF NOT EXISTS seances (
+                                     idSeance INT AUTO_INCREMENT PRIMARY KEY,
+                                     film_id INT NOT NULL,
+                                     cinema_id INT NOT NULL,
+                                     date DATE NOT NULL,
+                                     heure TIME NOT NULL,
+                                     langue VARCHAR(50),
+                                     qualite_id INT NOT NULL,
+                                     salle_id INT NOT NULL,
+                                     FOREIGN KEY (film_id) REFERENCES films(idFilms) ON DELETE CASCADE,
+                                     FOREIGN KEY (cinema_id) REFERENCES cinema(idCinema) ON DELETE CASCADE,
+                                     FOREIGN KEY (salle_id) REFERENCES salles(idSalles) ON DELETE CASCADE,
+                                     FOREIGN KEY (qualite_id) REFERENCES qualite(idQualite) ON DELETE CASCADE,
+  );
+
+-- Table Salles
+CREATE TABLE IF NOT EXISTS salles (
+                                    idSalles INT PRIMARY KEY AUTO_INCREMENT,
+                                    nomSalle VARCHAR(255),
+                                    capacite INT DEFAULT 100,
+                                    cinema_id INT,
+                                    FOREIGN KEY (cinema_id) REFERENCES cinema(idCinema) ON DELETE CASCADE
+);
+
+-- Table Sièges
+CREATE TABLE IF NOT EXISTS sieges (
+                      idSiege INT PRIMARY KEY AUTO_INCREMENT,
+                      rangée CHAR(1),           -- A à E
+                      numero INT,               -- 1 à 20
+                      estPMR BOOLEAN DEFAULT FALSE,
+                      salle_id INT,
+                      FOREIGN KEY (salle_id) REFERENCES salles(idSalles) ON DELETE CASCADE
+);
+
+-- Table Reservations
+CREATE TABLE IF NOT EXISTS reservations (
+                                          idReservation INT PRIMARY KEY AUTO_INCREMENT,
+                                          user_id INT,
+                                          seance_id INT,
+                                          siege_id INT,
+                                          date_reservation DATETIME DEFAULT CURRENT_TIMESTAMP,
+                                          FOREIGN KEY (user_id) REFERENCES users(id),
+                                          FOREIGN KEY (seance_id) REFERENCES seances(idSeance),
+                                          FOREIGN KEY (siege_id) REFERENCES sieges(idSiege)
+);
 
 -- Table Qualites
 CREATE TABLE IF NOT EXISTS Qualité(
