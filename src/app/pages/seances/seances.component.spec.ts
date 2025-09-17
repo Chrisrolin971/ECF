@@ -1,14 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReserveComponent } from './reserve.component';
+import { SeancesComponent } from './seances.component';
 import {ActivatedRoute} from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('ReserveComponent', () => {
-  let component: ReserveComponent;
-  let fixture: ComponentFixture<ReserveComponent>;
+
+describe('SeancesComponent', () => {
+  let component: SeancesComponent;
+  let fixture: ComponentFixture<SeancesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReserveComponent],
+      imports: [SeancesComponent, HttpClientTestingModule],
       providers: [
       {
         provide: ActivatedRoute,
@@ -26,7 +28,7 @@ describe('ReserveComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReserveComponent);
+    fixture = TestBed.createComponent(SeancesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
