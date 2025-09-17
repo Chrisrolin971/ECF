@@ -157,6 +157,10 @@ main {
   margin-right: auto !important;
 }
 
+.pegi-18 { color: red; }
+.pegi-12 { color: orange; }
+.pegi-7  { color: green; }
+
 .pill-group {
   display: flex;
   flex-direction: column;

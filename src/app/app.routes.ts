@@ -8,7 +8,7 @@ import { AdminComponent} from './pages/admin/admin.component';
 import { EmployeComponent} from './pages/employe/employe.component';
 import { InscriptionComponent} from './pages/inscription/inscription.component';
 import { CompteComponent} from './pages/compte/compte.component';
-import { ReserveComponent} from './pages/reserve/reserve.component';
+import { SeancesComponent} from './pages/seances/seances.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,5 +21,5 @@ export const routes: Routes = [
   { path: 'employe', component: EmployeComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'compte', component: CompteComponent },
-  { path: 'reserve/:titre', component: ReserveComponent },
+  { path: 'seances/:id/:cinema', component: SeancesComponent }
 ];

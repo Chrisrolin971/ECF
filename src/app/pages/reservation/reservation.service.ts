@@ -3,12 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Film {
+  id: number;
   titre: string;
   description: string;
   note: number;
   categorie: string;
   image: string;
   coeur: boolean;
+  pegi?: number;
 }
 
 @Injectable({ providedIn: 'root' })
