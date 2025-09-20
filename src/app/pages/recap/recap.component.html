@@ -1,0 +1,68 @@
+<h2>Réserver un film : Récapitulatif </h2>
+
+<div *ngIf="film" class="film-row">
+  <img [src]="film.image" alt="Affiche du film" class="film-poster">
+  <div class="film-info">
+    <div class="film-header">
+      <h3 class="film-title">{{ film.titre }}</h3>
+    </div>
+    <div class="place-info">
+      <label for="nbPlaces">Nombre de places :</label>
+      <div class="places">{{ nbPlaces }}</div>
+
+      <label for="nbPMR">dont PMR :</label>
+      <div class="places">{{ nbPMR }}</div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="seance">
+  <h3>Séance sélectionnée</h3>
+
+  <table class="seance-table">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Heure de début</th>
+      <th>Heure de fin</th>
+      <th>Langue</th>
+      <th>Qualité</th>
+      <th>Salle</th>
+      <th>Cinéma</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{ formatDate(seance.date) }}</td>
+      <td>{{ formatHeure(seance.heure) }}</td>
+      <td>{{ calculerHeureFin() }}</td>
+      <td>{{ seance.langue }}</td>
+      <td>{{ seance.qualite }}</td>
+      <td>{{ seance.salle }}</td>
+      <td>{{ seance.cinema }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="siege-info">
+  <label for="nbPlaces">Sièges sélectionnés :</label>
+  <span *ngFor="let seat of sieges" class="seat-tag">
+    {{ seat.rang }}{{ seat.numero }}
+  </span>
+</div>
+
+<div class="prix">
+  <h3>Total TTC :</h3>
+  <div class="champ">{{ prixCalcule.toFixed(2) }}</div>
+  <h3> €</h3>
+</div>
+
+<div class="actions">
+  <button class="close-btn" [routerLink]="['/seances', film.id, selectedCinema]">Annuler</button>
+  <button class="paiement-btn"
+          (click)="confirm()">
+    Confirmer et Payer
+  </button>
+</div>
