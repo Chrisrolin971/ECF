@@ -1,15 +1,18 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FilmsService, Films } from '../films/films.service';
+import {Component, OnInit, inject} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {FilmsService, Films} from '../films/films.service';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {Seance, SeanceService} from './seances.service';
 import {FormsModule} from '@angular/forms';
+import {SiegesService} from './sieges/sieges.component';
 
 interface Siege {
-  rangée: string;
+  idSiege: number;
+  rang: string;
   numero: number;
   estPMR: boolean;
-  estRéservé: boolean;
+  dispo: boolean;
+  salle_id: number;
 }
 
 @Component({
@@ -24,7 +27,7 @@ export class SeancesComponent implements OnInit {
   seances: Seance[] = [];
   selectedCinema: string | null = null;
   selectedSeance: Seance | null = null;
-  sieges: Siege[] = []; // récupérés depuis ton API
+  sieges: Siege[] = [];
 
   nbPlaces = 0;
   nbPMR = 0;
@@ -44,6 +47,7 @@ export class SeancesComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly filmService = inject(FilmsService);
   private readonly seanceService = inject(SeanceService);
+  private readonly siegesService = inject(SiegesService);
 
   ngOnInit(): void {
     const filmIdParam = this.route.snapshot.paramMap.get('id');
@@ -69,14 +73,6 @@ export class SeancesComponent implements OnInit {
     this.pmrErreur = this.nbPMR > 8;
   }
 
-  isPMR(row: string, col: number): boolean {
-    return this.sieges.some(s => s.rangée === row && s.numero === col && s.estPMR);
-  }
-
-  isReserved(row: string, col: number): boolean {
-    return this.sieges.some(s => s.rangée === row && s.numero === col && s.estRéservé);
-  }
-
   formatDate(dateStr: string): string {
     const mois = ['janv.', 'fév.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
     const date = new Date(dateStr);
@@ -90,20 +86,30 @@ export class SeancesComponent implements OnInit {
     const [hh, mm] = heureStr.split(':');
     return `${hh}:${mm}`;
   }
-  formatPrix(prix: number): string {
-    return prix.toFixed(2).replace('.', ',') + ' €';
-  }
-
 
   showPopup = false;
+
   selectSeance(seance: Seance) {
     this.selectedSeance = seance;
     this.showPopup = true;
+
+    this.siegesService.getSiegesBySalle(seance.salle_id).subscribe(data => {
+      this.sieges = data.map(s => ({
+        ...s,
+        estPMR: s.estPMR,
+        estReserve: !s.dispo,
+        salle_id: seance.salle_id
+      }));
+
+      this.rows = [...new Set(this.sieges.map(s => s.rang))];
+      this.columns = [...new Set(this.sieges.map(s => s.numero))].sort((a, b) => a - b);
+    });
   }
 
   rows: string[] = ['A', 'B', 'C', 'D', 'E'];
-  columns: number[] = Array.from({ length: 20 }, (_, i) => i + 1);
+  columns: number[] = Array.from({length: 20}, (_, i) => i + 1);
   selectedSeats: string[] = [];
+
   toggleSeat(seat: string) {
     const index = this.selectedSeats.indexOf(seat);
     if (index > -1) {
@@ -113,16 +119,37 @@ export class SeancesComponent implements OnInit {
     }
   }
 
+  getSeatClass(row: string, col: number): string {
+    const siege = this.sieges.find(s => s.rang === row && s.numero === col);
+    if (!siege) return '';
+
+    if (siege.estPMR && siege.dispo) return 'pmr-dispo';
+    if (siege.estPMR && !siege.dispo) return 'pmr-reserve';
+    if (!siege.estPMR && !siege.dispo) return 'reserve';
+    return 'disponible';
+  }
+
+  isReserved(row: string, col: number): boolean {
+    const siege = this.sieges.find(s => s.rang === row && s.numero === col);
+    return siege ? !siege.dispo : true;
+  }
+
   validateSelection() {
     const nbPlacesSouhaitees = this.nbPlaces;
     const nbPlacesSelectionnees = this.selectedSeats.length;
+
+    const salleId = this.selectedSeance!.salle_id;
+    const siegeSelection = this.selectedSeats.map(code => {
+      const rang = code.match(/[A-Z]/)?.[0] ?? '';
+      const numero = parseInt(code.replace(/[A-Z]/g, ''), 10);
+      return {rang, numero, salle_id: salleId};
+    });
 
     if (nbPlacesSelectionnees !== nbPlacesSouhaitees) {
       this.validationErreur = 'Le nombre de places sélectionnées ne correspond pas au nombre de places souhaitées';
       return;
     }
 
-    const salleId = this.selectedSeance?.salle_id;
     if (salleId && nbPlacesSouhaitees > 0 && this.selectedSeance) {
       this.seanceService.reduireCapacite(salleId, nbPlacesSouhaitees).subscribe({
         next: () => {
@@ -136,8 +163,25 @@ export class SeancesComponent implements OnInit {
         }
       });
     }
-  }
 
+    this.siegesService.reserverSieges(siegeSelection).subscribe(response => {
+      if (response.success) {
+        siegeSelection.forEach(sel => {
+          const siege = this.sieges.find(s =>
+            s.rang === sel.rang && s.numero === sel.numero && s.salle_id === sel.salle_id
+          );
+          if (siege) siege.dispo = false;
+        });
+
+        this.selectedSeats = [];
+        alert('✅ Vos sièges ont bien été réservés !');
+      } else {
+        alert('❌ La réservation a échoué.');
+      }
+    });
+
+
+  }
 
 
   closePopup() {
