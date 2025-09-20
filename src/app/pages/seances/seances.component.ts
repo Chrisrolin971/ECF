@@ -1,5 +1,5 @@
 import {Component, OnInit, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FilmsService, Films} from '../films/films.service';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {Seance, SeanceService} from './seances.service';
@@ -48,6 +48,7 @@ export class SeancesComponent implements OnInit {
   private readonly filmService = inject(FilmsService);
   private readonly seanceService = inject(SeanceService);
   private readonly siegesService = inject(SiegesService);
+  private readonly router = inject(Router);
 
   ngOnInit(): void {
     const filmIdParam = this.route.snapshot.paramMap.get('id');
@@ -83,6 +84,7 @@ export class SeancesComponent implements OnInit {
   }
 
   formatHeure(heureStr: string): string {
+    if (!heureStr) return '—';
     const [hh, mm] = heureStr.split(':');
     return `${hh}:${mm}`;
   }
@@ -150,37 +152,17 @@ export class SeancesComponent implements OnInit {
       return;
     }
 
-    if (salleId && nbPlacesSouhaitees > 0 && this.selectedSeance) {
-      this.seanceService.reduireCapacite(salleId, nbPlacesSouhaitees).subscribe({
-        next: () => {
-          this.selectedSeance!.capacite -= nbPlacesSouhaitees;
-          this.showPopup = false;
-          this.selectedSeats = [];
-          this.validationErreur = ''; // Réinitialiser le message
-        },
-        error: err => {
-          console.error('Erreur lors de la mise à jour de la capacité', err);
-        }
-      });
-    }
-
-    this.siegesService.reserverSieges(siegeSelection).subscribe(response => {
-      if (response.success) {
-        siegeSelection.forEach(sel => {
-          const siege = this.sieges.find(s =>
-            s.rang === sel.rang && s.numero === sel.numero && s.salle_id === sel.salle_id
-          );
-          if (siege) siege.dispo = false;
-        });
-
-        this.selectedSeats = [];
-        alert('✅ Vos sièges ont bien été réservés !');
-      } else {
-        alert('❌ La réservation a échoué.');
+    //réoriente vers la page de recapitulatif
+    this.router.navigate(['/recap'], {
+      state: {
+        film: this.film,
+        seance: this.selectedSeance,
+        nbPlaces: this.nbPlaces,
+        nbPMR: this.nbPMR,
+        sieges: siegeSelection,
+        selectedCinema: this.selectedCinema
       }
     });
-
-
   }
 
 

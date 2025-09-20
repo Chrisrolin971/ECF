@@ -13,6 +13,7 @@ export interface Seance {
   salle: string;
   cinema: string;
   salle_id: number;
+  duree: number;
 }
 
 export interface CapaciteResponse {
@@ -36,8 +37,9 @@ export class SeanceService {
     return this.http.post<CapaciteResponse>(url, body);
   }
 
-  reserverSieges(siegeIds: number[]): Observable<{ success: boolean }> {
+  reserverSieges(sieges: { rang: string; numero: number; salle_id: number }[]): Observable<{ success: boolean }> {
     const url = 'http://ecf.local/backend/api/sieges.php';
-    return this.http.post<{ success: boolean }>(url, { siegeIds });
+    return this.http.post<{ success: boolean }>(url, { sieges });
   }
+
 }

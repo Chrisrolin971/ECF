@@ -18,11 +18,13 @@ $sql = "SELECT
   sa.nomSalle AS salle,
   sa.idSalles AS salle_id,
   sa.capacite AS capacite,
-  c.villeCinema AS cinema
+  c.villeCinema AS cinema,
+  f.duree AS duree
 FROM seance s
 JOIN qualite q ON s.qualite_id = q.idQualite
 JOIN salles sa ON s.salle_id = sa.idSalles
 JOIN cinema c ON sa.idCinema = c.idCinema
+JOIN films f ON s.films_id = f.idFilms
 WHERE s.films_id = ?
 ORDER BY s.date, s.heure";
 
