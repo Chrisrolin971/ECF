@@ -1,0 +1,146 @@
+h2 {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  color: var(--vert-logo);
+}
+
+.film-row {
+  display: flex;
+  align-items: flex-start;
+  margin : 3rem 0;
+}
+
+.film-poster {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.film-info {
+  flex: 1;
+}
+
+.film-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.film-title {
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--dark-vert);
+}
+
+.place-info {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.place-info label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.seance-table {
+  margin-top: 1rem; /* centre le tableau horizontalement */
+  border-collapse: collapse;
+  width: 80%; /* ajuste la largeur selon ton design */
+  white-space: nowrap;
+
+  th, td {
+    padding: 12px 2rem; /* espace intérieur des cellules */
+    text-align: center;
+    border-bottom: 1px solid var(--light-vert-pastel);
+  }
+
+  thead {
+    background-color: var(--light-vert-pastel);
+  }
+
+}
+
+.siege-info {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.siege-info label {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.seat-tag {
+  background-color: var(--marron);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.prix {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+.places {
+    align-content: center;
+    padding: 6px 10px;
+    font-size: 1rem;
+    border: 2px solid var(--light-vert-pastel);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.champ {
+    align-content: center;
+    padding: 6px 10px;
+    font-size: 1.8rem;
+    border: 2px solid var(--light-vert-pastel);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.paiement-btn,
+.close-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border-color: var(--vert-logo);
+  cursor: pointer;
+  width: 200px;
+  text-align: center;
+}
+
+.paiement-btn:hover{
+  background-color: var(--vert-pastel);
+}
+
+.close-btn:hover {
+  background-color: var(--bs-gray-400);
+}

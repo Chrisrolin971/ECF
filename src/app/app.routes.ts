@@ -9,6 +9,7 @@ import { EmployeComponent} from './pages/employe/employe.component';
 import { InscriptionComponent} from './pages/inscription/inscription.component';
 import { CompteComponent} from './pages/compte/compte.component';
 import { SeancesComponent} from './pages/seances/seances.component';
+import {RecapComponent} from './pages/recap/recap.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,5 +22,6 @@ export const routes: Routes = [
   { path: 'employe', component: EmployeComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'compte', component: CompteComponent },
-  { path: 'seances/:id/:cinema', component: SeancesComponent }
+  { path: 'seances/:id/:cinema', component: SeancesComponent },
+  { path: 'recap', component: RecapComponent },
 ];
