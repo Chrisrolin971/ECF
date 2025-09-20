@@ -35,4 +35,9 @@ export class SeanceService {
     const body = { salleId, nbPlaces };
     return this.http.post<CapaciteResponse>(url, body);
   }
+
+  reserverSieges(siegeIds: number[]): Observable<{ success: boolean }> {
+    const url = 'http://ecf.local/backend/api/sieges.php';
+    return this.http.post<{ success: boolean }>(url, { siegeIds });
+  }
 }
