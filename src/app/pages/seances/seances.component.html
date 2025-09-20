@@ -1,7 +1,4 @@
 <h2>Réserver un film </h2>
-<div *ngIf="selectedCinema" class="cinema-selection">
-  <p><strong>Cinéma sélectionné :</strong> {{ selectedCinema }}</p>
-</div>
 
 <div *ngIf="film" class="film-row">
   <img [src]="film.image" alt="Affiche du film" class="film-poster">
@@ -35,7 +32,7 @@
          [min]="0"
          [max]="10"
          class="input-field"
-         (input)="verifierPMR()" />
+         (input)="verifierPMR()"/>
 
   <div *ngIf="pmrErreur" class="error-message">
     Le nombre maximum de sièges PMR a été atteint
@@ -115,32 +112,17 @@
         </div>
       </div>
 
-
+      <!--  Schéma des sièges -->
       <div class="seat-grid">
-        <!-- Ligne des numéros de colonnes -->
-        <div class="seat-line col-header">
-        <span *ngFor="let col of columns"
-              class="col-number"
-              [class.col-gap-left]="col === 5 || col === 17">
-          {{ col }}</span>
-        </div>
-
-        <!-- Rangées de sièges -->
         <div *ngFor="let row of rows" class="seat-row">
           <span class="row-label">{{ row }}</span>
-
           <div class="seat-line">
             <button
               *ngFor="let col of columns"
               class="seat-btn"
-              [class.selected]="selectedSeats.includes(row + col)"
-              [class.col-gap-left]="col === 5 || col === 17"
-              [ngClass]="{'pmr-dispo': isPMR(row, col) && !isReserved(row, col),
-                          'pmr-reserve': isPMR(row, col) && isReserved(row, col),
-                          'reserve': !isPMR(row, col) && isReserved(row, col),
-                          'disponible': !isPMR(row, col) && !isReserved(row, col)}"
-              (click)="toggleSeat(row + col)"
-            >
+              [ngClass]="[getSeatClass(row, col),selectedSeats.includes(row + col) ? 'selected' : '']"
+              [disabled]="isReserved(row, col)"
+              (click)="toggleSeat(row + col)">
               <span class="visually-hidden">{{ row + col }}</span>
             </button>
           </div>
@@ -179,7 +161,8 @@
     <button class="close-btn" (click)="closePopup()">Annuler</button>
     <button class="validate-btn"
             [disabled]="nbPlaces <= 0 || nbPlaces > 100 || nbPMR > nbPlaces || pmrErreur"
-            (click)="validateSelection()">Valider</button>
+            (click)="validateSelection()">Valider
+    </button>
   </div>
 
 </div>
