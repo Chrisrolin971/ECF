@@ -11,6 +11,9 @@ export interface ConnexionResponse {
   success: boolean;
   message: string;
   pseudo?: string;
+  id: number;
+  token: string;
+  role: string;
 }
 
 @Injectable({

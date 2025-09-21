@@ -8,6 +8,7 @@ export interface Utilisateur {
   pseudo: string;
   email: string;
   motDePasse: string;
+  role: string;
 }
 
 export interface ApiResponse {

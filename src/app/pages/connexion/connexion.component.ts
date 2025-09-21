@@ -1,8 +1,9 @@
 import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Router, RouterModule} from '@angular/router';
+import { Router, RouterModule} from '@angular/router';
 import {ConnexionPayload, ConnexionService} from './connexion.service';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from './auth.service';
 
 @Component({
   selector: 'app-connexion',
@@ -15,10 +16,19 @@ export class ConnexionComponent {
   email = '';
   motDePasse = '';
   messageErreur = '';
+  private readonly retour: string = '/recap';
+  private readonly recapState: Record<string, unknown> | null;
 
   private readonly connexionService = inject(ConnexionService);
   private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
 
+
+  constructor() {
+    const state = this.router.getCurrentNavigation()?.extras.state;
+    this.retour = state?.['retour'] ?? '/home';
+    this.recapState = state ?? null;
+  }
   onSubmit(): void {
     if (!this.email || !this.motDePasse) {
       this.messageErreur = 'Tous les champs sont obligatoires.';
@@ -32,8 +42,12 @@ export class ConnexionComponent {
 
     this.connexionService.connecterUtilisateur(payload).subscribe({
       next: (res) => {
-        if (res.message === 'Connexion réussie') {
-          this.router.navigate(['/home']);
+        if (res.success) {
+          localStorage.setItem('token', res.token);
+          this.authService.setUtilisateurFromToken(res.token);
+          this.router.navigate([this.retour], {
+            state: this.recapState ?? undefined
+          });
         } else {
           this.messageErreur = res.message;
         }

@@ -60,7 +60,7 @@
 </div>
 
 <div class="actions">
-  <button class="close-btn" [routerLink]="['/seances', film.id, selectedCinema]">Annuler</button>
+  <button class="close-btn" [routerLink]="['/seances', film!.id, selectedCinema]">Annuler</button>
   <button class="paiement-btn"
           (click)="confirm()">
     Confirmer et Payer

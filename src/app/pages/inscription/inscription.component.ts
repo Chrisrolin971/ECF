@@ -20,6 +20,7 @@ export class InscriptionComponent {
   confMotdePasse = '';
   messageErreur = '';
   messageValid = '';
+  role = '';
 
   resetForm(): void {
     this.nom = '';
@@ -77,7 +78,8 @@ export class InscriptionComponent {
       prenom: this.prenom,
       pseudo: this.pseudo,
       email: this.email,
-      motDePasse: this.motDePasse
+      motDePasse: this.motDePasse,
+      role: this.role
     };
 
     //Appel requette POST
