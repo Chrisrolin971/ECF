@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 export interface Siege {
-  idSiege: number;
+  id: number;
   rang: string;
   numero: number;
   estPMR: boolean;

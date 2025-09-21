@@ -40,9 +40,9 @@ $sieges = $data['sieges'] ?? [];
 $response = ['success' => false];
 
 if (!empty($sieges)) {
-  $stmt = $pdo->prepare("UPDATE sieges SET dispo = 0 WHERE rang = ? AND numero = ? AND salle_id = ?");
+  $stmt = $pdo->prepare("UPDATE sieges SET dispo = 0 WHERE idSiege = ?");
   foreach ($sieges as $s) {
-    $stmt->execute([$s['rang'], $s['numero'], $s['salle_id']]);
+      $stmt->execute([$s['id']]);
   }
   $response['success'] = true;
 }

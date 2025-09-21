@@ -8,7 +8,7 @@ require_once __DIR__ . '/../config/config.php';
 
 $salleId = $_GET['salleId'] ?? 0;
 
-$sql = "SELECT idSiege, rang, numero, estPMR, dispo, salle_id FROM sieges WHERE salle_id = ?";
+$sql = "SELECT idSiege AS id, rang, numero, estPMR, dispo, salle_id FROM sieges WHERE salle_id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$salleId]);
 $sieges = $stmt->fetchAll();

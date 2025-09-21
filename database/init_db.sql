@@ -82,12 +82,20 @@ CREATE TABLE IF NOT EXISTS reservations (
                                           idReservation INT PRIMARY KEY AUTO_INCREMENT,
                                           utilisateur_id INT,
                                           seance_id INT,
-                                          siege_id INT,
                                           date_resa DATETIME DEFAULT CURRENT_TIMESTAMP,
                                           FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(idUtilisateurs),
-                                          FOREIGN KEY (seance_id) REFERENCES seance(idSeance),
-                                          FOREIGN KEY (siege_id) REFERENCES sieges(idSiege)
+                                          FOREIGN KEY (seance_id) REFERENCES seance(idSeance)
 );
+
+-- Table Reservations-sièges
+CREATE TABLE IF NOT EXISTS reservation_sieges (
+                                                idResa INT PRIMARY KEY AUTO_INCREMENT,
+                                                reservation_id INT,
+                                                siege_id INT,
+                                                FOREIGN KEY (reservation_id) REFERENCES reservations(idReservation),
+                                                FOREIGN KEY (siege_id) REFERENCES sieges(idSiege)
+);
+
 
 -- Table Qualites
 CREATE TABLE IF NOT EXISTS Qualité(
