@@ -50,12 +50,10 @@ CREATE TABLE IF NOT EXISTS seances (
                                      date DATE NOT NULL,
                                      heure TIME NOT NULL,
                                      langue VARCHAR(50),
-                                     qualite_id INT NOT NULL,
                                      salle_id INT NOT NULL,
                                      FOREIGN KEY (film_id) REFERENCES films(idFilms) ON DELETE CASCADE,
                                      FOREIGN KEY (cinema_id) REFERENCES cinema(idCinema) ON DELETE CASCADE,
                                      FOREIGN KEY (salle_id) REFERENCES salles(idSalles) ON DELETE CASCADE,
-                                     FOREIGN KEY (qualite_id) REFERENCES qualite(idQualite) ON DELETE CASCADE,
   );
 
 -- Table Salles
@@ -63,8 +61,10 @@ CREATE TABLE IF NOT EXISTS salles (
                                     idSalles INT PRIMARY KEY AUTO_INCREMENT,
                                     nomSalle VARCHAR(255),
                                     capacite INT DEFAULT 100,
-                                    cinema_id INT,
-                                    FOREIGN KEY (cinema_id) REFERENCES cinema(idCinema) ON DELETE CASCADE
+                                    idCinema INT,
+                                    idQualite INT,
+                                    FOREIGN KEY (idCinema) REFERENCES cinema(idCinema) ON DELETE CASCADE
+                                    FOREIGN KEY (idQualite) REFERENCES qualite(idQualite) ON DELETE CASCADE
 );
 
 -- Table Sièges
