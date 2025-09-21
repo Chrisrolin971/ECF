@@ -13,9 +13,16 @@
     <li><a routerLink="/reservation">Réservation</a></li>
     <p class ="separateur">|</p>
     <li><a routerLink="/contacts">Contacts</a></li>
-    <p class ="separateur">|</p>
-    <li><a routerLink="/admin">Administration</a></li>
-<!--    <li><a routerLink="/employe">Intranet</a></li>-->
+    <!-- Si admin -->
+    <ng-container *ngIf="authService.estAdmin()">
+      <p class="separateur">|</p>
+      <li><a routerLink="/admin">Administration</a></li>
+    </ng-container>
+    <!-- Si employé -->
+    <ng-container *ngIf="authService.estEmploye()">
+      <p class="separateur">|</p>
+      <li><a routerLink="/employe">Intranet</a></li>
+    </ng-container>
   </ul>
 
   <!-- Liens sur mobiles -->
@@ -24,14 +31,28 @@
     <li><a routerLink="/films" (click)="toggleMenu()">Films</a></li>
     <li><a routerLink="/reservation" (click)="toggleMenu()">Réservation</a></li>
     <li><a routerLink="/contacts" (click)="toggleMenu()">Contacts</a></li>
-    <li><a routerLink="/admin" (click)="toggleMenu()">Administration</a></li>
-<!--    <li><a routerLink="/employe" (click)="toggleMenu()">Intranet</a></li>-->
+    <li *ngIf="authService.estAdmin()">
+      <a routerLink="/admin" (click)="toggleMenu()">Administration</a>
+    </li>
+    <li *ngIf="authService.estEmploye()">
+      <a routerLink="/employe" (click)="toggleMenu()">Intranet</a>
+    </li>
   </ul>
   <button class="hamburger" (click)="toggleMenu()"
           aria-label="Menu" [attr.aria-expanded]="menuOpen">☰
   </button>
 
-  <div class="navbar-right">
+  <div class="navbar-right" *ngIf="!authService.estConnecte()">
       <button class="person-btn" routerLink="/connexion">👤</button>
+  </div>
+
+  <div class="navbar-right" *ngIf="authService.estConnecte()">
+    <button class="person-btn" (click)="toggleMenuCompte()" [attr.aria-expanded]="menuCompte">👤
+      <span class="arrow" [class.open]="menuCompte">▾</span>
+    </button>
+    <ul class="nav-links compte" [class.active]="menuCompte" >
+      <li *ngIf="authService.estClient()"><a routerLink="/compte" (click)="toggleMenuCompte()">Mon compte</a></li>
+      <li><a routerLink="/home"  (click)="deconnexion()">Déconnexion</a></li>
+    </ul>
   </div>
 </nav>

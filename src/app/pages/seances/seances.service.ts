@@ -1,5 +1,5 @@
 ﻿import {inject, Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Seance {
@@ -34,12 +34,28 @@ export class SeanceService {
   reduireCapacite(salleId: number, nbPlaces: number): Observable<CapaciteResponse> {
     const url = 'http://ecf.local/backend/api/updateCapacite.php';
     const body = { salleId, nbPlaces };
-    return this.http.post<CapaciteResponse>(url, body);
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<CapaciteResponse>(url, body, { headers });
   }
 
-  reserverSieges(sieges: { rang: string; numero: number; salle_id: number }[]): Observable<{ success: boolean }> {
+  reserverSieges(sieges: {
+    sieges: { rang: string; numero: number; salle_id: number }[];
+    seance_id: number | undefined;
+    utilisateur_id: number
+  }): Observable<{ success: boolean }> {
     const url = 'http://ecf.local/backend/api/sieges.php';
-    return this.http.post<{ success: boolean }>(url, { sieges });
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<{ success: boolean }>(url, sieges, { headers });
   }
 
 }

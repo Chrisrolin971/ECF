@@ -61,6 +61,40 @@
       display: flex;
     }
   }
+
+  .compte {
+     display: none;
+     flex-direction: column;
+     top: 120px;
+     right: 0;
+     width: 15%;
+     background-color: var(--beige);
+     font-size: 16px;
+     position: absolute;
+     z-index: 1000;
+    padding-top: 30px;
+    height: 120px;
+
+     li {
+       padding: 0 12px;
+       line-height: 0;
+     }
+
+     &.active {
+       display: flex;
+     }
+   }
+}
+
+.arrow {
+  font-size: 2.5rem;
+  color: var(--vert-logo);
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
 }
 
 
@@ -70,7 +104,7 @@
   align-items: center;
 
   .a {
-    background: #000ae0;
+    background: var(--bright-blue);
   }
 }
 
