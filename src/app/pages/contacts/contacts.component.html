@@ -47,3 +47,17 @@
     <img src="assets/cineIllustration2.png" alt="Illustration contact" />
   </div>
 </div>
+
+<!-- Popup de confirmation -->
+<div class="popup-overlay" *ngIf="showPopup"></div>
+
+<div class="popup" *ngIf="showPopup">
+  <h3>INFORMATION</h3>
+  <div class="popup-message">
+    <p>Votre message a été envoyé avec succès !</p>
+  </div>
+
+  <div class="popup-actions">
+    <button class="validate-btn" (click)="closePopup()">OK</button>
+  </div>
+</div>

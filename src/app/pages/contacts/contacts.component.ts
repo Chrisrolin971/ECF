@@ -18,6 +18,7 @@ export class ContactsComponent {
   messageErreur = '';
   messageValid = '';
 
+  showPopup = false;
   onSubmit(): void {
     if (this.objet.trim() === '' || this.message.trim() === '') {
       this.messageErreur = 'Veuillez remplir les champs obligatoires.';
@@ -32,7 +33,8 @@ export class ContactsComponent {
       message: this.message
     });
 
-    this.messageValid = 'Votre message a été envoyé avec succès !';
+    this.showPopup = true;
+    // this.messageValid = 'Votre message a été envoyé avec succès !';
     this.messageErreur = '';
     this.resetForm();
   }
@@ -41,5 +43,8 @@ export class ContactsComponent {
     this.nom = '';
     this.objet = '';
     this.message = '';
+  }
+  closePopup(): void {
+    this.showPopup = false;
   }
 }
