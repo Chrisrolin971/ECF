@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Utilisateurs(
                            nom VARCHAR(255) NOT NULL,
                            prenom VARCHAR(255) NOT NULL,
                            pseudo VARCHAR(255),
-                           role INT,
+                           role VARCHAR(20),
                            email VARCHAR(255) NOT NULL,
                            mdp VARCHAR(255) NOT NULL
 );

@@ -4,6 +4,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {Seance, SeanceService} from '../seances/seances.service';
 import {Film} from '../reservation/reservation.service';
+import {AuthService} from '../connexion/auth.service';
 
 @Component({
   selector: 'app-recap',
@@ -26,6 +27,7 @@ export class RecapComponent {
 
   private readonly seanceService = inject(SeanceService);
   private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
 
 
   constructor() {
@@ -71,6 +73,23 @@ export class RecapComponent {
   confirm(): void {
     const salleId = this.seance!.salle_id;
     const nbPlacesSouhaitees = this.nbPlaces + this.nbPMR;
+    const utilisateurId = this.authService.getUtilisateurId();
+
+    if (!utilisateurId) {
+      alert('Vous devez être connecté pour réserver.');
+      this.router.navigate(['/connexion'], {
+        state: {
+          film: this.film,
+          seance: this.seance,
+          nbPlaces: this.nbPlaces,
+          nbPMR: this.nbPMR,
+          sieges: this.sieges,
+          selectedCinema: this.selectedCinema,
+          retour: '/recap'
+        }
+      });
+      return;
+    }
 
     this.seanceService.reduireCapacite(salleId, nbPlacesSouhaitees).subscribe({
       next: () => {
@@ -81,7 +100,11 @@ export class RecapComponent {
       }
     });
 
-    this.seanceService.reserverSieges(this.sieges).subscribe({
+    this.seanceService.reserverSieges({
+      sieges: this.sieges,
+      seance_id: this.seance?.idSeance,
+      utilisateur_id: utilisateurId
+    }).subscribe({
       next: () => {
         alert('Votre réservation a bien été confirmée !');
       },

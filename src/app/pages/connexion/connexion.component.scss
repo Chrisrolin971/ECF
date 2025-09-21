@@ -52,6 +52,11 @@ input {
   border: 1px solid #ccc; //couleur du champ de saisie
 }
 
+.separateur{
+  color: var(--turquoise);
+  background-color:  var(--turquoise);
+}
+
 input.invalid {
   border-color: #ff0000;
 }
