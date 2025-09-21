@@ -20,6 +20,16 @@ export interface Utilisateurs {
   role: string;
 }
 
+export interface Avis {
+  id: number;
+  note: number;
+  commentaire: string;
+  date: Date;
+  titre: string;
+  notes: number;
+  pseudo: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AdminService {
   private readonly apiUrl = 'http://ecf.local/backend/api';
@@ -29,9 +39,12 @@ export class AdminService {
     return this.http.get<Salle[]>(`${this.apiUrl}/salles.php`);
   }
 
-
   getUtilisateurs(): Observable<Utilisateurs[]> {
     return this.http.get<Utilisateurs[]>(`${this.apiUrl}/utilisateurs.php`);
+  }
+
+  getAvis():  Observable<Avis[]> {
+    return this.http.get<Avis[]>(`${this.apiUrl}/avis.php`);
   }
 
 }

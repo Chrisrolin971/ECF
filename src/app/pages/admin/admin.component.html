@@ -67,7 +67,7 @@
     </div>
 
     <!-- Employés -->
-    <div class="table-section">
+    <div class="table-section" *ngIf="authService.estAdmin()">
       <div class="table-header">
         <h2>Employés</h2>
         <button class="add-btn-employe">Ajouter</button>
@@ -90,6 +90,38 @@
           <td>{{ emp.pseudo }}</td>
           <td>{{ emp.email }}</td>
           <td>{{ '••••••••••' }}</td>
+          <td>
+            <button class="tiny-btn">✏️</button>
+            <button class="tiny-btn">🗑️</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- Avis -->
+    <div class="table-section" *ngIf="authService.estEmploye()">
+      <div class="table-header">
+        <h2>Avis</h2>
+        <button class="add-btn-employe">Ajouter</button>
+      </div>
+      <table>
+        <thead>
+        <tr>
+          <th>Film</th>
+          <th>Note</th>
+          <th>Avis</th>
+          <th>Utilisateur</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let avi of avis">
+          <td>{{ avi.titre }}</td>
+          <td>{{ avi.note}}</td>
+          <td>{{ avi.commentaire}}</td>
+          <td>{{ avi.pseudo }}</td>
           <td>
             <button class="tiny-btn">✏️</button>
             <button class="tiny-btn">🗑️</button>

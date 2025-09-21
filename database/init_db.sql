@@ -115,5 +115,8 @@ CREATE TABLE IF NOT EXISTS Avis(
                    idAvis INT AUTO_INCREMENT PRIMARY KEY,
                    idFilms INT,
                    Note INT NOT NULL,
-                   UNIQUE(idFilms)
+                   commentaire TEXT,
+                   dateAvis DATETIME DEFAULT CURRENT_TIMESTAMP,
+                   idUtilisateur INT,
+                   FOREIGN KEY (idUtilisateur) REFERENCES utilisateurs(idUtilisateurs),
 );

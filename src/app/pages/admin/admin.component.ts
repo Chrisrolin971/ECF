@@ -1,9 +1,9 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {SeanceService} from '../seances/seances.service';
 import {FilmCard, HomeService} from '../home/home.service';
-import {AdminService, Salle, Utilisateurs} from './admin.service';
+import {AdminService, Avis, Salle, Utilisateurs} from './admin.service';
+import {AuthService} from '../connexion/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -19,10 +19,11 @@ export class AdminComponent {
   salles: Salle[] = [];
   utilisateurs: Utilisateurs[] = [];
   employes: Utilisateurs[] = [];
+  avis: Avis[] = [];
 
   private readonly adminService = inject(AdminService);
-  private readonly seanceService = inject(SeanceService);
   private readonly homeService = inject(HomeService);
+  protected readonly authService = inject(AuthService);
 
   ngOnInit(): void {
     this.homeService.getFilms().subscribe(data => {
@@ -37,6 +38,10 @@ export class AdminComponent {
       this.utilisateurs = data;
       this.employes = this.utilisateurs.filter(u => u.role === 'employe');
     });
+
+    this.adminService.getAvis().subscribe(data => {
+      this.avis = data;
+    })
   }
 
   get displayedFilms(): FilmCard[] {

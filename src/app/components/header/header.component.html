@@ -21,7 +21,7 @@
     <!-- Si employé -->
     <ng-container *ngIf="authService.estEmploye()">
       <p class="separateur">|</p>
-      <li><a routerLink="/employe">Intranet</a></li>
+      <li><a routerLink="/admin">Intranet</a></li>
     </ng-container>
   </ul>
 
@@ -35,7 +35,7 @@
       <a routerLink="/admin" (click)="toggleMenu()">Administration</a>
     </li>
     <li *ngIf="authService.estEmploye()">
-      <a routerLink="/employe" (click)="toggleMenu()">Intranet</a>
+      <a routerLink="/admin" (click)="toggleMenu()">Intranet</a>
     </li>
   </ul>
   <button class="hamburger" (click)="toggleMenu()"
