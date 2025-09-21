@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {FilmCard, HomeService} from '../home/home.service';
@@ -12,7 +12,7 @@ import {AuthService} from '../connexion/auth.service';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
   films: FilmCard[] = [];
   showAllFilms = false;
 
