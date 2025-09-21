@@ -5,11 +5,11 @@ import { FilmsComponent} from './pages/films/films.component';
 import { ReservationComponent} from './pages/reservation/reservation.component';
 import { ContactsComponent} from './pages/contacts/contacts.component';
 import { AdminComponent} from './pages/admin/admin.component';
-import { EmployeComponent} from './pages/employe/employe.component';
 import { InscriptionComponent} from './pages/inscription/inscription.component';
 import { CompteComponent} from './pages/compte/compte.component';
 import { SeancesComponent} from './pages/seances/seances.component';
 import {RecapComponent} from './pages/recap/recap.component';
+import {PresentationComponent} from './pages/presentation/presentation.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,9 +19,9 @@ export const routes: Routes = [
   { path: 'reservation', component: ReservationComponent },
   { path: 'contacts', component: ContactsComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'employe', component: EmployeComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'compte', component: CompteComponent },
   { path: 'seances/:id/:cinema', component: SeancesComponent },
   { path: 'recap', component: RecapComponent },
+  { path: 'presentation/:id', component: PresentationComponent },
 ];
