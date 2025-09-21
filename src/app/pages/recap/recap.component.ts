@@ -22,7 +22,7 @@ export class RecapComponent {
   seance: Seance | null = null;
   nbPlaces = 0;
   nbPMR= 0;
-  sieges: { rang: string; numero: number; salle_id: number }[] = [];
+  sieges: { id: number; rang: string; numero: number; salle_id: number }[] = [];
   selectedCinema = '';
 
   private readonly seanceService = inject(SeanceService);
@@ -106,10 +106,36 @@ export class RecapComponent {
       utilisateur_id: utilisateurId
     }).subscribe({
       next: () => {
-        alert('Votre réservation a bien été confirmée !');
+        console.log('Sieges reservés mis à jours');
       },
       error: () => {
-        alert('❌ La réservation a échoué.');
+      console.error('Erreur lors de la mise à jour de la dispo des sièges');
+      }
+    });
+
+    this.seanceService.reserverSieges({
+      sieges: this.sieges,
+      seance_id: this.seance?.idSeance,
+      utilisateur_id: utilisateurId
+    }).subscribe({
+      next: () => {
+        const siegeId = this.sieges.map(s => s.id);
+        this.seanceService.enregistrerReservation({
+          utilisateur_id: utilisateurId,
+          seance_id: this.seance!.idSeance,
+          siege_id: siegeId
+        }).subscribe({
+          next: () => {
+            alert('Votre réservation a bien été confirmée !');
+            this.router.navigate(['/home']);
+          },
+          error: () => {
+            alert('La réservation n’a pas pu être enregistrée.');
+          }
+        });
+      },
+      error: () => {
+        alert('La réservation a échoué.');
       }
     });
   }

@@ -44,7 +44,7 @@ export class SeanceService {
   }
 
   reserverSieges(sieges: {
-    sieges: { rang: string; numero: number; salle_id: number }[];
+    sieges: { id: number; rang: string; numero: number; salle_id: number }[];
     seance_id: number | undefined;
     utilisateur_id: number
   }): Observable<{ success: boolean }> {
@@ -57,5 +57,20 @@ export class SeanceService {
 
     return this.http.post<{ success: boolean }>(url, sieges, { headers });
   }
+
+  enregistrerReservation(data: {
+    utilisateur_id: number;
+    seance_id: number;
+    siege_id: number[];
+  }): Observable<{ success: boolean }> {
+    const url = 'http://ecf.local/backend/api/enregistrerResa.php';
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<{ success: boolean }>(url, data, { headers });
+  }
+
 
 }

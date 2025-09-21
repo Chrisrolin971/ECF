@@ -7,7 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {SiegesService} from './sieges/sieges.component';
 
 interface Siege {
-  idSiege: number;
+  id: number;
   rang: string;
   numero: number;
   estPMR: boolean;
@@ -98,6 +98,7 @@ export class SeancesComponent implements OnInit {
     this.siegesService.getSiegesBySalle(seance.salle_id).subscribe(data => {
       this.sieges = data.map(s => ({
         ...s,
+        id: s.id,
         estPMR: s.estPMR,
         estReserve: !s.dispo,
         salle_id: seance.salle_id
@@ -115,9 +116,9 @@ export class SeancesComponent implements OnInit {
   toggleSeat(seat: string) {
     const index = this.selectedSeats.indexOf(seat);
     if (index > -1) {
-      this.selectedSeats.splice(index, 1); // ❌ Désélection
+      this.selectedSeats.splice(index, 1); //Désélection
     } else {
-      this.selectedSeats.push(seat); // ✅ Sélection
+      this.selectedSeats.push(seat); //Sélection
     }
   }
 
@@ -144,7 +145,13 @@ export class SeancesComponent implements OnInit {
     const siegeSelection = this.selectedSeats.map(code => {
       const rang = code.match(/[A-Z]/)?.[0] ?? '';
       const numero = parseInt(code.replace(/[A-Z]/g, ''), 10);
-      return {rang, numero, salle_id: salleId};
+      const siege = this.sieges.find(s => s.rang === rang && s.numero === numero);
+      return {
+        id: siege?.id,
+        rang,
+        numero,
+        alle_id: salleId
+      };
     });
 
     if (nbPlacesSelectionnees !== nbPlacesSouhaitees) {
