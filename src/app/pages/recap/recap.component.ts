@@ -70,6 +70,8 @@ export class RecapComponent {
     return this.seance!.prix * (this.nbPlaces + this.nbPMR);
   }
 
+  showConfirmationPopup = false;
+
   confirm(): void {
     const salleId = this.seance!.salle_id;
     const nbPlacesSouhaitees = this.nbPlaces + this.nbPMR;
@@ -126,19 +128,25 @@ export class RecapComponent {
           siege_id: siegeId
         }).subscribe({
           next: () => {
-            alert('Votre réservation a bien été confirmée !');
-            this.router.navigate(['/home']);
+            this.showConfirmationPopup = true;
+            console.log('Votre réservation a bien été confirmée !');
           },
           error: () => {
-            alert('La réservation n’a pas pu être enregistrée.');
+            console.error('La réservation n’a pas pu être enregistrée.');
           }
         });
       },
       error: () => {
-        alert('La réservation a échoué.');
+        console.error('La réservation a échoué.');
       }
     });
   }
+
+  closeConfirmation(): void {
+    this.showConfirmationPopup = false;
+    this.router.navigate(['/home']);
+  }
+
 }
 
 
