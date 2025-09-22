@@ -69,16 +69,6 @@ try {
         "message" => "Erreur lors de l'inscription : " . $e->getMessage()
     ]);
 }
-//     if ($success) {
-//     echo json_encode([
-//       "success" => true,
-//       "message" => "Inscription réussie"]);
-//     } else {
-//     echo json_encode([
-//       "success" => true,
-//       "message" => "Erreur lors de l'inscription"]);
-//     }
-//   }
 }
 ?>
 

@@ -12,9 +12,9 @@ import {NgForOf, NgIf} from '@angular/common';
   styleUrls: ['./popupMsg.component.scss']
 })
 export class PopupMessageComponent {
-  @Input() titre: string = 'INFORMATION';
+  @Input() titre = 'INFORMATION';
   @Input() messages: string[] = [];
-  @Input() reponse: boolean = false;
+  @Input() reponse = false;
 
   @Output() fermer = new EventEmitter<void>();
   @Output() valider = new EventEmitter<void>();

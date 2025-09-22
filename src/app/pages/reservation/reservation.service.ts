@@ -19,7 +19,6 @@ export interface Reservation {
   heure: string;
   qualite: string;
   salle: number;
-  prix: number;
   id: number;
 }
 
@@ -33,7 +32,10 @@ export class FilmService {
   }
 
   getReservations(): Observable<Reservation[]> {
-    const token = localStorage.getItem('token');
+    let token = '';
+    if (typeof window !== 'undefined' && window.localStorage) {
+      token = localStorage.getItem('token') ?? '';
+    }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<Reservation[]>(`${this.apiUrl}/getReservations.php`, { headers });
   }

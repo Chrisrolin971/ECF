@@ -1,5 +1,5 @@
 ﻿import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
 
 export interface Salle {
@@ -30,6 +30,12 @@ export interface Avis {
   pseudo: string;
 }
 
+export interface UpdateMdpResponse {
+  success: boolean;
+  message: string;
+}
+
+
 @Injectable({ providedIn: 'root' })
 export class AdminService {
   private readonly apiUrl = 'http://ecf.local/backend/api';
@@ -47,4 +53,11 @@ export class AdminService {
     return this.http.get<Avis[]>(`${this.apiUrl}/avis.php`);
   }
 
+  updateMotDePasse(ancienMotDePasse: string, nouveauMotDePasse: string): Observable<UpdateMdpResponse> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = { ancienMotDePasse, nouveauMotDePasse };
+
+    return this.http.post<UpdateMdpResponse>(`${this.apiUrl}/updateMdp.php`, body, { headers });
+  }
 }

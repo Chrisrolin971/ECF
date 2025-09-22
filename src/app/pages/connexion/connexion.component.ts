@@ -70,7 +70,7 @@ export class ConnexionComponent {
     });
   }
 
-  afficherPopup(titre: string, messages: string[], reponse: boolean = false, redirection?: string) {
+  afficherPopup(titre: string, messages: string[], reponse: boolean, redirection?: string) {
     this.popupTitre = titre;
     this.popupMessages = messages;
     this.popupReponse = reponse;

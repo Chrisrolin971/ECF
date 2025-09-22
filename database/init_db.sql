@@ -111,12 +111,13 @@ CREATE TABLE IF NOT EXISTS Defaillances(
 );
 
 -- Table Avis
-CREATE TABLE IF NOT EXISTS Avis(
-                   idAvis INT AUTO_INCREMENT PRIMARY KEY,
-                   idFilms INT,
-                   Note INT NOT NULL,
-                   commentaire TEXT,
-                   dateAvis DATETIME DEFAULT CURRENT_TIMESTAMP,
-                   idUtilisateur INT,
-                   FOREIGN KEY (idUtilisateur) REFERENCES utilisateurs(idUtilisateurs),
+CREATE TABLE IF NOT EXISTS avis_attente (
+                            idAvisAttente INT AUTO_INCREMENT PRIMARY KEY,
+                            seance_id INT NOT NULL,
+                            Note INT CHECK (Note BETWEEN 1 AND 5),
+                            commentaire TEXT,
+                            dateAvis DATETIME DEFAULT CURRENT_TIMESTAMP,
+                            idUtilisateur INT NOT NULL,
+                            FOREIGN KEY (seance_id) REFERENCES seances(idSeance),
+                            FOREIGN KEY (idUtilisateur) REFERENCES utilisateurs(idUtilisateurs)
 );
