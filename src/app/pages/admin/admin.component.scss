@@ -177,6 +177,10 @@ th, td {
   border-radius: 4px;
   cursor: pointer;
 }
+.tiny-btn:hover {
+  background-color: var(--light-vert-pastel); // fond clair au survol
+  border: 1px solid #ccc;    // bordure subtile
+}
 
 .table-section table td:last-child,
 .table-section table th:last-child {

@@ -12,17 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $stmt = $pdo->query("SELECT
-       a.idAvis AS id,
+       a.idAvisAttente AS id,
        a.Note AS note,
        a.commentaire,
        a.dateAvis AS date,
+       u.pseudo AS pseudo,
        f.titre AS titre,
-       f.note AS notes,
        u.pseudo AS pseudo
      FROM avis a
-     JOIN films f ON a.idFilms = f.idFilms
+     JOIN seance s ON a.seance_id = s.idSeance
      JOIN utilisateurs u ON a.idUtilisateur = u.idUtilisateurs
+     JOIN films f ON s.films_id = f.idFilms
+     WHERE a.valide = 0;
    ");
+
 
 $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($avis);

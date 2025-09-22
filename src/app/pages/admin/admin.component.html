@@ -104,7 +104,6 @@
     <div class="table-section" *ngIf="authService.estEmploye()">
       <div class="table-header">
         <h2>Avis</h2>
-        <button class="add-btn-employe">Ajouter</button>
       </div>
       <table>
         <thead>
@@ -123,8 +122,8 @@
           <td>{{ avi.commentaire}}</td>
           <td>{{ avi.pseudo }}</td>
           <td>
-            <button class="tiny-btn">✏️</button>
-            <button class="tiny-btn">🗑️</button>
+            <button class="tiny-btn" (click)="validerAvis(avi.id)">✏️</button>
+            <button class="tiny-btn" (click)="supprimerAvis(avi.id)">🗑️</button>
           </td>
         </tr>
         </tbody>
@@ -132,4 +131,15 @@
     </div>
   </div>
 </div>
+
+
+<app-popup-message
+  *ngIf="showPopup"
+  [titre]="popupTitre"
+  [messages]="popupMessages"
+  [reponse]="popupReponse"
+  (fermer)="fermerPopup()"
+  (valider)="validerPopup()">
+</app-popup-message>
+
 

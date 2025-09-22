@@ -26,7 +26,6 @@ export interface Avis {
   commentaire: string;
   date: Date;
   titre: string;
-  notes: number;
   pseudo: string;
 }
 
@@ -59,5 +58,19 @@ export class AdminService {
     const body = { ancienMotDePasse, nouveauMotDePasse };
 
     return this.http.post<UpdateMdpResponse>(`${this.apiUrl}/updateMdp.php`, body, { headers });
+  }
+
+  validerAvis(id: number): Observable<{ success: boolean; message: string }> {
+    return this.http.post<{ success: boolean; message: string }>(
+      `${this.apiUrl}/updateAvis.php`,
+      {id}
+    );
+  }
+
+  supprimerAvis(id: number): Observable<{ success: boolean; message: string }> {
+    return this.http.post<{ success: boolean; message: string }>(
+      `${this.apiUrl}/supprimerAvis.php`,
+      { id }
+    );
   }
 }
