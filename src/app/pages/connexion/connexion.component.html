@@ -19,3 +19,11 @@
     <button class="inscription-btn" routerLink="/inscription">S'inscrire</button>
   </form>
 </div>
+
+<app-popup-message
+  *ngIf="showPopup"
+  [titre]="popupTitre"
+  [messages]="popupMessages"
+  [reponse]="popupReponse"
+  (fermer)="fermerPopup()">
+</app-popup-message>
