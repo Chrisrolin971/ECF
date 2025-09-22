@@ -98,7 +98,7 @@ export class InscriptionComponent {
             this.messageErreur = res.message;
             return;
           }
-          this.afficherPopup('Féliciations', ['Inscription réussie !<br>' +
+          this.afficherPopup('INFORMATION', ['Inscription réussie !<br>' +
           'Vous allez être redirigé vers la page de connexion.'], false);
           console.log('Succès:', res.message);
           this.resetForm();
