@@ -2,11 +2,13 @@ import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InscriptionService, Utilisateur, ApiResponse } from './inscription.service';
+import {Router} from '@angular/router';
+import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
 
 @Component({
   selector: 'app-inscription',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, PopupMessageComponent],
   templateUrl: './inscription.component.html',
   styleUrls: ['./inscription.component.scss']
 })
@@ -22,6 +24,11 @@ export class InscriptionComponent {
   messageValid = '';
   role = '';
 
+  showPopup = false;
+  popupTitre = '';
+  popupMessages: string[] = [];
+  popupReponse = false;
+
   resetForm(): void {
     this.nom = '';
     this.prenom = '';
@@ -33,6 +40,7 @@ export class InscriptionComponent {
   }
 
   private readonly inscriptionService = inject(InscriptionService);
+  private readonly router = inject(Router);
   onSubmit(): void {
 
     //Vérification des champs requis
@@ -89,10 +97,9 @@ export class InscriptionComponent {
           if (!res.success) {
             this.messageErreur = res.message;
             return;
-          } else {
-            this.messageValid = "Inscription réussie !";
-            setTimeout(() => this.messageValid = '', 1500);
           }
+          this.afficherPopup('Féliciations', ['Inscription réussie !<br>' +
+          'Vous allez être redirigé vers la page de connexion.'], false);
           console.log('Succès:', res.message);
           this.resetForm();
         },
@@ -104,5 +111,17 @@ export class InscriptionComponent {
           this.messageErreur = msg;
         }
     });
+  }
+
+  afficherPopup(titre: string, messages: string[], response: boolean) {
+    this.popupTitre = titre;
+    this.popupMessages = messages;
+    this.showPopup = true;
+    this.popupReponse = response;
+  }
+
+  fermerPopup() {
+    this.showPopup = false;
+    this.router.navigate(['/connexion']);
   }
 }

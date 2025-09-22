@@ -74,3 +74,11 @@
   <button type="submit">S'inscrire</button>
 </form>
 
+<app-popup-message
+  *ngIf="showPopup"
+  [titre]="popupTitre"
+  [messages]="popupMessages"
+  [reponse]="popupReponse"
+  (fermer)="fermerPopup()">
+</app-popup-message>
+
