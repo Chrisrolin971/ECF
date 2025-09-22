@@ -5,11 +5,14 @@ import {FilmCard, HomeService} from '../home/home.service';
 import {AdminService, Avis, Salle, Utilisateurs} from './admin.service';
 import {AuthService} from '../connexion/auth.service';
 import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
+import {PopupAjoutEmployeComponent} from './popup/ajoutEmploye.component';
+import {Utilisateur} from '../inscription/inscription.service';
+import {UpdateMdpComponent} from './popup/updateEmploye.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, RouterModule, PopupMessageComponent],
+  imports: [CommonModule, RouterModule, PopupMessageComponent, UpdateMdpComponent, PopupAjoutEmployeComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
@@ -29,6 +32,10 @@ export class AdminComponent implements OnInit {
   popupTitre = '';
   popupMessages: string[] = [];
   popupReponse = false;
+
+  showAjoutEmploye = false;
+  showUpdatetEmploye = false;
+  empAModifier = '';
 
   private readonly adminService = inject(AdminService);
   private readonly homeService = inject(HomeService);
@@ -84,7 +91,7 @@ export class AdminComponent implements OnInit {
           this.avis = this.avis.filter(a => a.id !== this.avisAttenteValid);
           this.avisAttenteValid = null;
           this.afficherPopup(
-            'INFORMATION',
+            'Information',
             ['Vous avez validé l\'avis'],
             false
           );
@@ -102,7 +109,7 @@ export class AdminComponent implements OnInit {
           this.afficherPopup('Avis supprimé', [res.message], false);
         },
         error: () => {
-          this.afficherPopup('Erreur', ['Impossible de supprimer cet avis'], false);
+          alert("Impossible de supprimer cet avis");
         }
       });
     }
@@ -117,5 +124,38 @@ export class AdminComponent implements OnInit {
 
   fermerPopup() {
     this.showPopup = false;
+  }
+
+  ajouterEmploye(): void {
+    this.showAjoutEmploye = true;
+  }
+  enregistrerEmploye(employe: Utilisateur): void {
+    this.adminService.creerUtilisateur(employe).subscribe({
+      next: () => {
+        this.showAjoutEmploye = false;
+        this.afficherPopup('Information', ['Le nouvel employé a été enregistré'], false);
+        this.ngOnInit();// maj liste
+      },
+      error: () => {
+        alert("Impossible d'ajouter l'employé");
+      }
+    });
+  }
+
+  modifierMdp(emp: Utilisateur): void {
+    this.empAModifier  = emp.email;
+    this.showUpdatetEmploye = true;
+  }
+  mettreAJourEmploye(data: { email: string; motDePasse: string }): void {
+    this.adminService.updateMotDePasseEmploye(data.email, data.motDePasse).subscribe({
+      next: () => {
+        this.showUpdatetEmploye = false;
+        this.afficherPopup('Mot de passe modifié', ['Le mot de passe a été mis à jour.'], false);
+        this.ngOnInit();
+      },
+      error: () => {
+        alert("Impossible de modifier le mot de passe");
+      }
+    });
   }
 }

@@ -1,6 +1,7 @@
 ﻿import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
+import {Utilisateur} from '../inscription/inscription.service';
 
 export interface Salle {
   numero: number;
@@ -30,6 +31,11 @@ export interface Avis {
 }
 
 export interface UpdateMdpResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface CreationUtilisateurResponse {
   success: boolean;
   message: string;
 }
@@ -73,4 +79,21 @@ export class AdminService {
       { id }
     );
   }
+
+  creerUtilisateur(utilisateur: Utilisateur): Observable<CreationUtilisateurResponse> {
+    return this.http.post<CreationUtilisateurResponse>(`${this.apiUrl}/inscription.php`, utilisateur);
+  }
+
+  updateMotDePasseEmploye(email: string, nouveauMotDePasse: string): Observable<{ success: boolean; message: string }> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = { email, nouveauMotDePasse };
+
+    return this.http.post<{ success: boolean; message: string }>(
+      `${this.apiUrl}/updateMdpEmploye.php`,
+      body,
+      { headers }
+    );
+  }
+
 }

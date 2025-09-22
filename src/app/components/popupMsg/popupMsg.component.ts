@@ -12,7 +12,7 @@ import {NgForOf, NgIf} from '@angular/common';
   styleUrls: ['./popupMsg.component.scss']
 })
 export class PopupMessageComponent {
-  @Input() titre = 'INFORMATION';
+  @Input() titre = 'Information';
   @Input() messages: string[] = [];
   @Input() reponse = false;
 

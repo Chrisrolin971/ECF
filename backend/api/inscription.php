@@ -53,10 +53,9 @@ try {
         ':nom' => $data['nom'],
         ':prenom' => $data['prenom'],
         ':pseudo' => $data['pseudo'],
-        ':role' => 0,
         ':email' => $data['email'],
         ':mdp' => $mdpHash,
-        'role' => 'client'
+        'role' => $data['role']
     ]);
 
     echo json_encode([

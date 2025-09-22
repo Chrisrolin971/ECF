@@ -41,7 +41,7 @@ export class ContactsComponent {
 
     this.messageErreur = '';
     this.resetForm();
-    this.afficherPopup('INFORMATION', ['Votre message a bien été envoyé !'], false)
+    this.afficherPopup('Information', ['Votre message a bien été envoyé !'], false)
   }
 
   resetForm(): void {

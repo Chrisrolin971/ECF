@@ -85,7 +85,7 @@ export class RecapComponent {
 
     if (!utilisateurId) {
       this.afficherPopup(
-        'INFORMATION',
+        'Information',
         ['Vous devez être connecté pour réserver.'],
         false,
         '/connexion'
@@ -129,7 +129,7 @@ export class RecapComponent {
         }).subscribe({
           next: () => {
             this.afficherPopup(
-              'INFORMATION',
+              'Information',
               [
                 'Votre réservation a bien été confirmée !<br>',
                 'Il n’y a pas de plateforme de paiement,<br>',

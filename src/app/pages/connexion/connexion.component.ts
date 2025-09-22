@@ -54,7 +54,7 @@ export class ConnexionComponent {
           localStorage.setItem('token', res.token);
           this.authService.setUtilisateurFromToken(res.token);
           this.afficherPopup(
-            'INFORMATION',
+            'Information',
             [res.message],
             false,
             this.retour

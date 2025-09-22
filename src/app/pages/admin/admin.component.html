@@ -70,7 +70,7 @@
     <div class="table-section" *ngIf="authService.estAdmin()">
       <div class="table-header">
         <h2>Employés</h2>
-        <button class="add-btn-employe">Ajouter</button>
+        <button class="add-btn-employe" (click)="ajouterEmploye()">Ajouter</button>
       </div>
       <table>
         <thead>
@@ -91,7 +91,7 @@
           <td>{{ emp.email }}</td>
           <td>{{ '••••••••••' }}</td>
           <td>
-            <button class="tiny-btn">✏️</button>
+            <button class="tiny-btn" (click)="modifierMdp(emp)">✏️</button>
             <button class="tiny-btn">🗑️</button>
           </td>
         </tr>
@@ -141,5 +141,18 @@
   (fermer)="fermerPopup()"
   (valider)="validerPopup()">
 </app-popup-message>
+
+<app-popup-ajout-employe
+  *ngIf="showAjoutEmploye"
+  (fermer)="showAjoutEmploye = false"
+  (enregistrer)="enregistrerEmploye($event)">
+</app-popup-ajout-employe>
+
+<app-update-mdp
+  *ngIf="showUpdatetEmploye"
+  [email]="empAModifier"
+  (fermer)="showUpdatetEmploye = false"
+  (modifierMdp)="mettreAJourEmploye($event)">
+</app-update-mdp>
 
 

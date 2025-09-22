@@ -87,7 +87,7 @@ export class InscriptionComponent {
       pseudo: this.pseudo,
       email: this.email,
       motDePasse: this.motDePasse,
-      role: this.role
+      role: 'client'
     };
 
     //Appel requette POST
@@ -98,7 +98,7 @@ export class InscriptionComponent {
             this.messageErreur = res.message;
             return;
           }
-          this.afficherPopup('INFORMATION', ['Inscription réussie !<br>' +
+          this.afficherPopup('Information', ['Inscription réussie !<br>' +
           'Vous allez être redirigé vers la page de connexion.'], false);
           console.log('Succès:', res.message);
           this.resetForm();
