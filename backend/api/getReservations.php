@@ -45,7 +45,8 @@ try {
         s.heure AS heure,
         q.type AS qualite,
         sa.idSalles AS salle,
-        r.idReservation AS id
+        r.idReservation AS id,
+        s.idSeance AS seance_id
     FROM reservations r
     JOIN seance s ON r.seance_id = s.idSeance
     JOIN films f ON s.films_id = f.idFilms

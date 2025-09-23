@@ -143,5 +143,8 @@ export class AdminService {
     );
   }
 
+  getAvisByFilm(id: number): Observable<Avis[]> {
+    return this.http.get<Avis[]>(`${this.apiUrl}/getAvis.php?id=${id}`);
+  }
 
 }

@@ -23,6 +23,7 @@ export class CompteComponent implements OnInit {
   tri =  'Date';
   selectedCategories: string[] = [];
   reservations: Reservation[] = [];
+
   nom = '';
   prenom = '';
   pseudo = '';
@@ -175,14 +176,15 @@ export class CompteComponent implements OnInit {
         this.avisAjout = null;
         this.noteFinale = 0;
         this.commentaire = '';
+        this.afficherPopup('Ajout d\'un avis', [
+          'Votre ajout a bien été pris en compte.'
+        ], false);
       },
       error: (err) => {
         console.error('Erreur lors de l\'envoi de l\'avis', err);
       }
     });
   }
-
-
 
   confirmerSuppression() {
     this.afficherPopup('Suppression du compte', [

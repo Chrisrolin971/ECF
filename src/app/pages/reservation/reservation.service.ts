@@ -20,6 +20,7 @@ export interface Reservation {
   qualite: string;
   salle: number;
   id: number;
+  seance_id: number;
 }
 
 @Injectable({ providedIn: 'root' })

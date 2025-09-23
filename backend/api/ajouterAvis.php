@@ -1,5 +1,4 @@
 ﻿<?php
-// 🔧 CORS — doit être tout en haut
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("Access-Control-Allow-Origin: http://localhost:4200");
     header("Access-Control-Allow-Methods: POST, OPTIONS");

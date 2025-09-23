@@ -79,8 +79,8 @@
             <td>{{ res.salle }}</td>
             <td><button
               class="btn-avis"
-              [disabled]="estSeanceFuture(res)"
-              (click)="avisAjout = res.id">
+
+              (click)="avisAjout = res.seance_id">
               Laisser un avis
             </button>
             </td>

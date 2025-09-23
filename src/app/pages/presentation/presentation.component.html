@@ -1,1 +1,81 @@
-<p>presentation works! {{film?.titre}}</p>
+<h2>Présentation du film</h2>
+
+<div *ngIf="film" class="film-row">
+  <img [src]="film.image" alt="Affiche du film" class="film-poster">
+  <div class="film-info">
+    <div class="film-header">
+      <h3 class="film-title">{{ film.titre }}</h3>
+      <div class="coeur" *ngIf="film.coeur">❤️ Coup de cœur</div>
+    </div>
+    <p class="film-description">{{ film.description }}</p>
+    <div class="film-meta">
+      <div class="categorie">{{ film.categorie }}</div>
+      <div class="film-rating" [class.invisible]="film.note === null">Note : {{ film.note }} / 10</div>
+      <div *ngIf="film.pegi !== null" class="pegi">PEGI {{ film.pegi }}</div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="seances.length > 0; else pasDeSeance">
+  <h3>Séances disponibles</h3>
+  <table class="seance-table">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Heure</th>
+      <th>Cinéma</th>
+      <th>Salle</th>
+      <th>Langue</th>
+      <th>Qualité</th>
+      <th>Prix</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let s of seances">
+      <td>{{ formatDate(s.date) }}</td>
+      <td>{{ s.heure }}</td>
+      <td>{{ s.cinema }}</td>
+      <td>{{ s.salle }}</td>
+      <td>{{ s.langue }}</td>
+      <td>{{ s.qualite }}</td>
+      <td>{{ s.prix }} €</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #pasDeSeance>
+  <p class="no-seance">Aucune séance prévue pour ce film.</p>
+</ng-template>
+
+
+<div *ngIf="avis.length > 0">
+  <h3>Avis</h3>
+
+  <table class="seance-table">
+    <thead>
+    <tr>
+      <th id="note">Note</th>
+      <th id="commentaire">Commentaire</th>
+      <th id="user">Utilisateur</th>
+      <td>Date de publication</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let avis of avis">
+      <td>
+        <span *ngFor="let i of [1,2,3,4,5]">
+            <span [ngClass]="i <= avis.note ? 'star-full' : 'star-empty'">★</span>
+        </span>
+      </td>
+      <td>{{ avis.commentaire }}</td>
+      <td>{{ avis.pseudo }}</td>
+      <td>{{ formatDate(avis.date) }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template [ngIf]="avis.length === 0">
+  <p class="no-seance">Aucun avis pour ce film.</p>
+</ng-template>

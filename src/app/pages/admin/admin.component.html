@@ -106,7 +106,7 @@
       <div class="table-header">
         <h2>Avis</h2>
       </div>
-      <table>
+      <table *ngIf="avis.length > 0; else aucunAvis">
         <thead>
         <tr>
           <th>Film</th>
@@ -129,6 +129,10 @@
         </tr>
         </tbody>
       </table>
+
+      <ng-template #aucunAvis>
+        <p class="no-avis">Aucun avis à valider</p>
+      </ng-template>
     </div>
   </div>
 </div>
