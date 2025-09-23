@@ -19,7 +19,7 @@ if (!isset($data['email']) || !isset($data['pseudo'])) {
 }
 
 try {
-    // Vérifie si l'utilisateur existe
+    // si utilisateur existe
     $stmtCheck = $pdo->prepare("SELECT idUtilisateur FROM Utilisateurs WHERE email = :email OR pseudo = :pseudo");
     $stmtCheck->execute([
         ':email' => $data['email'],

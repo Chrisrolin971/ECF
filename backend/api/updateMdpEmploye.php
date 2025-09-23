@@ -22,7 +22,6 @@ try {
     $stmt = $pdo->prepare("SELECT idUtilisateurs FROM Utilisateurs WHERE email = :email");
     $stmt->execute([':email' => $data['email']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-     error_log("Résultat SELECT : " . print_r($user, true));
 
     if (!$user) {
         echo json_encode(["success" => false, "message" => "Utilisateur introuvable"]);

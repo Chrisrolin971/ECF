@@ -29,8 +29,6 @@ $token = $matches[1];
 try {
     $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
     $userId = $decoded->id;
-    error_log("Token décodé : " . json_encode($decoded));
-    error_log("ID utilisateur : " . $userId);
 
 } catch (Exception $e) {
     http_response_code(401);
@@ -59,8 +57,6 @@ try {
     $stmt->execute([':userId' => $userId]);
     $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($reservations);
-
-    error_log("Nombre de réservations : " . count($reservations));
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(["error" => "Erreur lors de la récupération des réservations"]);
