@@ -53,10 +53,9 @@ try {
         ':nom' => $data['nom'],
         ':prenom' => $data['prenom'],
         ':pseudo' => $data['pseudo'],
-        ':role' => 0,
         ':email' => $data['email'],
         ':mdp' => $mdpHash,
-        'role' => 'client'
+        'role' => $data['role']
     ]);
 
     echo json_encode([
@@ -69,16 +68,6 @@ try {
         "message" => "Erreur lors de l'inscription : " . $e->getMessage()
     ]);
 }
-//     if ($success) {
-//     echo json_encode([
-//       "success" => true,
-//       "message" => "Inscription réussie"]);
-//     } else {
-//     echo json_encode([
-//       "success" => true,
-//       "message" => "Erreur lors de l'inscription"]);
-//     }
-//   }
 }
 ?>
 

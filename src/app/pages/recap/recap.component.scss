@@ -144,3 +144,74 @@ h2 {
 .close-btn:hover {
   background-color: var(--bs-gray-400);
 }
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  height: 300px;
+  background: var(--vert-pastel);
+  border-radius: 8px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+.popup h3 {
+  margin: 0;
+  padding: 1rem;
+  color: var(--vert-logo);
+  font-weight: bold;
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.popup-message {
+  flex-grow: 1; // ✅ prend tout l’espace dispo
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // ✅ centre verticalement
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.popup-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.validate-btn {
+  padding: 10px 20px;
+  background-color: var(--vert-logo);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 40%;
+}
+
+.validate-btn:hover {
+  background-color: #2e7d32;
+}

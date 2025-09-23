@@ -66,3 +66,11 @@
     Confirmer et Payer
   </button>
 </div>
+
+<app-popup-message
+  *ngIf="showPopup"
+  [titre]="popupTitre"
+  [messages]="popupMessages"
+  [reponse]="popupReponse"
+  (fermer)="fermerPopup()">
+</app-popup-message>

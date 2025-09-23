@@ -8,7 +8,7 @@ export interface Films {
   duree: number;
   categorie: string;
   description: string;
-  note: number;
+  note?: number;
   date_sortie: string;
   image: string;
   coeur: boolean;

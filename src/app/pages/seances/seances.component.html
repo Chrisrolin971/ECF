@@ -9,8 +9,8 @@
     </div>
     <p class="film-description">{{ film.description }}</p>
     <div class="film-meta">
-      <div class="film-rating">Note : {{ film.note }} / 10</div>
       <div class="categorie">{{ film.categorie }}</div>
+      <div class="film-rating" [class.invisible]="film.note === null">Note : {{ film.note }} / 10</div>
       <div *ngIf="film.pegi !== null" class="pegi">PEGI {{ film.pegi }}</div>
     </div>
   </div>

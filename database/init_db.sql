@@ -50,12 +50,10 @@ CREATE TABLE IF NOT EXISTS seances (
                                      date DATE NOT NULL,
                                      heure TIME NOT NULL,
                                      langue VARCHAR(50),
-                                     qualite_id INT NOT NULL,
                                      salle_id INT NOT NULL,
                                      FOREIGN KEY (film_id) REFERENCES films(idFilms) ON DELETE CASCADE,
                                      FOREIGN KEY (cinema_id) REFERENCES cinema(idCinema) ON DELETE CASCADE,
                                      FOREIGN KEY (salle_id) REFERENCES salles(idSalles) ON DELETE CASCADE,
-                                     FOREIGN KEY (qualite_id) REFERENCES qualite(idQualite) ON DELETE CASCADE,
   );
 
 -- Table Salles
@@ -63,8 +61,10 @@ CREATE TABLE IF NOT EXISTS salles (
                                     idSalles INT PRIMARY KEY AUTO_INCREMENT,
                                     nomSalle VARCHAR(255),
                                     capacite INT DEFAULT 100,
-                                    cinema_id INT,
-                                    FOREIGN KEY (cinema_id) REFERENCES cinema(idCinema) ON DELETE CASCADE
+                                    idCinema INT,
+                                    idQualite INT,
+                                    FOREIGN KEY (idCinema) REFERENCES cinema(idCinema) ON DELETE CASCADE
+                                    FOREIGN KEY (idQualite) REFERENCES qualite(idQualite) ON DELETE CASCADE
 );
 
 -- Table Sièges
@@ -111,9 +111,13 @@ CREATE TABLE IF NOT EXISTS Defaillances(
 );
 
 -- Table Avis
-CREATE TABLE IF NOT EXISTS Avis(
-                   idAvis INT AUTO_INCREMENT PRIMARY KEY,
-                   idFilms INT,
-                   Note INT NOT NULL,
-                   UNIQUE(idFilms)
+CREATE TABLE IF NOT EXISTS avis_attente (
+                            idAvisAttente INT AUTO_INCREMENT PRIMARY KEY,
+                            seance_id INT NOT NULL,
+                            Note INT CHECK (Note BETWEEN 1 AND 5),
+                            commentaire TEXT,
+                            dateAvis DATETIME DEFAULT CURRENT_TIMESTAMP,
+                            idUtilisateur INT NOT NULL,
+                            FOREIGN KEY (seance_id) REFERENCES seances(idSeance),
+                            FOREIGN KEY (idUtilisateur) REFERENCES utilisateurs(idUtilisateurs)
 );

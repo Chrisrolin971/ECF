@@ -1,1 +1,173 @@
-<p>admin works!</p>
+<div class="admin-page">
+
+  <!-- Section Films -->
+  <div class="films-section">
+    <div class="film-actions">
+      <div class="action-card">
+        <button class="action-btn" (click)="ajouterFilm()">Ajouter</button>
+        <button class="action-btn" [disabled]="!filmSelectionne" (click)="modifierFilm()">Modifier</button>
+        <button class="action-btn" [disabled]="!filmSelectionne" (click)="SupprimerFilm()">Supprimer</button>
+      </div>
+    </div>
+
+    <div class="film-display">
+      <div class="film-header">
+        <h2>Liste des films</h2>
+        <button class="toggle-btn" *ngIf="films.length > 4" (click)="toggleFilms()">
+          {{ showAllFilms ? 'Réduire' : 'Afficher tout' }}
+        </button>
+      </div>
+
+      <div *ngIf="displayedFilms.length === 0">
+        <p>Aucune nouveauté cette semaine !</p>
+      </div>
+
+      <div class="film-grid">
+        <div class="film-card" *ngFor="let film of displayedFilms">
+          <button class="image-btn" (click)="selectionnerFilm(film)">
+            <img [src]="film.image" [alt]="film.titre"
+                 [class.selectionne]="film === filmSelectionne"/>
+          </button>
+          <p>{{ film.titre }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2ème moitié  -->
+  <div class="admin-tables">
+    <!-- Salles -->
+    <div class="table-section">
+      <div class="table-header">
+        <h2>Salles</h2>
+        <button class="add-btn-salle">Ajouter</button>
+      </div>
+      <table>
+        <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Capacité</th>
+          <th>Ville</th>
+          <th>Qualité</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let salle of salles">
+          <td>{{ salle.nom }}</td>
+          <td>{{ salle.capacite }}</td>
+          <td>{{ salle.cinema }}</td>
+          <td>{{ salle.qualite }}</td>
+          <td>
+            <button class="tiny-btn">✏️</button>
+            <button class="tiny-btn">🗑️</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Employés -->
+    <div class="table-section" *ngIf="authService.estAdmin()">
+      <div class="table-header">
+        <h2>Employés</h2>
+        <button class="add-btn-employe" (click)="ajouterEmploye()">Ajouter</button>
+      </div>
+      <table>
+        <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Login</th>
+          <th>Email</th>
+          <th>Mot de passe</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let emp of employes">
+          <td>{{ emp.nom }}</td>
+          <td>{{ emp.prenom }}</td>
+          <td>{{ emp.pseudo }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ '••••••••••' }}</td>
+          <td>
+            <button class="tiny-btn" (click)="modifierMdp(emp)">✏️</button>
+            <button class="tiny-btn" (click)="supprimerEmploye(emp)">🗑️</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- Avis -->
+    <div class="table-section" *ngIf="authService.estEmploye()">
+      <div class="table-header">
+        <h2>Avis</h2>
+      </div>
+      <table *ngIf="avis.length > 0; else aucunAvis">
+        <thead>
+        <tr>
+          <th>Film</th>
+          <th>Note</th>
+          <th>Avis</th>
+          <th>Utilisateur</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let avi of avis">
+          <td>{{ avi.titre }}</td>
+          <td>{{ avi.note}}</td>
+          <td>{{ avi.commentaire}}</td>
+          <td>{{ avi.pseudo }}</td>
+          <td>
+            <button class="tiny-btn" (click)="validerAvis(avi.id)">✏️</button>
+            <button class="tiny-btn" (click)="supprimerAvis(avi.id)">🗑️</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <ng-template #aucunAvis>
+        <p class="no-avis">Aucun avis à valider</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+<app-popup-message
+  *ngIf="showPopup"
+  [titre]="popupTitre"
+  [messages]="popupMessages"
+  [reponse]="popupReponse"
+  (fermer)="fermerPopup()"
+  (valider)="validerPopup()">
+</app-popup-message>
+
+<app-ajout-film
+  *ngIf="showAjoutFilm"
+  [film]="filmAModifier"
+  (fermer)="showAjoutFilm = false"
+  (enregistrerFilm)="traiterFilm($event)">
+</app-ajout-film>
+
+
+<app-popup-ajout-employe
+  *ngIf="showAjoutEmploye"
+  (fermer)="showAjoutEmploye = false"
+  (enregistrer)="enregistrerEmploye($event)">
+</app-popup-ajout-employe>
+
+<app-update-mdp
+  *ngIf="showUpdatetEmploye"
+  [email]="empAModifier"
+  (fermer)="showUpdatetEmploye = false"
+  (modifierMdp)="mettreAJourEmploye($event)">
+</app-update-mdp>
+
+
+
+

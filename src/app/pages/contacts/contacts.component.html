@@ -47,3 +47,11 @@
     <img src="assets/cineIllustration2.png" alt="Illustration contact" />
   </div>
 </div>
+
+<app-popup-message
+  *ngIf="showPopup"
+  [titre]="popupTitre"
+  [messages]="popupMessages"
+  [reponse]="popupReponse"
+  (fermer)="fermerPopup()">
+</app-popup-message>

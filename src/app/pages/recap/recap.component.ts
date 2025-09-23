@@ -5,6 +5,7 @@ import {Router, RouterLink} from '@angular/router';
 import {Seance, SeanceService} from '../seances/seances.service';
 import {Film} from '../reservation/reservation.service';
 import {AuthService} from '../connexion/auth.service';
+import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
 
 @Component({
   selector: 'app-recap',
@@ -13,6 +14,7 @@ import {AuthService} from '../connexion/auth.service';
     ReactiveFormsModule,
     NgForOf,
     RouterLink,
+    PopupMessageComponent,
   ],
   templateUrl: './recap.component.html',
   styleUrl: './recap.component.scss'
@@ -24,6 +26,12 @@ export class RecapComponent {
   nbPMR= 0;
   sieges: { id: number; rang: string; numero: number; salle_id: number }[] = [];
   selectedCinema = '';
+
+  showPopup = false;
+  popupTitre = '';
+  popupMessages: string[] = [];
+  popupReponse = false;
+  popupRedirection: string | null = null;
 
   private readonly seanceService = inject(SeanceService);
   private readonly router = inject(Router);
@@ -76,18 +84,12 @@ export class RecapComponent {
     const utilisateurId = this.authService.getUtilisateurId();
 
     if (!utilisateurId) {
-      alert('Vous devez être connecté pour réserver.');
-      this.router.navigate(['/connexion'], {
-        state: {
-          film: this.film,
-          seance: this.seance,
-          nbPlaces: this.nbPlaces,
-          nbPMR: this.nbPMR,
-          sieges: this.sieges,
-          selectedCinema: this.selectedCinema,
-          retour: '/recap'
-        }
-      });
+      this.afficherPopup(
+        'Information',
+        ['Vous devez être connecté pour réserver.'],
+        false,
+        '/connexion'
+      );
       return;
     }
 
@@ -126,18 +128,53 @@ export class RecapComponent {
           siege_id: siegeId
         }).subscribe({
           next: () => {
-            alert('Votre réservation a bien été confirmée !');
-            this.router.navigate(['/home']);
+            this.afficherPopup(
+              'Information',
+              [
+                'Votre réservation a bien été confirmée !<br>',
+                'Il n’y a pas de plateforme de paiement,<br>',
+                'vous pouvez fermer cette fenêtre.<br>',
+                'Vous allez être redirigée vers la page d’accueil.'
+              ],
+              false,
+              '/home'
+            );
           },
           error: () => {
-            alert('La réservation n’a pas pu être enregistrée.');
+            console.error('La réservation n’a pas pu être enregistrée.');
           }
         });
       },
       error: () => {
-        alert('La réservation a échoué.');
+        console.error('La réservation a échoué.');
       }
     });
+  }
+
+  afficherPopup(titre: string, messages: string[], reponse: boolean, redirection?: string) {
+    this.popupTitre = titre;
+    this.popupMessages = messages;
+    this.popupReponse = reponse;
+    this.popupRedirection = redirection ?? null;
+    this.showPopup = true;
+  }
+
+  fermerPopup() {
+    this.showPopup = false;
+
+    if (this.popupRedirection) {
+      this.router.navigate([this.popupRedirection], {
+        state: {
+          film: this.film,
+          seance: this.seance,
+          nbPlaces: this.nbPlaces,
+          nbPMR: this.nbPMR,
+          sieges: this.sieges,
+          selectedCinema: this.selectedCinema,
+          retour: '/recap'
+        }
+      });
+    }
   }
 }
 

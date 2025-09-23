@@ -22,7 +22,7 @@ if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
     $token = $matches[1];
     try {
         $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
-        $utilisateurId = $decoded->id; // ✅ tu peux l’utiliser si besoin
+        $utilisateurId = $decoded->id;
     } catch (Exception $e) {
         http_response_code(401);
         echo json_encode(["error" => "Token invalide"]);
