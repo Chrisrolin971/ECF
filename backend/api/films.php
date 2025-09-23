@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-$sql = "SELECT idFilms as id, titre, description, note, genre AS categorie, image_url AS image, coeur, date_sortie, pegi FROM films";
+$sql = "SELECT idFilms as id, titre, description, note, genre AS categorie, image_url AS image, coeur, date_sortie, pegi, duree FROM films";
 $stmt = $pdo->query($sql);
 $films = $stmt->fetchAll();
 

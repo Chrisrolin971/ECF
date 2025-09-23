@@ -1,23 +1,24 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {FilmCard, HomeService} from '../home/home.service';
-import {AdminService, Avis, Salle, Utilisateurs} from './admin.service';
+import {HomeService} from '../home/home.service';
+import {AdminService, Avis, Film, Salle, Utilisateurs} from './admin.service';
 import {AuthService} from '../connexion/auth.service';
 import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
 import {PopupAjoutEmployeComponent} from './popup/ajoutEmploye.component';
 import {Utilisateur} from '../inscription/inscription.service';
 import {UpdateMdpComponent} from './popup/updateEmploye.component';
+import {PopupAjoutFilmComponent} from './popup/ajoutFilm.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, RouterModule, PopupMessageComponent, UpdateMdpComponent, PopupAjoutEmployeComponent],
+  imports: [CommonModule, RouterModule, PopupMessageComponent, UpdateMdpComponent, PopupAjoutEmployeComponent, PopupAjoutFilmComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent implements OnInit {
-  films: FilmCard[] = [];
+  films: Film[] = [];
   showAllFilms = false;
 
   salles: Salle[] = [];
@@ -27,6 +28,10 @@ export class AdminComponent implements OnInit {
 
   avisAttenteValid: number | null = null;
   avisAttenteSuppr: number | null = null;
+  employeAttenteSuppr: Utilisateur | null = null;
+  filmAttenteSuppr: Film | null = null;
+  filmSelectionne: Film | null = null;
+  filmAModifier: Film | null = null;
 
   showPopup = false;
   popupTitre = '';
@@ -35,6 +40,8 @@ export class AdminComponent implements OnInit {
 
   showAjoutEmploye = false;
   showUpdatetEmploye = false;
+  showAjoutFilm = false;
+
   empAModifier = '';
 
   private readonly adminService = inject(AdminService);
@@ -42,8 +49,8 @@ export class AdminComponent implements OnInit {
   protected readonly authService = inject(AuthService);
 
   ngOnInit(): void {
-    this.homeService.getFilms().subscribe(data => {
-      this.films = data.affiches;
+    this.adminService.getFilms().subscribe(data => {
+      this.films = data;
     });
 
     this.adminService.getSalles().subscribe(data => {
@@ -60,7 +67,7 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  get displayedFilms(): FilmCard[] {
+  get displayedFilms(): Film[] {
     return this.showAllFilms ? this.films : this.films.slice(0, 5);
   }
 
@@ -113,6 +120,32 @@ export class AdminComponent implements OnInit {
         }
       });
     }
+
+    if(this.employeAttenteSuppr !== null) {
+      this.adminService.supprimerEmploye(this.employeAttenteSuppr.email).subscribe({
+        next: () => {
+          this.afficherPopup('Information', [`L'employé ${this.employeAttenteSuppr?.prenom} ${this.employeAttenteSuppr?.nom} a été supprimé.`], false);
+          this.ngOnInit(); // recharge la liste
+        },
+        error: () => {
+          alert("Impossible de supprimer cet employé");
+        }
+      });
+    }
+
+    if (this.filmAttenteSuppr) {
+      this.adminService.supprimerFilm(this.filmAttenteSuppr.id).subscribe({
+        next: () => {
+          this.afficherPopup('Film supprimé', [`${this.filmAttenteSuppr!.titre} a été supprimé.`], false);
+          this.filmAttenteSuppr = null;
+          this.ngOnInit();
+        },
+        error: () => {
+          this.afficherPopup('Erreur', ['Impossible de supprimer ce film'], false);
+        }
+      });
+      return;
+    }
   }
 
   afficherPopup(titre: string, messages: string[], response: boolean) {
@@ -158,4 +191,68 @@ export class AdminComponent implements OnInit {
       }
     });
   }
+
+  supprimerEmploye(emp: Utilisateur): void {
+    this.employeAttenteSuppr = emp;
+    this.afficherPopup(
+      'Confirmation',
+      [`Voulez-vous vraiment supprimer ${emp.prenom} ${emp.nom} ?`],
+      true
+    );
+  }
+
+  ajouterFilm(): void {
+    this.showAjoutFilm = true;
+  }
+
+  selectionnerFilm(film: Film): void {
+    this.filmSelectionne = film;
+  }
+
+  modifierFilm(): void {
+    if (!this.filmSelectionne) return;
+    this.filmAModifier = { ...this.filmSelectionne };
+    this.showAjoutFilm = true;
+  }
+
+  SupprimerFilm(): void {
+    if (!this.filmSelectionne) return;
+    this.filmAttenteSuppr = this.filmSelectionne;
+    this.afficherPopup(
+      'Confirmation',
+      [`Voulez-vous vraiment supprimer le film "${this.filmSelectionne.titre}" ?`],
+      true
+    );
+  }
+  traiterFilm(film: Film): void {
+    if (film.id) {
+      //mise à jour
+      this.adminService.modifierFilm(film).subscribe({
+        next: () => {
+          this.showAjoutFilm = false;
+          this.filmSelectionne = null;
+          this.afficherPopup('Film modifié', ['Les informations ont été mises à jour.'], false);
+          this.ngOnInit();
+        },
+        error: () => {
+          alert('Impossible de modifier le film');
+        }
+      });
+    } else {
+      //ajout
+      this.adminService.creerFilm(film).subscribe({
+        next: () => {
+          this.showAjoutFilm = false;
+          this.afficherPopup('Film ajouté', ['Le film a bien été ajouté.<br>',
+            'Veuillez rafraîchir la page si l\'image ne se charge pas correctement'], false);
+          this.ngOnInit();
+        },
+        error: () => {
+          alert("Impossible d'ajouter le film");
+        }
+      });
+    }
+  }
+
+
 }

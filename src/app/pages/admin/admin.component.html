@@ -4,9 +4,9 @@
   <div class="films-section">
     <div class="film-actions">
       <div class="action-card">
-        <button class="action-btn">Ajouter</button>
-        <button class="action-btn">Modifier</button>
-        <button class="action-btn">Supprimer</button>
+        <button class="action-btn" (click)="ajouterFilm()">Ajouter</button>
+        <button class="action-btn" [disabled]="!filmSelectionne" (click)="modifierFilm()">Modifier</button>
+        <button class="action-btn" [disabled]="!filmSelectionne" (click)="SupprimerFilm()">Supprimer</button>
       </div>
     </div>
 
@@ -24,9 +24,10 @@
 
       <div class="film-grid">
         <div class="film-card" *ngFor="let film of displayedFilms">
-          <a [routerLink]="['/films']">
-            <img [src]="film.image" [alt]="film.titre" />
-          </a>
+          <button class="image-btn" (click)="selectionnerFilm(film)">
+            <img [src]="film.image" [alt]="film.titre"
+                 [class.selectionne]="film === filmSelectionne"/>
+          </button>
           <p>{{ film.titre }}</p>
         </div>
       </div>
@@ -92,7 +93,7 @@
           <td>{{ '••••••••••' }}</td>
           <td>
             <button class="tiny-btn" (click)="modifierMdp(emp)">✏️</button>
-            <button class="tiny-btn">🗑️</button>
+            <button class="tiny-btn" (click)="supprimerEmploye(emp)">🗑️</button>
           </td>
         </tr>
         </tbody>
@@ -142,6 +143,14 @@
   (valider)="validerPopup()">
 </app-popup-message>
 
+<app-ajout-film
+  *ngIf="showAjoutFilm"
+  [film]="filmAModifier"
+  (fermer)="showAjoutFilm = false"
+  (enregistrerFilm)="traiterFilm($event)">
+</app-ajout-film>
+
+
 <app-popup-ajout-employe
   *ngIf="showAjoutEmploye"
   (fermer)="showAjoutEmploye = false"
@@ -154,5 +163,7 @@
   (fermer)="showUpdatetEmploye = false"
   (modifierMdp)="mettreAJourEmploye($event)">
 </app-update-mdp>
+
+
 
 

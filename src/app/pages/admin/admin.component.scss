@@ -189,4 +189,27 @@ th, td {
   text-align: center;
 }
 
+.image-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+img.selectionne {
+  transform: scale(1.05);
+  border: 6px solid var(--vert-logo);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6); // vert lumineux
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+.film-card img:hover:not(.selectionne) {
+  transform: scale(1.03);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
 

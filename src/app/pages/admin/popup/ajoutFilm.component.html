@@ -1,0 +1,55 @@
+﻿<div class="overlay">
+  <div class="popup-container">
+    <form (ngSubmit)="valider()" class="popup-form">
+      <h2>Ajouter un film</h2>
+
+      <div class="form-row">
+        <label for="titre">Titre</label>
+        <input id="titre" [(ngModel)]="titre" name="titre" required />
+      </div>
+
+      <div class="form-row">
+        <label for="duree">Durée (minutes)</label>
+        <input id="duree" type="number" [(ngModel)]="duree" name="duree" required />
+      </div>
+
+      <div class="form-row">
+        <label for="description">Description</label>
+        <textarea id="description" [(ngModel)]="description" name="description" required></textarea>
+      </div>
+
+      <div class="form-row">
+        <label><input type="checkbox" [(ngModel)]="coeur" name="coeur" /> Coup de cœur</label>
+      </div>
+
+      <div class="form-row">
+        <label for="date">Date de sortie</label>
+        <input id="date" type="date" [(ngModel)]="dateSortie" name="dateSortie" required />
+      </div>
+
+      <div class="form-row">
+        <label for="genre">Genre</label>
+        <select id="genre" [(ngModel)]="genre" name="genre" required>
+          <option *ngFor="let g of genres" [value]="g">{{ g }}</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="image">Image (assets)</label>
+        <input id="image" [(ngModel)]="imageUrl" name="imageUrl" placeholder="assets/images/affiche.jpg" required />
+      </div>
+
+      <div class="form-row">
+        <label for="pegi">PEGI</label>
+        <select id="pegi" [(ngModel)]="pegi" name="pegi">
+          <option *ngFor="let p of pegiOptions" [value]="p">{{ p }}</option>
+        </select>
+      </div>
+
+      <div class="popup-actions">
+        <button type="button" (click)="annuler()">Annuler</button>
+        <button type="submit">Valider</button>
+      </div>
+    </form>
+  </div>
+</div>

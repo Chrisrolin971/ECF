@@ -30,6 +30,20 @@ export interface Avis {
   pseudo: string;
 }
 
+export interface Film {
+  id: number;
+  titre: string;
+  description: string;
+  note?: number;
+  categorie: string;
+  image: string;
+  coeur: boolean;
+  duree: number;
+  date_sortie: string;
+  pegi: number | null;
+}
+
+
 export interface UpdateMdpResponse {
   success: boolean;
   message: string;
@@ -57,6 +71,11 @@ export class AdminService {
   getAvis():  Observable<Avis[]> {
     return this.http.get<Avis[]>(`${this.apiUrl}/avis.php`);
   }
+
+  getFilms(): Observable<Film[]> {
+    return this.http.get<Film[]>('http://ecf.local/backend/api/films.php');
+  }
+
 
   updateMotDePasse(ancienMotDePasse: string, nouveauMotDePasse: string): Observable<UpdateMdpResponse> {
     const token = localStorage.getItem('token');
@@ -95,5 +114,34 @@ export class AdminService {
       { headers }
     );
   }
+
+  supprimerEmploye(email: string): Observable<{ success: boolean; message: string }> {
+    return this.http.post<{ success: boolean; message: string }>(
+      `${this.apiUrl}/supprimerEmploye.php`,
+      { email }
+    );
+  }
+
+  creerFilm(film: Film): Observable<{ success: boolean; message: string }> {
+    return this.http.post<{ success: boolean; message: string }>(
+      `${this.apiUrl}/ajouterFilm.php`,
+      film
+    );
+  }
+
+  modifierFilm(film: Film): Observable<{ success: boolean; message: string }> {
+    return this.http.post<{ success: boolean; message: string }>(
+      `${this.apiUrl}/updateFilm.php`,
+      film
+    );
+  }
+
+  supprimerFilm(id: number): Observable<{ success: boolean; message: string }> {
+    return this.http.post<{ success: boolean; message: string }>(
+      `${this.apiUrl}/supprimerFilm.php`,
+      { id }
+    );
+  }
+
 
 }
