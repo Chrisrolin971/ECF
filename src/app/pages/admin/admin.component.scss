@@ -1,0 +1,222 @@
+.admin-page {
+  padding: 2rem;
+}
+
+.admin-page h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--vert-logo);
+}
+
+.films-section {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.film-actions {
+  width: 180px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.action-card {
+  width: 180px;
+  height: 220px;
+  background-color: var(--light-vert-pastel);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 80px;
+}
+
+.action-btn {
+  padding: 10px;
+  background-color: var(--vert-logo);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  width: 100%;
+}
+
+.action-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.film-display {
+  flex: 1;
+}
+
+.film-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.toggle-btn:hover {
+  color: #555;
+}
+
+
+.film-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: flex-start; //aligner les Films à gauche
+  margin: 20px;
+  padding-top: 20px;
+}
+
+.film-card {
+  width: 180px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.film-card img {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+}
+
+
+.film-card:hover {
+  transform: scale(1.05);
+}
+
+.film-card p {
+  margin-top: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+.admin-tables {
+  display: flex;
+  gap: 2rem;
+}
+
+.table-section {
+  flex: 1;
+  align-items: flex-start;
+}
+
+.table-section table {
+  max-width: 600px;
+  margin-left: 0;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.add-btn-salle{
+  background-color: var(--vert-logo);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 27rem;
+}
+
+.add-btn-employe{
+  background-color: var(--vert-logo);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 24rem;
+}
+
+.add-btn-salle:hover,
+.add-btn-employe:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.tiny-btn {
+  font-size: 0.8rem;
+  padding: 4px 6px;
+  margin-right: 4px;
+  background-color: var(--gray-200);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.tiny-btn:hover {
+  background-color: var(--light-vert-pastel); // fond clair au survol
+  border: 1px solid #ccc;    // bordure subtile
+}
+
+.table-section table td:last-child,
+.table-section table th:last-child {
+  width: 90px;
+  text-align: center;
+}
+
+.image-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+img.selectionne {
+  transform: scale(1.05);
+  border: 6px solid var(--vert-logo);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6); // vert lumineux
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+.film-card img:hover:not(.selectionne) {
+  transform: scale(1.03);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.no-avis {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 2rem;
+}
+
+

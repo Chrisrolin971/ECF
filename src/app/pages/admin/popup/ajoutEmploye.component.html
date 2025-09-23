@@ -1,0 +1,78 @@
+﻿<div class="overlay">
+  <div class="popup-container">
+    <form (ngSubmit)="valider()" #form="ngForm" class="popup-form">
+      <h2>Ajouter un employé</h2>
+
+      <div class="form-row">
+        <label for="prenom">Prénom</label>
+        <input
+          type="text"
+          name="prenom"
+          [(ngModel)]="prenom"
+          placeholder="Marc"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          name="nom"
+          [(ngModel)]="nom"
+          placeholder="Dupont"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="pseudo">Nom d'utilisateur</label>
+        <input
+          type="text"
+          name="pseudo"
+          [(ngModel)]="pseudo"
+          placeholder="Pseudo"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="email">Adresse mail (Loggin)</label>
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="exemple@domain.com"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="password">Mot de passe</label>
+        <input
+          type="password"
+          name="motDePasse"
+          [(ngModel)]="motDePasse"
+          placeholder="••••••••"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="password">Confirmez votre mot de passe</label>
+        <input
+          id="password"
+          type="password"
+          name="motDePasse"
+          [(ngModel)]="confMotdePasse"
+          placeholder="••••••••"
+          required
+        />
+      </div>
+
+      <div *ngIf="messageErreur" [innerHTML]="messageErreur" class="erreur">
+        {{ messageErreur }}
+      </div>
+
+      <div class="popup-actions">
+        <button type="button" (click)="annuler()">Annuler</button>
+        <button type="submit">Valider</button>
+      </div>
+    </form>
+  </div>
+</div>

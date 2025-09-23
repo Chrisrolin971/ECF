@@ -1,0 +1,14 @@
+﻿<div class="popup-overlay"></div>
+
+<div class="popup">
+  <h3>{{ titre }}</h3>
+  <div class="popup-message">
+    <p *ngFor="let msg of messages" [innerHTML]="msg"></p>
+  </div>
+
+  <div class="popup-actions">
+      <button *ngIf="reponse" class="cancel-btn" (click)="close()">Annuler</button>
+      <button *ngIf="reponse" class="validate-btn" (click)="confirm()">Valider</button>
+      <button *ngIf="!reponse" class="validate-btn" (click)="close()">OK</button>
+  </div>
+</div>

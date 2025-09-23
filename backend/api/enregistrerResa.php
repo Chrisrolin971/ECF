@@ -38,7 +38,6 @@ $data = json_decode(file_get_contents("php://input"), true);
 $utilisateurId = $data['utilisateur_id'] ?? null;
 $seanceId = $data['seance_id'] ?? null;
 $siegeId = $data['siege_id'] ?? [];
-error_log(print_r($siegeId, true));
 
 
 if (!$utilisateurId || !$seanceId || empty($siegeId)) {
@@ -50,17 +49,15 @@ if (!$utilisateurId || !$seanceId || empty($siegeId)) {
 try {
     $pdo->beginTransaction();
 
-    // 1. Insérer la réservation
+    //réservation
     $stmt = $pdo->prepare("INSERT INTO reservations (utilisateur_id, seance_id) VALUES (:utilisateur_id, :seance_id)");
     $stmt->execute([
         ':utilisateur_id' => $utilisateurId,
         ':seance_id' => $seanceId
     ]);
-
-    // 2. Récupérer l'ID généré
     $reservationId = $pdo->lastInsertId();
 
-    // 3. Insérer les sièges liés à cette réservation dans la table reservation_sieges
+    //insertion sièges table reservation_sieges
     $stmtSiege = $pdo->prepare("INSERT INTO reservation_sieges (reservation_id, siege_id) VALUES (:reservation_id, :siege_id)");
 
     foreach ($siegeId as $sid) {
@@ -68,8 +65,6 @@ try {
             ':reservation_id' => $reservationId,
             ':siege_id' => $sid
         ]);
-        error_log("Insertion siege_id: " . $sid);
-        error_log("siegeIds reçus : " . print_r($sid, true));
 
     }
     $pdo->commit();

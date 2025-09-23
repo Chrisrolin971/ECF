@@ -1,0 +1,107 @@
+﻿.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-container {
+  background-color: var(--vert-pastel);
+  padding: 2.5rem 3rem;
+  border-radius: 12px;
+  width: 700px;
+  max-width: 90vw;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.popup-form h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--vert-logo);
+  font-size: 1.8rem;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.form-row label {
+  width: 180px;
+  font-weight: 500;
+  text-align: right;
+  padding-right: 1rem;
+  font-size: 1rem;
+}
+
+.form-row input,
+.form-row textarea,
+.form-row select {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.popup-actions button {
+  padding: 12px;
+  background-color: var(--vert-logo);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 12rem;
+  transition: background-color 0.3s ease;
+}
+
+.popup-actions button:hover {
+  background-color: #2e7d32;
+}
+
+.erreur {
+  color: var(--invalid);
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.valid {
+  color: var(--valid);
+  margin: 0.5rem;
+  text-align: center;
+}
+
+img.selectionne {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}

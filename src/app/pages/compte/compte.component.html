@@ -1,1 +1,136 @@
-<p>compte works!</p>
+<div class="compte-container">
+  <nav class="menu-lateral">
+    <button (click)="afficher('information')">Informations</button>
+    <button (click)="afficher('confidentialite')">Confidentialité</button>
+    <button (click)="afficher('commandes')">Commandes</button>
+    <button (click)="afficher('abo')">Cinéphori'Abo</button>
+    <button class="danger" (click)="confirmerSuppression()">Supprimer mon compte</button>
+  </nav>
+
+  <section class="contenu-dynamique">
+
+    <!--  Onglet informations  -->
+    <div *ngIf=" ongletActif === 'information'" class="container">
+      <h2>Informations</h2>
+      <div class="infos">
+        <div class="photo-section">
+          <div class="photo-round">📷</div>
+          <div class="user-fields">
+            <p><strong>Nom d'utilisateur :</strong> {{ pseudo }}</p>
+            <p><strong>Nom :</strong> {{ nom }}</p>
+            <p><strong>Prénom :</strong> {{ prenom }}</p>
+            <p><strong>Adresse e-mail :</strong> {{ email }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  Onglet Confidentialité  -->
+    <div *ngIf=" ongletActif === 'confidentialite'" class="container">
+      <h2>Confidentialité</h2>
+      <form (ngSubmit)="changerMotDePasse()">
+        <label for="ancien">Mot de passe actuel</label>
+        <input type="password" id="ancien" name="ancien" [(ngModel)]="ancienMotDePasse" required />
+
+        <label for="nouveau">Nouveau mot de passe</label>
+        <input type="password" id="nouveau" name="nouveau" [(ngModel)]="nouveauMotDePasse" required />
+
+        <label for="confirmation">Confirmer le nouveau mot de passe</label>
+        <input type="password" id="confirmation" name="confirmation" [(ngModel)]="confirmationMotDePasse" required />
+
+        <p *ngIf="messageErreur" class= "error" [innerHTML]="messageErreur">
+          {{ messageErreur }}
+        </p>
+        <button type="submit">Changer le mot de passe</button>
+      </form>
+    </div>
+
+    <!-- Onglet Commandes -->
+    <div *ngIf=" ongletActif === 'commandes'" class="container">
+      <h2>Commandes</h2>
+
+      <div *ngIf="reservations.length === 0">
+        <p class="no-commande">Aucune commande trouvée.</p>
+      </div>
+
+      <div class="table-wrapper" *ngIf="reservations.length > 0">
+<!--        <select [(ngModel)]="tri">-->
+<!--          <option value="date">Date la plus récente</option>-->
+<!--          <option value="titre">Titre du film</option>-->
+<!--        </select>-->
+
+        <table class="admin-table">
+          <thead>
+          <tr>
+            <th>Titre du film</th>
+            <th>Date de la séance</th>
+            <th>Heure</th>
+            <th>Qualité</th>
+            <th>n° Salle</th>
+            <th>Avis</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let res of reservations">
+            <td>{{ res.titre }}</td>
+            <td>{{ formatDate(res.date) }}</td>
+            <td>{{ formatHeure(res.heure) }}</td>
+            <td>{{ res.qualite }}</td>
+            <td>{{ res.salle }}</td>
+            <td><button
+              class="btn-avis"
+
+              (click)="avisAjout = res.seance_id">
+              Laisser un avis
+            </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="avis-form" *ngIf="avisAjout !== null">
+          <div class="stars">
+            <button
+              *ngFor="let star of [1,2,3,4,5]"
+              (mouseenter)="noteTemporaire = star"
+              (mouseleave)="noteTemporaire = 0"
+              (click)="noteFinale = star"
+              [class.active]="star <= noteTemporaire || star <= noteFinale"
+              class="star-button"
+              type="button">★</button>
+          </div>
+          <textarea [(ngModel)]="commentaire" placeholder="Votre avis (facultatif)"></textarea>
+          <button (click)="posterAvis()" class="btn-avis">Valider</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Onglet Abonnement -->
+    <div *ngIf=" ongletActif === 'abo'" class="container">
+      <h2>Cinéphori'Abo</h2>
+      <div class="abo" *ngIf="ongletActif === 'abo'">
+        <div class="carte-section">
+          <img src="assets/carteAbo.png" class="carte-img" alt="Carte d'abonnement">
+          <div class="abo-fields">
+            <p><strong>Carte Abonné n° :</strong>  0123456789</p>
+            <p><strong>Date d'achat :</strong>  22/09/2025</p>
+            <p><strong>Date de validité :</strong> 22/09/2026</p>
+          </div>
+        </div>
+        <div class="abo-pts">
+          <p><strong>Points cumulés :</strong></p>
+          <input type="text" disabled placeholder="0">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-popup-message
+  *ngIf="showPopup"
+  [titre]="popupTitre"
+  [messages]="popupMessages"
+  [reponse]="popupReponse"
+  (fermer)="fermerPopup()"
+(valider)="validerPopup()">
+</app-popup-message>

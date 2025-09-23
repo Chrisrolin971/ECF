@@ -1,0 +1,38 @@
+﻿<div class="overlay">
+  <div class="popup-container">
+    <form (ngSubmit)="valider()" class="popup-form">
+      <h2>Modifier votre mot de passe</h2>
+
+      <div class="form-row">
+        <label for="nouveau">Nouveau mot de passe</label>
+        <input
+          id="nouveau"
+          name="nouveauMotDePasse"
+          type="password"
+          [(ngModel)]="nouveauMotDePasse"
+          required
+          autocomplete="new-password"
+        />
+      </div>
+
+      <div class="form-row">
+        <label for="confirmation">Confirmer le mot de passe</label>
+        <input
+          id="confirmation"
+          name="confirmationMotDePasse"
+          type="password"
+          [(ngModel)]="confirmationMotDePasse"
+          required
+          autocomplete="new-password"
+        />
+      </div>
+
+      <div *ngIf="messageErreur" class="erreur" [innerHTML]="messageErreur"></div>
+
+      <div class="popup-actions">
+        <button type="button" (click)="annuler()">Annuler</button>
+        <button type="submit">Valider</button>
+      </div>
+    </form>
+  </div>
+</div>
