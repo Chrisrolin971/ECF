@@ -54,11 +54,6 @@
       </div>
 
       <div class="table-wrapper" *ngIf="reservations.length > 0">
-<!--        <select [(ngModel)]="tri">-->
-<!--          <option value="date">Date la plus récente</option>-->
-<!--          <option value="titre">Titre du film</option>-->
-<!--        </select>-->
-
         <table class="admin-table">
           <thead>
           <tr>
@@ -79,7 +74,7 @@
             <td>{{ res.salle }}</td>
             <td><button
               class="btn-avis"
-
+              [disabled]="estSeanceFuture(res)"
               (click)="avisAjout = res.seance_id">
               Laisser un avis
             </button>

@@ -1,8 +1,8 @@
 import {Component, OnInit, inject} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FilmsService, Films} from '../films/films.service';
+import {FilmsService, Films} from '../../services/films.service';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
-import {Seance, SeanceService} from './seances.service';
+import {Seance, SeanceService} from '../../services/seances.service';
 import {FormsModule} from '@angular/forms';
 import {SiegesService} from './sieges/sieges.component';
 
@@ -54,10 +54,10 @@ export class SeancesComponent implements OnInit {
     const filmIdParam = this.route.snapshot.paramMap.get('id');
     const cinemaParam = this.route.snapshot.paramMap.get('cinema');
 
-    const filmId = filmIdParam ? parseInt(filmIdParam, 10) : null;
+    const filmId = filmIdParam ? Number.parseInt(filmIdParam, 10) : null;
     this.selectedCinema = cinemaParam ?? null;
 
-    if (filmId !== null && !isNaN(filmId)) {
+    if (filmId !== null && !Number.isNaN(filmId)) {
       // 1. Récupérer les infos du film
       this.filmService.getFilmById(filmId).subscribe(data => {
         this.film = data;
@@ -143,8 +143,8 @@ export class SeancesComponent implements OnInit {
 
     const salleId = this.selectedSeance!.salle_id;
     const siegeSelection = this.selectedSeats.map(code => {
-      const rang = code.match(/[A-Z]/)?.[0] ?? '';
-      const numero = parseInt(code.replace(/[A-Z]/g, ''), 10);
+      const rang = new RegExp(/[A-Z]/).exec(code)?.[0] ?? '';
+      const numero = Number.parseInt(code.replaceAll(/[A-Z]/g, ''), 10);
       const siege = this.sieges.find(s => s.rang === rang && s.numero === numero);
       return {
         id: siege?.id,

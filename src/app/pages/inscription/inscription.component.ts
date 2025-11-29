@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InscriptionService, Utilisateur, ApiResponse } from './inscription.service';
+import { InscriptionService, Utilisateur, ApiResponse } from '../../services/inscription.service';
 import {Router} from '@angular/router';
 import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
 
@@ -53,7 +53,7 @@ export class InscriptionComponent {
     }
 
     //Vérification du format de l'adresse mail
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (!emailRegex.test(this.email.trim())) {
       this.messageValid = '';
       this.messageErreur = 'Le format de l’adresse email est invalide.<br> ' +

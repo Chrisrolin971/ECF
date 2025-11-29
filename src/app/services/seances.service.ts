@@ -1,6 +1,7 @@
 ﻿import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../environments/environment';
 
 export interface Seance {
   capacite: number;
@@ -24,15 +25,15 @@ export interface CapaciteResponse {
 
 @Injectable({ providedIn: 'root' })
 export class SeanceService {
-  private readonly apiUrl = 'http://ecf.local/backend/api/seances.php'
+  private readonly apiUrl = environment.apiUrl;
   private readonly http = inject (HttpClient);
 
   getSeancesByFilm(filmId: number): Observable<Seance[]> {
-    return this.http.get<Seance[]>(`${this.apiUrl}?filmId=${filmId}`);
+    return this.http.get<Seance[]>(`${this.apiUrl}/seances.php?filmId=${filmId}`);
   }
 
   reduireCapacite(salleId: number, nbPlaces: number): Observable<CapaciteResponse> {
-    const url = 'http://ecf.local/backend/api/updateCapacite.php';
+    const url = `${this.apiUrl}/updateCapacite.php`;
     const body = { salleId, nbPlaces };
     const token = localStorage.getItem('token');
 
@@ -48,7 +49,7 @@ export class SeanceService {
     seance_id: number | undefined;
     utilisateur_id: number
   }): Observable<{ success: boolean }> {
-    const url = 'http://ecf.local/backend/api/sieges.php';
+    const url = `${this.apiUrl}/sieges.php`;
     const token = localStorage.getItem('token');
 
     const headers = new HttpHeaders({
@@ -63,7 +64,7 @@ export class SeanceService {
     seance_id: number;
     siege_id: number[];
   }): Observable<{ success: boolean }> {
-    const url = 'http://ecf.local/backend/api/enregistrerResa.php';
+    const url = `${this.apiUrl}/enregistrerResa.php`;
     const token = localStorage.getItem('token');
 
     const headers = new HttpHeaders({

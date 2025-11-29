@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import { FilmService, Film } from './reservation.service';
+import { FilmService, Film } from '../../services/reservation.service';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {NgForOf, NgIf} from '@angular/common';

@@ -1,7 +1,7 @@
 ﻿import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {Film} from '../admin.service';
+import {Film} from '../../../services/admin.service';
 
 @Component({
   selector: 'app-ajout-film',

@@ -1,6 +1,7 @@
 ﻿import {inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../environments/environment';
 
 export interface Films {
   id: number;
@@ -17,14 +18,14 @@ export interface Films {
 
 @Injectable({ providedIn: 'root' })
 export class FilmsService {
-  private readonly apiUrl = 'http://ecf.local/backend/api/films.php';
+  private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
 
   getFilms(): Observable<Films[]> {
-    return this.http.get<Films[]>(this.apiUrl);
+    return this.http.get<Films[]>(`${this.apiUrl}/films.php`);
   }
 
   getFilmById(id: number): Observable<Films> {
-    return this.http.get<Films>(`http://ecf.local/backend/api/getFilmById.php?id=${id}`);
+    return this.http.get<Films>(`${this.apiUrl}/getFilmById.php?id=${id}`);
   }
 }

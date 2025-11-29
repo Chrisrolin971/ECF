@@ -1,9 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Films, FilmsService} from '../films/films.service';
+import {Films, FilmsService} from '../../services/films.service';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
-import {AdminService, Avis} from '../admin/admin.service';
-import {Seance, SeanceService} from '../seances/seances.service';
+import {AdminService, Avis} from '../../services/admin.service';
+import {Seance, SeanceService} from '../../services/seances.service';
 
 @Component({
   selector: 'app-presentation',
