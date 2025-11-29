@@ -1,7 +1,8 @@
 ﻿import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
-import {Utilisateur} from '../inscription/inscription.service';
+import {Utilisateur} from './inscription.service';
+import {environment} from '../../environments/environment';
 
 export interface Salle {
   numero: number;
@@ -57,7 +58,7 @@ export interface CreationUtilisateurResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
-  private readonly apiUrl = 'http://ecf.local/backend/api';
+  private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
 
   getSalles(): Observable<Salle[]> {
@@ -73,7 +74,7 @@ export class AdminService {
   }
 
   getFilms(): Observable<Film[]> {
-    return this.http.get<Film[]>('http://ecf.local/backend/api/films.php');
+    return this.http.get<Film[]>(`${this.apiUrl}/films.php`);
   }
 
 

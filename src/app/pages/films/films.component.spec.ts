@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { FilmsComponent } from './films.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FilmsService } from './films.service';
+import {FilmsService} from '../../services/films.service';
 
 describe('FilmsComponent', () => {
   beforeEach(async () => {

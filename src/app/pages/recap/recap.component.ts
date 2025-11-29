@@ -2,9 +2,9 @@ import {Component, inject} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
-import {Seance, SeanceService} from '../seances/seances.service';
-import {Film} from '../reservation/reservation.service';
-import {AuthService} from '../connexion/auth.service';
+import {Seance, SeanceService} from '../../services/seances.service';
+import {Film} from '../../services/reservation.service';
+import {AuthService} from '../../services/auth.service';
 import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
 
 @Component({

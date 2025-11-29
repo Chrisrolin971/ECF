@@ -1,10 +1,10 @@
 
-CREATE DATABASE IF NOT EXISTS ecf CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE ecf;
+USE test;
 
 -- Table Utilisateurs
-CREATE TABLE IF NOT EXISTS Utilisateurs(
+CREATE TABLE IF NOT EXISTS utilisateurs(
                            idUtilisateurs INT AUTO_INCREMENT PRIMARY KEY,
                            nom VARCHAR(255) NOT NULL,
                            prenom VARCHAR(255) NOT NULL,
@@ -18,42 +18,41 @@ CREATE TABLE IF NOT EXISTS Utilisateurs(
 CREATE TABLE IF NOT EXISTS films (
                      id INT AUTO_INCREMENT PRIMARY KEY,
                      titre VARCHAR(255),
-                     duree INT, -- en minutes
+                     duree INT,
                      genre VARCHAR(255),
                      description TEXT,
-                     note FLOAT, -- sur 5
-                     image_url VARCHAR(255), -- lien vers l'affiche
+                     note FLOAT,
+                     image_url VARCHAR(255),
                      date_sortie DATE,
                      coeur BOOLEAN DEFAULT FALSE
 );
 
 -- Table Cinema
-CREATE TABLE IF NOT EXISTS Cinema (
+CREATE TABLE IF NOT EXISTS cinema (
                                     idCinema INT AUTO_INCREMENT PRIMARY KEY,
-                                    villeCinema VARCHAR(255) NOT NULL,
+                                    villeCinema VARCHAR(255) NOT NULL
   );
 
 -- Table qui relie les films aux cinémas
-CREATE TABLE IF NOT EXISTS FilmCinema (
+CREATE TABLE IF NOT EXISTS filmcinema (
                                         idFilm INT,
                                         idCinema INT,
                                         PRIMARY KEY (idFilm, idCinema),
   FOREIGN KEY (idFilm) REFERENCES films(id),
-  FOREIGN KEY (idCinema) REFERENCES Cinema(idCinema)
+  FOREIGN KEY (idCinema) REFERENCES cinema(idCinema)
   );
 
 -- Table des séances
-CREATE TABLE IF NOT EXISTS seances (
+CREATE TABLE IF NOT EXISTS seance (
                                      idSeance INT AUTO_INCREMENT PRIMARY KEY,
-                                     film_id INT NOT NULL,
-                                     cinema_id INT NOT NULL,
+                                     films_id INT NOT NULL,
                                      date DATE NOT NULL,
                                      heure TIME NOT NULL,
                                      langue VARCHAR(50),
                                      salle_id INT NOT NULL,
-                                     FOREIGN KEY (film_id) REFERENCES films(idFilms) ON DELETE CASCADE,
+                                     FOREIGN KEY (films_id) REFERENCES films(idFilms) ON DELETE CASCADE,
                                      FOREIGN KEY (cinema_id) REFERENCES cinema(idCinema) ON DELETE CASCADE,
-                                     FOREIGN KEY (salle_id) REFERENCES salles(idSalles) ON DELETE CASCADE,
+                                     FOREIGN KEY (salle_id) REFERENCES salles(idSalles) ON DELETE CASCADE
   );
 
 -- Table Salles
@@ -111,10 +110,10 @@ CREATE TABLE IF NOT EXISTS Defaillances(
 );
 
 -- Table Avis
-CREATE TABLE IF NOT EXISTS avis_attente (
+CREATE TABLE IF NOT EXISTS avis (
                             idAvisAttente INT AUTO_INCREMENT PRIMARY KEY,
                             seance_id INT NOT NULL,
-                            Note INT CHECK (Note BETWEEN 1 AND 5),
+                            note INT CHECK (note BETWEEN 1 AND 5),
                             commentaire TEXT,
                             dateAvis DATETIME DEFAULT CURRENT_TIMESTAMP,
                             idUtilisateur INT NOT NULL,

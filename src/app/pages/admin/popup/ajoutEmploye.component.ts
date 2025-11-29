@@ -1,7 +1,7 @@
 ﻿import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {Utilisateur} from '../../inscription/inscription.service';
+import {Utilisateur} from '../../../services/inscription.service';
 
 @Component({
   selector: 'app-popup-ajout-employe',
@@ -54,7 +54,7 @@ export class PopupAjoutEmployeComponent {
     }
 
     // Vérification du format de l'adresse mail
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (!emailRegex.test(this.email.trim())) {
       this.messageErreur = 'Le format de l’adresse email est invalide.<br> ' +
         'Elle doit être sous forme : exemple@domaine.com';

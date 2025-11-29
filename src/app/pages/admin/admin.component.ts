@@ -1,14 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {HomeService} from '../home/home.service';
-import {AdminService, Avis, Film, Salle, Utilisateurs} from './admin.service';
-import {AuthService} from '../connexion/auth.service';
 import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
 import {PopupAjoutEmployeComponent} from './popup/ajoutEmploye.component';
-import {Utilisateur} from '../inscription/inscription.service';
 import {UpdateMdpComponent} from './popup/updateEmploye.component';
 import {PopupAjoutFilmComponent} from './popup/ajoutFilm.component';
+import {AdminService, Avis, Film, Salle, Utilisateurs} from '../../services/admin.service';
+import {AuthService} from '../../services/auth.service';
+import {Utilisateur} from '../../services/inscription.service';
+import {HomeService} from '../../services/home.service';
 
 @Component({
   selector: 'app-admin',
@@ -144,7 +144,6 @@ export class AdminComponent implements OnInit {
           this.afficherPopup('Erreur', ['Impossible de supprimer ce film'], false);
         }
       });
-      return;
     }
   }
 
