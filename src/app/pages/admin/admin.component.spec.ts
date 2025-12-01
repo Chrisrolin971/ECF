@@ -100,8 +100,8 @@ describe('AdminComponent', () => {
   });
 
   it('should set avisAttenteValid and show popup when validerAvis is called', () => {
-    component.validerAvis(123);
-    expect(component.avisAttenteValid).toBe(123);
+    component.validerAvis(mockAvis.id);
+    expect(component.avisAttenteValid).toBe(mockAvis.id);
     expect(component.showPopup).toBeTrue();
     expect(component.popupTitre).toBe('Confirmation');
   });
