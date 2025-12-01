@@ -25,7 +25,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
         with:
-          submodules: 'recursive'
+          submodules: 'false'
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Setup Node
         uses: actions/setup-node@v4
