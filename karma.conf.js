@@ -5,6 +5,12 @@
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     browsers: ['ChromeHeadless'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     reporters: ['progress', 'coverage-istanbul'],
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/ecf'),
