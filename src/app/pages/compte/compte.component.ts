@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { NgForOf, NgIf} from '@angular/common';
-import {FilmService, Reservation} from '../reservation/reservation.service';
-import {AdminService} from '../admin/admin.service';
+import {FilmService, Reservation} from '../../services/reservation.service';
+import {AdminService} from '../../services/admin.service';
 import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
-import {AvisPayload, CompteService} from './compte.service';
+import {AvisPayload, CompteService} from '../../services/compte.service';
 
 @Component({
   selector: 'app-compte',

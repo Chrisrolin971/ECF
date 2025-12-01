@@ -1,9 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Films, FilmsService} from '../films/films.service';
+import {Films, FilmsService} from '../../services/films.service';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
-import {AdminService, Avis} from '../admin/admin.service';
-import {Seance, SeanceService} from '../seances/seances.service';
+import {AdminService, Avis} from '../../services/admin.service';
+import {Seance, SeanceService} from '../../services/seances.service';
 
 @Component({
   selector: 'app-presentation',
@@ -39,9 +39,9 @@ export class PresentationComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-      console.log('ID du film pour les avis :', id); // ← trace ici
+      console.log('ID du film pour les avis :', id);
       this.adminService.getAvisByFilm(id).subscribe(data => {
-        console.log('Avis reçus :', data); // ← tu l’as déjà
+        console.log('Avis reçus :', data);
         this.avis = data;
       });
     });

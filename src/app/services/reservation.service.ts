@@ -1,6 +1,7 @@
 ﻿import {inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../environments/environment';
 
 export interface Film {
   id: number;
@@ -25,7 +26,7 @@ export interface Reservation {
 
 @Injectable({ providedIn: 'root' })
 export class FilmService {
-  private readonly apiUrl = 'http://ecf.local/backend/api'
+  private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
 
   reservation(ville: string): Observable<Film[]> {

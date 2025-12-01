@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HomeService, FilmCard } from './home.service';
+import {FilmCard, HomeService} from '../../services/home.service';
 
 @Component({
   selector: 'app-home',

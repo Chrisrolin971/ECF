@@ -1,6 +1,7 @@
 ﻿import {inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../environments/environment';
 
 export interface AvisPayload {
   seance_id: number;
@@ -17,7 +18,7 @@ export interface AvisResponse {
   providedIn: 'root'
 })
 export class CompteService {
-  private readonly apiUrl = 'http://localhost/backend/api/ajouterAvis.php';
+  private readonly apiUrl = environment.apiUrl;
 
   private readonly http = inject(HttpClient);
 

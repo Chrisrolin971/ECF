@@ -1,7 +1,7 @@
 import {Component, HostListener, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {AuthService} from '../../pages/connexion/auth.service';
 import {NgIf} from '@angular/common';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',

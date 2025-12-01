@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {FilmsService, Films} from './films.service';
+import {FilmsService, Films} from '../../services/films.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';

@@ -1,9 +1,9 @@
 import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule} from '@angular/router';
-import {ConnexionPayload, ConnexionService} from './connexion.service';
+import {ConnexionPayload, ConnexionService} from '../../services/connexion.service';
 import {FormsModule} from '@angular/forms';
-import {AuthService} from './auth.service';
+import {AuthService} from '../../services/auth.service';
 import {PopupMessageComponent} from '../../components/popupMsg/popupMsg.component';
 
 @Component({

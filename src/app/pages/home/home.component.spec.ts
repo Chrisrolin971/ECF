@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HomeService } from './home.service';
+import {HomeService} from '../../services/home.service';
 
 
 describe('HomeComponent', () => {
