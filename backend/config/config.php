@@ -8,7 +8,7 @@ $host = $_ENV['DB_HOST'];
 $dbname = $_ENV['DB_DATABASE'];
 $user = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASSWORD'];
-$port = 3306;
+$port = $_ENV['DB_PORT'];
 
 $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
 $options = [

@@ -39,9 +39,9 @@ export class PresentationComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-      console.log('ID du film pour les avis :', id); // ← trace ici
+      console.log('ID du film pour les avis :', id);
       this.adminService.getAvisByFilm(id).subscribe(data => {
-        console.log('Avis reçus :', data); // ← tu l’as déjà
+        console.log('Avis reçus :', data);
         this.avis = data;
       });
     });
