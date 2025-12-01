@@ -68,6 +68,7 @@ jobs:
           cp -r dist/ecf/browser/* deploy/
           cp -r backend/api deploy/api
           cp -r backend/config deploy/config
+          cp -r vendor deploy/vendor
 
 # Please do not touch the following action
       - name: Store deployment content
