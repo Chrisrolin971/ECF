@@ -49,4 +49,5 @@ Thumbs.db
 !.env.vault
 .env.keys
 
-vendor/vlucas/phpdotenv
+# Composer dependencies
+/vendor
