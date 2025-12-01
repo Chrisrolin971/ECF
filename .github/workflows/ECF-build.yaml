@@ -70,6 +70,11 @@ jobs:
           cp -r backend/config deploy/config
           cp -r vendor deploy/vendor
 
+      - name: Debug env
+        run: |
+          echo "DB_HOST=$DB_HOST"
+          echo "DB_USER=$DB_USER"
+
 # Please do not touch the following action
       - name: Store deployment content
         uses: ionos-deploy-now/artifact-action@v1
