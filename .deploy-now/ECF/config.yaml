@@ -1,0 +1,20 @@
+version: 1
+
+project:
+  type: php
+  public: dist/ecf/browser
+
+build:
+  environment:
+    node: "18"
+  commands:
+    - npm ci
+    - npm run build
+  artifacts:
+    - dist/**
+    - backend/**
+    - public/**
+
+deploy:
+  public: dist/ecf/browser
+  php: true
