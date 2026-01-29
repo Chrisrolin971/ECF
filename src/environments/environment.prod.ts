@@ -1,4 +1,4 @@
 ﻿export const environment = {
   production: true,
-  apiUrl: 'http://s1066088635.onlinehome.fr/api'
+  apiUrl: 'https://projet-cinephoria.fr/api'
 };
