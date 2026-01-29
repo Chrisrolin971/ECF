@@ -1,18 +1,10 @@
 ﻿<?php
-// Affichage des erreurs (à désactiver en production)
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Réponse JSON
 header('Content-Type: application/json');
 
-// CORS
 $allowedOrigins = [
     "https://projet-cinephoria.fr",
     "https://home-5019114412.app-ionos.space"
 ];
-
 if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
     header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
 }
