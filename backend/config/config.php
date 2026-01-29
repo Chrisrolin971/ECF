@@ -29,6 +29,7 @@ $host_name = $_ENV['DB_HOST'];
 $database = $_ENV['DB_DATABASE'];
 $user_name = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASSWORD'];
+$port = $_ENV['DB_PORT'];
 
 $link = new mysqli($host_name, $user_name, $password, $database);
 
@@ -37,4 +38,12 @@ $link = new mysqli($host_name, $user_name, $password, $database);
   } else {
     echo '<p>Connexion au serveur MySQL établie avec succès.</p>';
   }
+
+$dsn = "mysql:host=$host_name;port=$port;dbname=$database;charset=utf8mb4";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+];
+
+$pdo = new PDO($dsn, $user_name, $password, $options);
 ?>
