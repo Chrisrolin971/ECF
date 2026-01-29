@@ -14,12 +14,7 @@ on:
         type: string
 
 env:
-  DEPLOYMENT_FOLDER: deploy
-  DB_HOST: ${{ secrets.DB_HOST }}
-  DB_PORT: ${{ secrets.DB_PORT }}
-  DB_DATABASE: ${{ secrets.DB_DATABASE }}
-  DB_USER: ${{ secrets.DB_USER }}
-  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DEPLOYMENT_FOLDER: dist/ecf
 
 jobs:
 # Please do not rename this job
@@ -30,22 +25,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
         with:
-          submodules: 'false'
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          tools: composer
-      
-      - name: Clean vendor
-        run: rm -rf vendor
-      
-      - name: Install PHP dependencies
-        run: composer install --no-dev --no-interaction --no-progress --prefer-dist
-      
-      - name: Regenerate autoload
-        run: composer dump-autoload -o
+          submodules: 'recursive'
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -59,21 +39,8 @@ jobs:
         run: |
           npm ci
           npm run lint
-          # npm test -- --watch=false --code-coverage
+          npm test -- --watch=false --code-coverage
           npm run build -- --configuration=production
-          
-      - name: Prepare deployment folder
-        run: |
-          mkdir deploy
-          cp -r dist/ecf/browser/* deploy/
-          cp -r backend/api deploy/api
-          cp -r backend/config deploy/config
-          cp -r vendor deploy/vendor
-
-      - name: Debug env
-        run: |
-          echo "DB_HOST=$DB_HOST"
-          echo "DB_USER=$DB_USER"
 
 # Please do not touch the following action
       - name: Store deployment content
