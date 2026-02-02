@@ -6,7 +6,7 @@ header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']); }
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/config.php';
 
 // reponse a la requette preflight HTTP
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -14,15 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-require_once '../config/config.php';
-
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!empty($data['nom']) && !empty($data['prenom']) &&
     !empty($data['pseudo']) && !empty($data['email']) && !empty($data['motDePasse']))
   {
       // Vérification si le pseudo existe déjà
-              $sqlCheck = "SELECT * FROM Utilisateurs WHERE pseudo = :pseudo";
+              $sqlCheck = "SELECT * FROM utilisateurs WHERE pseudo = :pseudo";
               $stmtCheck = $pdo->prepare($sqlCheck);
               $stmtCheck->execute([':pseudo' => $data['pseudo']]);
               $pseudoExiste = $stmtCheck->fetchColumn() > 0;
@@ -35,7 +33,7 @@ if (!empty($data['nom']) && !empty($data['prenom']) &&
               }
 
               // Vérification de l'email
-              $sqlEmail = "SELECT * FROM Utilisateurs WHERE email = :email";
+              $sqlEmail = "SELECT * FROM utilisateurs WHERE email = :email";
               $stmtEmail = $pdo->prepare($sqlEmail);
               $stmtEmail->execute([':email' => $data['email']]);
               $emailExiste = $stmtEmail->fetchColumn() > 0;
@@ -48,7 +46,7 @@ if (!empty($data['nom']) && !empty($data['prenom']) &&
     $mdpHash = password_hash($data['motDePasse'], PASSWORD_DEFAULT);
 
 try {
-    $sql = "INSERT INTO Utilisateurs (nom, prenom, pseudo, role, email, mdp)
+    $sql = "INSERT INTO utilisateurs (nom, prenom, pseudo, role, email, mdp)
             VALUES (:nom, :prenom, :pseudo, :role, :email, :mdp)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
