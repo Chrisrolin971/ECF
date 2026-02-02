@@ -1,4 +1,7 @@
 ﻿<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 header('Content-Type: application/json');
 $allowedOrigins = [ "https://projet-cinephoria.fr", "https://home-5019114412.app-ionos.space" ];
 if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
@@ -9,7 +12,15 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 require_once __DIR__ . '/vendor/autoload.php';
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    die("autoload introuvable");
+}
+
 require_once __DIR__ . '/config.php';
+if (!isset($pdo)) {
+    die("pdo non initialisé");
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -19,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!empty($data['email']) && !empty($data['motDePasse'])) {
-    $sql = "SELECT * FROM Utilisateurs WHERE email = :email";
+    $sql = "SELECT * FROM utilisateurs  WHERE email = :email";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':email' => $data['email']]);
     $user = $stmt->fetch();
@@ -32,6 +43,12 @@ if (!empty($data['email']) && !empty($data['motDePasse'])) {
             'role' => $user['role'],
             'exp' => time() + 3600 // expire dans 1h
         ];
+
+        if (!class_exists('Firebase\JWT\JWT')) {
+            die("classe JWT introuvable");
+        }
+
+
         $jwt = JWT::encode($payload, $secretKey, 'HS256');
         echo json_encode([
                     "message" => "Connexion réussie",
