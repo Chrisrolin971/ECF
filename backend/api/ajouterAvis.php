@@ -1,19 +1,13 @@
 ﻿<?php
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+header('Content-Type: application/json');
 $allowedOrigins = [ "https://projet-cinephoria.fr", "https://home-5019114412.app-ionos.space" ];
 if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
 header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']); }
-    header("Access-Control-Allow-Methods: POST, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
-    header("Access-Control-Max-Age: 86400");
-    http_response_code(200);
-    exit;
-}
-
-header("Access-Control-Allow-Origin: http://localhost:4200");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Methods: POST");
-header("Content-Type: application/json");
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -54,7 +48,7 @@ if (!$seance_id || !$note || !is_numeric($note)) {
 }
 
 try {
-    $stmt = $pdo->prepare("INSERT INTO avis (seance_id, Note, commentaire, dateAvis, idUtilisateur)
+    $stmt = $pdo->prepare("INSERT INTO avis (seance_id, note, commentaire, dateAvis, idUtilisateur)
                            VALUES (:seance_id, :note, :commentaire, NOW(), :userId)");
     $stmt->execute([
         ':seance_id' => $seance_id,
