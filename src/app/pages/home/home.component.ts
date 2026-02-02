@@ -21,4 +21,8 @@ export class HomeComponent implements OnInit {
       this.affiches = data.affiches;
     });
   }
+
+  goToPage() {
+    window.location.href = 'http://85.215.41.20:8080';
+  }
 }
