@@ -1,6 +1,6 @@
-projectKey=ecf_sonarqube
+projectKey=ECF
 serverUrl=http://127.0.0.1:9000
 serverVersion=25.11.0.114957
-dashboardUrl=http://127.0.0.1:9000/dashboard?id=ecf_sonarqube
-ceTaskId=ec3e8c8d-9ef1-4c72-8678-fd8fd110c711
-ceTaskUrl=http://127.0.0.1:9000/api/ce/task?id=ec3e8c8d-9ef1-4c72-8678-fd8fd110c711
+dashboardUrl=http://127.0.0.1:9000/dashboard?id=ECF
+ceTaskId=66bd990b-070a-40fb-87a2-82c9e3bd5083
+ceTaskUrl=http://127.0.0.1:9000/api/ce/task?id=66bd990b-070a-40fb-87a2-82c9e3bd5083

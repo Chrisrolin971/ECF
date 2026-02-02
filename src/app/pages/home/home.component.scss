@@ -50,6 +50,55 @@
   color: #333;
 }
 
+.top-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 10px 10px 20px;
+}
+
+.btn-download {
+  position: relative;
+  background-color: var(--vert-pastel);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.btn-download:hover {
+  background-color: var(--vert-logo);
+}
+
+.icon-smartphone {
+  width: 40px;
+  height: 40px;
+}
+
+/* Tooltip */
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  position: absolute;
+  top: -40px; /* position au-dessus du bouton */
+  right: 0; /* aligné à droite */
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+/* Affichage au survol */
+.btn-download:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .film-card {
     width: 45%;
