@@ -29,6 +29,6 @@ export class CompteService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.post<AvisResponse>(this.apiUrl, avis, { headers });
+    return this.http.post<AvisResponse>(`${this.apiUrl}/ajouterAvis.php`, avis, { headers });
   }
 }
