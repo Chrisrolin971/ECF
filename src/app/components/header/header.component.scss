@@ -149,3 +149,57 @@
     font-size: 40px;
   }
 }
+
+//Pour la version mobile
+@media (max-width: 430px) {
+
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navbar .logo {
+    width: 70px;   // 50% de 140px
+  }
+
+  .navbar .hamburger {
+    font-size: 28px;   // 50% de 50px
+    margin-right: 1rem;
+  }
+
+  .person-btn {
+    font-size: 20px;   // 50% de 40px
+    margin-top: 0;
+    margin-left: 10px;
+  }
+
+  .nav-links.mobile {
+    display: none;
+    position: absolute;
+    top: 100px; /* juste sous la navbar */
+    left: 0; /* collé à gauche */
+    width: 100%; /* prend toute la largeur */
+    background: var(--beige);
+    padding: 10px 0;
+    text-align: left;
+    font-size: 14px; /* police réduite */
+    z-index: 1000; }
+
+  .nav-links.mobile.active {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    left: 40%;
+    top: 20%;
+  }
+
+  .nav-links.mobile li a {
+    font-size: 14px; // moitié de la taille actuelle
+    font-weight: 500;
+  }
+
+  .nav-links.mobile li {
+    padding: 6px 0;
+  }
+}
+
+
