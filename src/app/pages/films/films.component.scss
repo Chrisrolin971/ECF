@@ -178,74 +178,70 @@ h3 {
 
 @media (max-width: 430px) {
 
-  /* Réduction du titre principal */
-  h2 {
-    font-size: 1.4rem;
-    margin-bottom: 2rem;
+  .film-filter {
+    width: 75%;
+    margin-left: 8rem;
   }
 
-  /* Le conteneur film passe en colonne */
   .film-row {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
     margin-bottom: 3rem;
+    margin-left: 5rem;
   }
 
-  /* Affiche du film réduite de 50% */
-  .film-poster {
-    width: 75px;     /* 50% de 150px */
-    height: 100px;   /* 50% de 200px */
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-
-  /* Titre du film plus petit */
   .film-title {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    text-align: left;
   }
 
-  /* Description plus compacte */
+  .film-info {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .film-poster {
+    order: 2;
+    width: 80px;
+    height: 110px;
+    margin: 20px;
+  }
+
   .film-description {
     font-size: 0.85rem;
-    margin-top: 5px;
+    text-align: left;
+    margin: 0;
+    flex: 1;
   }
 
-  /* Réduction des badges */
-  .film-rating,
-  .categorie,
-  .pegi,
-  .coeur {
-    font-size: 0.75rem;
-    padding: 4px 8px;
-    margin: 0.3rem auto;
-  }
-
-  /* Alignement vertical des métadonnées */
   .film-meta {
-    flex-direction: column;
-    align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     gap: 6px;
   }
 
-  /* Bouton détails plus petit */
+  .categorie,
+  .film-rating,
+  .pegi {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
   .reserver-btn {
     font-size: 14px;
     padding: 6px 10px;
-    margin-top: 10px;
-  }
-
-  /* Filtre plus compact */
-  .film-filter {
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-  }
-
-  .film-filter select {
-    font-size: 14px;
-    padding: 5px 10px;
   }
 }
+
+
+
+
+
 

@@ -105,35 +105,34 @@
   }
 }
 
-@media (max-width: 480px) {
-  .film-card {
-    width: 100%;
-  }
-}
-
+//@media (max-width: 480px) {
+//  .film-card {
+//    width: 100%;
+//  }
+//}
 @media (max-width: 430px) {
 
-  .film-card img {
-    width: 75px;
-    height: 100px;
+  .film-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
   }
 
   .film-card {
-    width: 50%;
+    width: 30%;        /* 2 par ligne */
     text-align: center;
+    max-width: none;
+  }
+
+  .film-card img {
+    width: 75px;       /* 50% */
+    height: 100px;
   }
 
   .film-card p {
     font-size: 0.8rem;
   }
-
-  .film-grid {
-    gap: 15px;
-    margin: 10px;
-  }
-
-  .section h2 {
-    font-size: 1.4rem;
-  }
 }
+
 
