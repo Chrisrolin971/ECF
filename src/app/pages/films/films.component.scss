@@ -175,3 +175,77 @@ h3 {
   margin: 0;
   padding: 0;
 }
+
+@media (max-width: 430px) {
+
+  /* Réduction du titre principal */
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Le conteneur film passe en colonne */
+  .film-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  /* Affiche du film réduite de 50% */
+  .film-poster {
+    width: 75px;     /* 50% de 150px */
+    height: 100px;   /* 50% de 200px */
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  /* Titre du film plus petit */
+  .film-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Description plus compacte */
+  .film-description {
+    font-size: 0.85rem;
+    margin-top: 5px;
+  }
+
+  /* Réduction des badges */
+  .film-rating,
+  .categorie,
+  .pegi,
+  .coeur {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    margin: 0.3rem auto;
+  }
+
+  /* Alignement vertical des métadonnées */
+  .film-meta {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Bouton détails plus petit */
+  .reserver-btn {
+    font-size: 14px;
+    padding: 6px 10px;
+    margin-top: 10px;
+  }
+
+  /* Filtre plus compact */
+  .film-filter {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  .film-filter select {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+}
+

@@ -80,3 +80,60 @@ h2 {
   text-align: center;
 }
 
+@media (max-width: 430px) {
+
+  /* Conteneur réduit de moitié */
+  .login-container {
+    max-width: 30rem;        /* moitié de 35rem */
+    padding: 15px;           /* moitié de 30px */
+    margin: 30px auto;       /* plus compact */
+  }
+
+  /* Formulaire réduit */
+  form {
+    width: 22rem;            /* moitié de 60rem */
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  /* Chaque ligne passe en colonne */
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  /* Labels plus petits */
+  .form-row label {
+    width: auto;             /* plus de largeur fixe */
+    font-size: 14px;
+    padding-right: 0;
+    margin-bottom: 4px;
+    text-align: left;
+  }
+
+  /* Inputs plus petits */
+  .form-row input {
+    width: 100%;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  /* Messages d’erreur / valid */
+  .erreur,
+  .valid {
+    font-size: 13px;
+    margin: 0.3rem 0;
+  }
+
+  /* Bouton d'inscription réduit */
+  button {
+    width: 10rem;            /* moitié de 20rem */
+    padding: 8px;
+    font-size: 14px;
+    margin-top: 1rem;
+    align-self: center;
+  }
+}
+
+

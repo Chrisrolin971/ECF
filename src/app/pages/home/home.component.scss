@@ -110,3 +110,30 @@
     width: 100%;
   }
 }
+
+@media (max-width: 430px) {
+
+  .film-card img {
+    width: 75px;
+    height: 100px;
+  }
+
+  .film-card {
+    width: 50%;
+    text-align: center;
+  }
+
+  .film-card p {
+    font-size: 0.8rem;
+  }
+
+  .film-grid {
+    gap: 15px;
+    margin: 10px;
+  }
+
+  .section h2 {
+    font-size: 1.4rem;
+  }
+}
+
