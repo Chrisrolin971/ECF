@@ -81,3 +81,52 @@ label {
   font-weight: 450;
 }
 
+@media (max-width: 430px) {
+
+  /* Conteneur réduit de moitié */
+  .login-container {
+    max-width: 30rem;       /* moitié de 35rem */
+    padding: 15px;          /* moitié de 30px */
+    margin: 40px auto;      /* moitié de 80px */
+  }
+
+  /* Formulaire réduit */
+  form {
+    width: 20rem;           /* moitié de 25rem */
+  }
+
+  /* Inputs plus petits */
+  input {
+    padding: 6px;           /* réduit */
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  /* Labels plus petits */
+  label {
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+
+  /* Bouton connexion réduit */
+  button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  /* Lien "mot de passe oublié" plus petit */
+  .forgot-link {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  /* Bouton inscription réduit */
+  .inscription-btn {
+    width: 120px;           /* moitié de 200px */
+    font-size: 14px;
+    margin-top: 25px;       /* moitié de 50px */
+    align-self: center;     /* centré sur mobile */
+  }
+}
+
+
