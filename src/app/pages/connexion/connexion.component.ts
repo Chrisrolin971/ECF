@@ -48,6 +48,8 @@ export class ConnexionComponent {
       motDePasse: this.motDePasse
     };
 
+    console.log("Payload envoyé :", payload);
+
     this.connexionService.connecterUtilisateur(payload).subscribe({
       next: (res) => {
         if (res.success) {
